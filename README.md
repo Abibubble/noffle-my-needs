@@ -210,13 +210,13 @@ MongoDB was used to store data for this site in a database. The data has been se
 | username | string |
 | password | string |
 | is_admin | boolean |
-| states | array |
+| noffles | array |
 
-| States |    |    |
-|---|---|---|
-| _id | ObjectId |    |
-| state_name | string |    |
-| state_description | string |    |
+| Noffles |    |
+|---|---|
+| _id | ObjectId |
+| noffle_name | string |
+| noffle_description | string |
 
 [Back to Top](#title)
 
@@ -411,7 +411,7 @@ This site was deployed to Heroku by following these steps:
 ### How to Fork it
 
 1. Login or Sign Up to [GitHub](www.github.com).
-2. On GitHub, go to [Abibubble/ms3-the-bar-blade](https://github.com/Abibubble/ms3-the-bar-blade).
+2. On GitHub, go to [Abibubble/REPO](https://github.com/Abibubble/REPO).
 3. In the top right, click "Fork".
 4. You will need to create an env.py file with your own values, and create a MongoDB database with the data keys and types as shown above.
 5. You will also need to install all of the project requirements. This can be done using the command `pip3 install -r requirements.txt`.
@@ -419,7 +419,7 @@ This site was deployed to Heroku by following these steps:
 
 ### Making a Local Clone
 
-1. Log in to [GitHub](https://www.github.com) and locate the [Repository](https://github.com/Abibubble/ms3-the-bar-blade) for this site.
+1. Log in to [GitHub](https://www.github.com) and locate the [Repository](https://github.com/Abibubble/REPO) for this site.
 2. Under the repository name, above the list of files, click "Code".
 3. Here you can either Clone or Download the repository.
 4. You should clone the repository using HTTPS, clicking on the icon to copy the link.
@@ -506,8 +506,6 @@ The W3C Markup Validator, W3C CSS Validator and JSHint were used to validate the
 * How
 
 #### Admin
-
-In addition to the First Time and Returning Visitor Goals, as an administrator of this site, an admin user should be able to:
 
 ##### Be confident that a user can't to brute force their way into the restricted pages
 

@@ -1,4 +1,4 @@
-# Title
+# Building an Accessible Workplace Hackathon
 
 ![GitHub contributors](https://img.shields.io/github/contributors/abibubble/REPO)
 ![GitHub last commit](https://img.shields.io/github/last-commit/abibubble/REPO)

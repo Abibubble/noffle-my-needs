@@ -79,7 +79,7 @@ As a first time visitor to this site, a user should be able to :
 * Easily navigate the site.
 * Intuitively and easily understand what to do.
 * Register for an account.
-* Set my state.
+* Set my noffles.
 * Get visual feedback when an action on the site is completed.
 
 #### Returning Visitor Goals
@@ -140,10 +140,6 @@ In addition to the First Time and Returning Visitor Goals, as an administrator o
 
 ![Edit and Delete a user](static/docs/img/users.png)
 
-* Search for a specific cocktail.
-
-![Search bar](static/docs/img/search.png)
-
 * Confirm to delete modal.
 
 ![Confirm deletion modal](static/docs/img/modal.png)
@@ -154,14 +150,13 @@ In addition to the First Time and Returning Visitor Goals, as an administrator o
 
 ### Future Features
 
-* Email verification before a user can add a cocktail.
+* Email verification before a user can set their noffles.
 * Enter user's password to delete user account.
-* Create an 'Add to Favourites' so users can store their favourite cocktail recipes.
-* Admin to approve cocktail recipe before it goes live on the site.
+* Dynamic desk movement to allow for different office layouts.
 
 ### Audio
 
-* WHAT AUDIO IS USED (IF ANY) AND WHY.
+* No audio is used on this site.
 
 ### Navigation bar
 
@@ -169,11 +164,11 @@ The navigation bar changes depending on user status and screen size:
 
 | Nav Link | Logged Out | Logged In (User) | Logged In (Admin) |
 |-------|-----|-----|-----|
-| Logo (Homepage) | &#9989; | &#9989; | &#9989; |
-| Home | &#9989; | &#9989; | &#9989; |
+| Landing Page | &#9989; | &#9989; | &#9989; |
+| Home | &#10060; | &#9989; | &#9989; |
 | Profile | &#10060; | &#9989; | &#9989; |
-| Add Cocktail | &#10060; | &#9989; | &#9989; |
-| Manage Categories | &#10060; | &#10060; | &#9989; |
+| Set My Noffles | &#10060; | &#9989; | &#9989; |
+| Manage Noffles | &#10060; | &#10060; | &#9989; |
 | Manage Users | &#10060; | &#10060; | &#9989; |
 | Log Out | &#10060; | &#9989; | &#9989; |
 | Log In | &#9989; | &#10060; | &#10060; |
@@ -204,19 +199,25 @@ The navigation bar changes depending on user status and screen size:
 
 MongoDB was used to store data for this site in a database. The data has been set out in two collections, which are described below:
 
-| Users |    |
-|-------|-----|
-| _id | ObjectId |
-| username | string |
-| password | string |
-| is_admin | boolean |
-| noffles | array |
+| Users |    |    |
+|---|---|---|
+| _id | ObjectId |    |
+| username | string |    |
+| password | string |    |
+| first_name | string |    |
+| last_name | string |    |
+| image_no | int |    |
+| is_admin | boolean |    |
+| noffles | array | noffles._id |
 
 | Noffles |    |
 |---|---|
 | _id | ObjectId |
-| noffle_name | string |
-| noffle_description | string |
+| name | string |
+| description | string |
+| permanent | boolean |
+| private | boolean |
+| icon | code |
 
 [Back to Top](#title)
 
@@ -285,7 +286,7 @@ MongoDB was used to store data for this site in a database. The data has been se
 
 #### Imgur
 
-[Imgur](https://imgur.com/) was used to host images to add to each cocktail recipe.
+[Imgur](https://imgur.com/) was used to host images to add to each user.
 
 ### Database Design Technologies
 
@@ -315,9 +316,9 @@ MongoDB was used to store data for this site in a database. The data has been se
 
 [Flask](https://flask.palletsprojects.com/en/2.0.x/) was used to help create the templating for this site.
 
-#### Materialize
+#### Bootstrap
 
-[Materialize](https://materializecss.com/) was used to create a beautiful, responsive website.
+[Bootstrap](https://getbootstrap.com/) was used to create a beautiful, responsive website.
 
 #### jQuery
 
@@ -449,10 +450,13 @@ The W3C Markup Validator, W3C CSS Validator and JSHint were used to validate the
 2. W3C CSS Validator
     * [CSS Results](LINK)
 
-3. JSHint
-    * [JSHint](https://jshint.com/)
+3. markdownlint GitPod Extension
+    * [markdownlint Extension](https://open-vsx.org/vscode/item?itemName=DavidAnson.vscode-markdownlint)
 
-4. PEP8 Online
+4. JSHint GitPod Extension
+    * [JSHint Extension](https://open-vsx.org/vscode/item?itemName=dbaeumer.jshint)
+
+5. PEP8 Online
     * [PEP8 Online](http://pep8online.com/)
 
     ![Image of PEP8 Online results](static/docs/img/pep8.png)
@@ -636,7 +640,7 @@ I tested my website using DevTools Lighthouse feature, and got these results:
 
 * [Font Awesome](https://fontawesome.com/): Library of icons used for social media and download links.
 * [Autoprefixer CSS online](https://autoprefixer.github.io/): To aid in the CSS prefixing.
-* [Materialize](https://materializecss.com/): Throughout the site, to create a beautiful responsive site, without taking too much time.
+* [Boostrap](https://getbootstrap.com/): Throughout the site, to create a beautiful responsive site, without taking too much time.
 * ANY CODE I USED FROM OTHER PEOPLE OR SITES AND WHO IT'S FROM, INCLUDING CREDITING ANYONE WHO HELPED ME FIX BUGS
 
 ### Audio Credit

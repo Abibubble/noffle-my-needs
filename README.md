@@ -124,6 +124,12 @@ In addition to the First Time and Returning Visitor Goals, as an administrator o
 
 [Here are the wireframes for desktop, mobile and tablet for this project](assets/docs/wireframes.pdf).
 
+### User Journey
+
+![User journey map](user-journey.png)
+
+### Features
+
 * Update a state
 
 ![Update a state](static/docs/img/state.png)

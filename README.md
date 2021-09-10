@@ -26,6 +26,7 @@ WHY DID I CHOOSE THIS PROJECT
   * [Typography](#typography)
   * [Imagery](#imagery)
   * [Wireframes](#wireframes)
+  * [User Journey](#user-journey)
   * [Features](#features)
   * [Audio](#audio)
 
@@ -171,14 +172,14 @@ The navigation bar changes depending on user status and screen size:
 | Nav Link | Logged Out | Logged In (User) | Logged In (Admin) |
 |-------|-----|-----|-----|
 | Landing Page | &#9989; | &#9989; | &#9989; |
-| Home | &#10060; | &#9989; | &#9989; |
-| Profile | &#10060; | &#9989; | &#9989; |
+| Log In | &#9989; | &#10060; | &#10060; |
+| Register | &#9989; | &#10060; | &#10060; |
 | Set My Noffles | &#10060; | &#9989; | &#9989; |
+| Office Page | &#10060; | &#9989; | &#9989; |
+| Profile | &#10060; | &#9989; | &#9989; |
 | Manage Noffles | &#10060; | &#10060; | &#9989; |
 | Manage Users | &#10060; | &#10060; | &#9989; |
 | Log Out | &#10060; | &#9989; | &#9989; |
-| Log In | &#9989; | &#10060; | &#10060; |
-| Register | &#9989; | &#10060; | &#10060; |
 
 * Logged in
 
@@ -213,6 +214,7 @@ MongoDB was used to store data for this site in a database. The data has been se
 | first_name | string |    |
 | last_name | string |    |
 | image_no | int |    |
+| pronouns| string |    |
 | is_admin | boolean |    |
 | noffles | array | noffles._id |
 

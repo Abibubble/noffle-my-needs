@@ -85,14 +85,28 @@ footer {
 
 /* ----------------------------------------------------------------------------------- Buttons */
 
-.btn-close-modal {
-    background-color: var(--pastel-blue) !important;
+.btn-close-modal,
+.btn-delete,
+.btn-red,
+.btn-blue,
+.btn-green,
+.btn-yellow {
     color: black !important;
     border: 2px solid black !important;
 }
 
-.btn-delete {
+.btn-close-modal, .btn-blue {
+    background-color: var(--pastel-blue) !important;
+}
+
+.btn-delete, .btn-red {
     background-color: var(--pastel-red) !important;
-    color: black !important;
-    border: 2px solid black !important;
+}
+
+.btn-green {
+    background-color: var(--pastel-green) !important;
+}
+
+.btn-yellow {
+    background-color: var(--pastel-yellow) !important;
 }

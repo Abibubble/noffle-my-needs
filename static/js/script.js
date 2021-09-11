@@ -1,4 +1,4 @@
-  // -------------------------------------------------------------------- Copyright
+// -------------------------------------------------------------------- Show Password
 
 function showPassword() {
   var input = document.getElementById("password");
@@ -8,6 +8,8 @@ function showPassword() {
     input.type = "password";
   }
 }
+
+// -------------------------------------------------------------------- Copyright
 
 function copyrightYear() {
     var d = new Date();

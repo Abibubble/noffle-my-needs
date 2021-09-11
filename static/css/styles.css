@@ -82,3 +82,17 @@ footer {
 .border-black {
     border: 2px solid black !important;
 }
+
+/* ----------------------------------------------------------------------------------- Buttons */
+
+.btn-close-modal {
+    background-color: var(--pastel-blue) !important;
+    color: black !important;
+    border: 2px solid black !important;
+}
+
+.btn-delete {
+    background-color: var(--pastel-red) !important;
+    color: black !important;
+    border: 2px solid black !important;
+}

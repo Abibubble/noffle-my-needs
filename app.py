@@ -39,9 +39,9 @@ def register(name=None):
     return render_template('register.html', name=name)
 
 
-@app.route('/admin')
-def admin(name=None):
-    return render_template('admin.html', name=name)
+@app.route('/profile')
+def profile(name=None):
+    return render_template('profile.html', name=name)
 
 
 @app.route('/office')

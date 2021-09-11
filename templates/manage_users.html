@@ -1,5 +1,25 @@
 {% extends 'base.html' %}
-
 {% block content %}
     <h2>Manage Users</h2>
+    <div class="container">
+        <div class="row">
+            {% for user in users %}
+                <div class="col-sm-12 col-md-4 col-lg-3">
+                    <div class="card user-card">
+                        <img class="card-img-top" src="{{ url_for('static', filename='img/user{{ user.image_no }}.png') }}" alt="Icon for {{ user.username }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ user.first_name }} {{ user.last_name }} ({{ user.pronouns }})</h5>
+                            <p class="card-text">{{ user.username }}</p>
+                            <p class="card-text">Has admin rights: {{ user.is_admin }}</p>
+                            <ul>Noffles:
+                                {% for noffle in user.noffles %}
+                                    <li><i class="{{ noffle.icon }}"></i> {{ noffle.name }} - {{ noffle.description }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}

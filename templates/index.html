@@ -1,5 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Index</h1>
+    <h1>Index</h1>
+    {% for noffle in noffles %}
+        {{ noffle.icon }}<br>
+        {{ noffle.name }}<br>
+        {{ noffle.description }}<br>
+        {{ noffle.permanent }}<br>
+        {{ noffle.private }}<br>
+    {% endfor %}
 {% endblock %}

@@ -35,8 +35,29 @@ def logout(name=None):
 
 
 @app.route('/register')
-def register(name=None):
-    return render_template('register.html', name=name)
+def register():
+    if request.method == 'POST':
+        # check if the username already exists in database
+        existing_user = mongo.db.users.find_one(
+            {"username": request.form.get("username").lower()})
+
+        if existing_user:
+            print("Username already exists")
+            return redirect(url_for("register"))
+
+        register = {
+            "username": request.form.get("username").lower(),
+            "password": generate_password_hash(request.form.get("password"))
+        }
+        mongo.db.users.insert_one(register)
+
+        # put the new user into 'session' cookie
+        session["user"] = request.form.get("username").lower()
+        print(session)
+        print("Hi, {}. Welcome to Noffle My Needs.".format(
+                        request.form.get("username").capitalize()))
+        return render_template("index.html")
+    return render_template('register.html')
 
 
 @app.route('/admin')
@@ -47,4 +68,4 @@ def admin(name=None):
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
-            debug=False)
+            debug=True)

@@ -4,12 +4,16 @@ from flask_pymongo import PyMongo
 # for accessing the databse uri from Heroku
 import os
 
+# if os.path.exists('env.py'):
+#     import env
+
 app = Flask(__name__)
 
-# connect to the database with Heroku env variables
-# app.config["MONGO_DBNAME"] = "<insert db name>"
-# app.config["MONGO_URI"] = os.getenv("MONGO_URI")
-
+# # connect to the database with Heroku env variables
+# app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME")
+# app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
+# app.secret_key = os.environ.get("SECRET_KEY")
+# MONGO_URI = os.environ.get('MONGO_URI')
 
 @app.route('/')
 def hello(name=None):

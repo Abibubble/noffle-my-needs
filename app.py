@@ -36,11 +36,11 @@ def login():
             if check_password_hash(
                     existing_user["password"], request.form.get("password")):
                 session["user"] = request.form.get("username").lower()
-                return render_template("index.html")
+                return redirect(url_for('set_noffles'))
             else:
                 # Invalid password match
                 flash("Incorrect Username and/or Password")
-                return redirect(url_for('profile'))
+                return redirect(url_for('login'))
 
         else:
             # Username does not exist

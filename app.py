@@ -184,6 +184,14 @@ def add_noffle(noffle_id):
     return render_template('set_noffles.html', noffles=noffles)
 
 
+def delete_account(username):
+    # Allow user to delete their own account
+    mongo.db.users.remove({"username": username})
+    flash("User Successfully Deleted")
+    session.pop("user")
+    return redirect(url_for("landing"))
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),

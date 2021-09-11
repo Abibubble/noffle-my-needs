@@ -58,29 +58,42 @@ def logout():
     return redirect(url_for("landing"))
 
 
-@app.route('/register')
+@app.route('/register', methods=["GET", "POST"])
 def register():
     if request.method == 'POST':
-        # check if the username already exists in database
-        existing_user = mongo.db.users.find_one(
-            {"username": request.form.get("username").lower()})
+        # Set variables
+        username = request.form.get("username").lower()
+        password = request.form.get("password")
+        password_confirm = request.form.get("password_confirm")
+        print(password_confirm)
+        # Check if the username already exists in database
+        existing_user = mongo.db.users.find_one({"username": username})
 
         if existing_user:
-            print("Username already exists")
+            flash("Username already exists")
+            return redirect(url_for("register"))
+
+        if password != password_confirm:
+            flash("Oh no! Your passwords don't match")
             return redirect(url_for("register"))
 
         register = {
             "username": request.form.get("username").lower(),
-            "password": generate_password_hash(request.form.get("password"))
+            "password": generate_password_hash(password),
+            "first_name": request.form.get("first_name").lower(),
+            "last_name": request.form.get("last_name").lower(),
+            "pronouns": request.form.get("pronouns").lower(),
+            "image_no": request.form.get("image_no"),
         }
         mongo.db.users.insert_one(register)
 
-        # put the new user into 'session' cookie
+        # Put the new user into 'session' cookie
         session["user"] = request.form.get("username").lower()
-        print(session)
-        print("Hi, {}. Welcome to Noffle My Needs.".format(
+        flash("Hi, {}. Welcome to Noffle My Needs.".format(
                         request.form.get("username").capitalize()))
-        return render_template("index.html")
+
+        return render_template("set_noffles.html")
+
     return render_template('register.html')
 
 

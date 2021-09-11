@@ -239,7 +239,7 @@ MongoDB was used to store data for this site in a database. The data has been se
 | description | string |
 | permanent | boolean |
 | private | boolean |
-| icon | code |
+| icon | string |
 
 [Back to Top](#title)
 
@@ -682,6 +682,6 @@ We tested this website using DevTools Lighthouse feature, and got these results:
   * [Carla Buongiorno](https://github.com/CarlaBuongiorno)
   * [Henrique Peroni](https://github.com/Henriqueperoni)
   * [Monika Hrda](https://github.com/monika-hrda)
-* Our team facilitator Megan Armstrong.
+* Our team facilitator [Megan Armstrong](https://www.linkedin.com/in/megan-armstrong4/).
 
 [Back to Top](#title)

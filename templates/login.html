@@ -1,5 +1,42 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Login</h1>
+<section class="container">
+    <h2 class="text-center">Log In</h2>
+    <form method="POST" action="{{ url_for('login') }}">
+        <div class="row">
+            <div class="form-group">
+                <span><i class="fas fa-user"></i></span>
+                <label for="username" class="sr-only">Username</label>
+                <input type="text" name="username" id="username" minlength="5" maxlength="15" 
+                    pattern="^[a-zA-Z0-9!-.@_]{5,15}$" class="form-control" placeholder="Username" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <span><i class="fas fa-key"></i></span>
+                <label for="password" class ="sr-only">Password</label>
+                <input type="password" name="password" id="password" minlength="5" maxlength="20" 
+                    pattern="^[a-zA-Z0-9!£%~#$%&()*+,-./?@^_~]{5,15}$" class="form-control" placeholder="Passsword" required>
+            </div>
+        </div>
+        <div class="row">
+            <label class="show-password" for="show-password">
+                <input type="checkbox" id="show-password" onclick="showPassword()">
+                <span>Show Password</span>
+            </label>
+        </div>
+        <div class="row">
+            <button name="login" id="login" class="btn login-btn" type="submit">Log In</button>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <p>
+                    New here? <a href="{{ url_for('register') }}">Register</a>
+                </p>
+            </div>
+        </div>
+    </form>
+</section>
+
 {% endblock %}

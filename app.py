@@ -91,7 +91,9 @@ def register():
         session["user"] = request.form.get("username").lower()
         flash("Hi, {}. Welcome to Noffle My Needs.".format(
                         request.form.get("username").capitalize()))
+
         return render_template("set_noffles.html")
+
     return render_template('register.html')
 
 

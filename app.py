@@ -102,7 +102,7 @@ def register():
         flash("Hi, {}. Welcome to Noffle My Needs.".format(
                         request.form.get("username").capitalize()))
 
-        return render_template("set_noffles.html", user=session["user"])
+        return render_template("set_noffles.html", noffles=noffles, user=session["user"])
 
     return render_template('register.html')
 
@@ -184,6 +184,7 @@ def add_noffle(noffle_id):
     return render_template('set_noffles.html', noffles=noffles)
 
 
+@app.route('/delete_account/<username>')
 def delete_account(username):
     # Allow user to delete their own account
     mongo.db.users.remove({"username": username})

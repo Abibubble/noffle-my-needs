@@ -1,21 +1,21 @@
-# Building an Accessible Workplace Hackathon
+# Noffle My Needs
 
-![GitHub contributors](https://img.shields.io/github/contributors/abibubble/REPO)
-![GitHub last commit](https://img.shields.io/github/last-commit/abibubble/REPO)
-![GitHub language count](https://img.shields.io/github/languages/count/abibubble/REPO)
-![GitHub top language](https://img.shields.io/github/languages/top/abibubble/REPO)
+![GitHub contributors](https://img.shields.io/github/contributors/abibubble/noffle-my-needs)
+![GitHub last commit](https://img.shields.io/github/last-commit/abibubble/noffle-my-needs)
+![GitHub language count](https://img.shields.io/github/languages/count/abibubble/noffle-my-needs)
+![GitHub top language](https://img.shields.io/github/languages/top/abibubble/noffle-my-needs)
 ![Font Awesome version](https://img.shields.io/badge/Font%20Awesome-v5.15.1-blue)
-![GitHub forks](https://img.shields.io/github/forks/abibubble/REPO?style=social)
+![GitHub forks](https://img.shields.io/github/forks/abibubble/noffle-my-needs?style=social)
 
-[Here is a link to the final project](https://REPO.herokuapp.com/homepage)
+[Here is a link to the final project](https://noffle-my-needs.herokuapp.com/)
 
-BASIC DESCRIPTION OF PROJECT
-It is designed to be responsive on a wide range of devices, whilst also being easy to navigate through.
-WHY DID I CHOOSE THIS PROJECT
+This project was built for the Trust In SODA and Code Institute Hackathon in September 2021. The theme for it is 'Building An Accessible Workplace', and we were tasked with creating a tool that helps employers create a truly accessible workspace, or improve their recruitment and onboarding experience for every person. It is designed to be responsive on a wide range of devices, whilst also being easy to navigate through, and fully accessible.
 
 ![Final project image home page](static/docs/img/finalpage.png)
 
 ## Contents
+
+* [Definition](#definition)
 
 * [User Experience (UX)](#user-experience-(ux))
   * [Initial Discussion](#initial-discussion)
@@ -61,17 +61,25 @@ WHY DID I CHOOSE THIS PROJECT
 
 ---
 
+## Definition
+
+**Noffle**  
+_noun_  
+A state of need of a particular person  
+Usage: "I've set a 'Please Speak Up' Noffle on my work system so that everyone knows I may be hard of hearing."  
+Similar: State, Need, Setting, Status
+
+---
+
 ## User Experience (UX)
 
 ### Initial Discussion
 
-WHAT I WANTED FROM THIS PROJECT
+* The theme for this Hackathon is 'Building An Accessible Workplace', and we were tasked with creating a tool that helps employers create a truly accessible workspace, or improve their recruitment and onboarding experience for every person.
+* We chose to work on the former, ensuring that all employees can feel that their needs are met every day while they're at work.
+* This site should be fully inclusive for all employees, not just those with visible disabilities, but also including those with mental health disabilities, as well as all neurotypical and able-bodied employees.
 
 ### User Stories
-
-#### Client Goals
-
-* WHAT THE CLIENT WANTS, NOT THE USER
 
 #### First Time Visitor Goals
 
@@ -109,6 +117,12 @@ In addition to the First Time and Returning Visitor Goals, as an administrator o
 
 ## Design
 
+### Overall
+
+* We wanted to make this a fun way to start your workday. So when you first log in, we wanted to ensure that the user was met with a welcome relating to the time of day.
+* We also decided to call the individual need states 'Noffles' for the same reason. We can't say it without a little giggle, and we wanted it to brighten everyone's day, leading to a happier and more inclusive workspace overall.
+* This led into the name of this project, 'Noffle My Needs'. It provides a small description of what this site is targeting - the needs of each employee in the business, whilst also giving them that little smile or giggle from the word 'Noffle'.
+
 ### Color Scheme
 
 * WHAT COLORS USED AND WHY
@@ -131,17 +145,17 @@ In addition to the First Time and Returning Visitor Goals, as an administrator o
 
 ### Features
 
-* Update a state
+* Update a Noffle
 
-![Update a state](static/docs/img/state.png)
+![Update a Noffle](static/docs/img/noffle.png)
 
 * Create and Delete a profile.
 
 ![Create and delete a profile](static/docs/img/delete-profile.png)
 
-* Create, Edit and Delete a state for admin users only.
+* Create, Edit and Delete a Noffle for admin users only.
 
-![Create, Edit and Delete a state](static/docs/img/states.png)
+![Create, Edit and Delete a Noffle](static/docs/img/noffless.png)
 
 * Edit admin rights and delete a user for admin users only.
 
@@ -420,7 +434,7 @@ This site was deployed to Heroku by following these steps:
 ### How to Fork it
 
 1. Login or Sign Up to [GitHub](www.github.com).
-2. On GitHub, go to [Abibubble/REPO](https://github.com/Abibubble/REPO).
+2. On GitHub, go to [Abibubble/noffle-my-needs](https://github.com/Abibubble/noffle-my-needs).
 3. In the top right, click "Fork".
 4. You will need to create an env.py file with your own values, and create a MongoDB database with the data keys and types as shown above.
 5. You will also need to install all of the project requirements. This can be done using the command `pip3 install -r requirements.txt`.
@@ -428,7 +442,7 @@ This site was deployed to Heroku by following these steps:
 
 ### Making a Local Clone
 
-1. Log in to [GitHub](https://www.github.com) and locate the [Repository](https://github.com/Abibubble/REPO) for this site.
+1. Log in to [GitHub](https://www.github.com) and locate the [Repository](https://github.com/Abibubble/noffle-my-needs) for this site.
 2. Under the repository name, above the list of files, click "Code".
 3. Here you can either Clone or Download the repository.
 4. You should clone the repository using HTTPS, clicking on the icon to copy the link.
@@ -487,7 +501,7 @@ The W3C Markup Validator, W3C CSS Validator and JSHint were used to validate the
 
 * How
 
-##### Set my state
+##### Set my Noffles
 
 * How
 
@@ -501,11 +515,11 @@ The W3C Markup Validator, W3C CSS Validator and JSHint were used to validate the
 
 * How
 
-##### Update their state
+##### Update their Noffles
 
 * How
 
-##### See the public states of other users
+##### See the public Noffles of other users
 
 * How
 
@@ -527,11 +541,11 @@ The W3C Markup Validator, W3C CSS Validator and JSHint were used to validate the
 
 * How
 
-##### Add a new state
+##### Add a new Noffle
 
 * How
 
-##### Edit or delete any state
+##### Edit or delete any Noffle
 
 * How
 

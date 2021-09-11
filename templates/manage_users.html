@@ -6,7 +6,7 @@
             {% for user in users %}
                 <div class="col-sm-12 col-md-4 col-lg-3">
                     <div class="card user-card">
-                        <img class="card-img-top" src="{{ url_for('static', filename='img/user{{ user.image_no }}.png') }}" alt="Icon for {{ user.username }}">
+                        <img class="card-img-top" src="/static/img/avatar{{ user.image_no }}.jpeg" alt="Icon for {{ user.username }}">
                         <div class="card-body">
                             <h5 class="card-title">Name: {{ user.first_name }} {{ user.last_name }} ({{ user.pronouns }})</h5>
                             <p class="card-text">Username: {{ user.username }}</p>

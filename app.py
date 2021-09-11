@@ -55,8 +55,9 @@ def login():
 
 
 @app.route('/logout')
-def logout(name=None):
-    return render_template('logout.html', name=name)
+def logout():
+    session.pop("user")
+    return render_template('index.html')
 
 
 @app.route('/register', methods=['GET', 'POST'])

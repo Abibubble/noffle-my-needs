@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Office</h2>
+    <div class="container">
+        <div class="row">
+            {% for noffle in noffles %}
+                <div class="col-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="{{ noffle.icon }}"></i> {{ noffle.name }}</h5>
+                            <p class="card-text">{{ noffle.description }}</p>
+                            <p>Permanent: {{ noffle.permanent }}</p>
+                            <p>Private: {{ noffle.private }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

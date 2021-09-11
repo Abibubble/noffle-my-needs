@@ -52,9 +52,18 @@ def login():
 
 @app.route('/logout')
 def logout():
-    # Remove user from session cookies and log out
-    session.pop("user")
-    flash("You have been logged out")
+    try:
+        user = mongo.db.users.find_one({"username": session["user"]})
+        for noffle in user.noffles:
+            if not noffle.permanent:
+                user.noffles.pop(noffle)
+
+        # Remove user from session cookies and log out
+        session.pop("user")
+        flash("You have been logged out")
+    except BaseException:
+        flash("You're already logged out!")
+
     return redirect(url_for("landing"))
 
 
@@ -65,7 +74,6 @@ def register():
         username = request.form.get("username").lower()
         password = request.form.get("password")
         password_confirm = request.form.get("password_confirm")
-        print(password_confirm)
         # Check if the username already exists in database
         existing_user = mongo.db.users.find_one({"username": username})
 
@@ -92,20 +100,22 @@ def register():
         flash("Hi, {}. Welcome to Noffle My Needs.".format(
                         request.form.get("username").capitalize()))
 
-        return render_template("set_noffles.html")
+        return render_template("set_noffles.html", user=session["user"])
 
     return render_template('register.html')
 
 
-@app.route("/profile", methods=["GET", "POST"])
-def profile(name=None):
+@app.route("/profile/<username>", methods=["GET", "POST"])
+def profile(username):
     noffles = mongo.db.noffles.find()
-
-    if session["user"]:
-        return render_template(
-            "profile.html", noffles=noffles, user=user)
-
-    return redirect(url_for("login"))
+    try:
+        user = mongo.db.users.find_one({"username": username})
+        if session["user"]:
+            return render_template(
+                "profile.html", noffles=noffles, user=user)
+    except BaseException:
+        return redirect(url_for("landing"))
+    return redirect(url_for("landing"))
 
 
 @app.route('/office')
@@ -123,9 +133,8 @@ def manage_noffles(name=None):
 @app.route('/manage_users')
 def manage_users(name=None):
     noffles = mongo.db.noffles.find()
-    users = mongo.db.users.find()
     return render_template(
-        'manage_users.html', name=name, noffles=noffles, users=users)
+        'manage_users.html', name=name, noffles=noffles, user=session["user"])
 
 
 @app.route('/set_noffles')

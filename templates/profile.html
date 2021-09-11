@@ -3,74 +3,88 @@
 {% block content %}
     <h2>{{ user.username }}'s Profile</h2>
     <hr>
-    <h3>Update Your Details</h3>
     <div class="row">
-        <form class="col-12" method="POST" action="{{ url_for('register') }}">
-            <i class="fas fa-user-plus"></i>
-            <input value="{{ user.username }}" id="username" name="username" type="text" minlength="5" maxlength="15" pattern="^[a-zA-Z0-9!-.@_]{5,15}$" required>
-            <label for="username">Username</label>
-            <br>
-            <i class="fas fa-user-lock"></i>
-            <input id="old_password" name="old_password" type="password" minlength="5" maxlength="20" pattern="^[a-zA-Z0-9!£%~#$%&()*+,-./?@^_~]{5,15}$" required>
-            <label for="old_password">Old Password</label>
-            <br>
-            <i class="fas fa-user-lock"></i>
-            <input id="password" name="password" type="password" minlength="5" maxlength="20" pattern="^[a-zA-Z0-9!£%~#$%&()*+,-./?@^_~]{5,15}$" required>
-            <label for="password">New Password</label>
-            <br>
-            <i class="fas fa-user-lock"></i>
-            <input id="password_confirm" name="password_confirm" type="password" minlength="5" maxlength="20" pattern="^[a-zA-Z0-9!£%~#$%&()*+,-./?@^_~]{5,15}$" required>
-            <label for="password_confirm">Confirm New Password</label>
-            <br>
-            <i class="fas fa-genderless"></i>
-            <input value="{{ user.pronouns }}" id="pronouns" name="pronouns" type="text" minlength="5" maxlength="40" required>
-            <label for="pronouns">Pronouns (format she/her, he/him, they/them)</label>
-            <br>
-            <i class="fas fa-image"></i>
-            <input value="{{ user.image_no }}" id="image_no" name="image_no" type="number" required>
-            <label for="image_no">Image Number</label>
-            <br>
-            <button type="submit">
-                Update Details
-            </button>
-        </form>
-    </div>
-    <hr>
-    <h3 class="pt-4">View your Noffles</h3>
-    {% if user.noffles[0] %}
-        {% for noffle in user.noffles %}
-            <div class="col-sm-12 col-md-4 col-lg-3 mb-5">
-                <div class="card noffle-card">
-                    <div class="card-body">
-                        <div class="row card-title">
-                            <div class="col-2"><i class="{{ noffle.icon }} fa-2x noffle-icon"></i></div>
-                            <div class="col-10"><h5>{{ noffle.name }}</h5></div>
-                        </div>
-                        <hr>
-                        <p class="card-text">{{ noffle.description }}</p>
-                        <p class="card-text">Permanent: {% if noffle.permanent %}&#9989;{% else %}&#10060;{% endif %}</p>
-                        <i class="fas fa-exclamation-circle"></i>
-                        {% if noffle.private %}
-                            <input id="private" type="checkbox" data-toggle="toggle" checked>
-                        {% else %}
-                            <input id="private" type="checkbox" data-toggle="toggle">
-                        {% endif %}
-                        <label for="private">Private</label>
-                        <br>
-                    </div>
-                </div>
+        <div class="col-5 border p-4">
+            <div class="row">
+                <form class="col-12" method="POST" action="{{ url_for('register') }}">
+                    <i class="fas fa-user-plus"></i>
+                    <label for="username">Username</label>
+                    <br>
+                    <input class="mb-3 w-100" value="{{ user.username }}" id="username" name="username" type="text" minlength="5" maxlength="15" pattern="^[a-zA-Z0-9!-.@_]{5,15}$" required>
+                    <br>
+                    <i class="fas fa-user-lock"></i>
+                    <label for="old_password">Old Password</label>
+                    <br>
+                    <input class="mb-3 w-100" id="old_password" name="old_password" type="password" minlength="5" maxlength="20" pattern="^[a-zA-Z0-9!£%~#$%&()*+,-./?@^_~]{5,15}$" required>
+                    <br>
+                    <i class="fas fa-user-lock"></i>
+                    <label for="password">New Password</label>
+                    <br>
+                    <input class="mb-3 w-100" id="password" name="password" type="password" minlength="5" maxlength="20" pattern="^[a-zA-Z0-9!£%~#$%&()*+,-./?@^_~]{5,15}$" required>
+                    <br>
+                    <i class="fas fa-user-lock"></i>
+                    <label for="password_confirm">Confirm New Password</label>
+                    <br>
+                    <input class="mb-3 w-100" id="password_confirm" name="password_confirm" type="password" minlength="5" maxlength="20" pattern="^[a-zA-Z0-9!£%~#$%&()*+,-./?@^_~]{5,15}$" required>
+                    <br>
+                    <i class="fas fa-genderless"></i>
+                    <label for="pronouns">Pronouns (format she/her, he/him, they/them)</label>
+                    <br>
+                    <input class="mb-3 w-100" value="{{ user.pronouns }}" id="pronouns" name="pronouns" type="text" minlength="5" maxlength="40" required>
+                    <br>
+                    <i class="fas fa-image"></i>
+                    <label for="image_no">Image Number</label>
+                    <br>
+                    <input class="mb-3 w-100" value="{{ user.image_no }}" id="image_no" name="image_no" type="number" required>
+                    <br>
+                    <button type="submit" class="btn btn-green">
+                        Update Details
+                    </button>
+                </form>
             </div>
-        {% endfor %}
-    {% else %}
-        <div class="col-sm-12 col-md-4 col-lg-3 mb-5">
-            <h4 class="text-danger">You haven't got any Noffles set!</h4>
-            <a href="{{ url_for('set_noffles') }}">Set your Noffles now!</a>
         </div>
-    {% endif %}
+        <div class="col-5 offset-2 p-4 border">
+            {% if user.noffles[0] %}
+                {% for noffle in user.noffles %}
+                    <div class="col-sm-12 col-md-4 col-lg-3 mb-5">
+                        <div class="card noffle-card">
+                            <div class="card-body">
+                                <div class="row card-title">
+                                    <div class="col-2"><i class="{{ noffle.icon }} fa-2x noffle-icon"></i></div>
+                                    <div class="col-10"><h5>{{ noffle.name }}</h5></div>
+                                </div>
+                                <hr>
+                                <p class="card-text">{{ noffle.description }}</p>
+                                <p class="card-text">Permanent: {% if noffle.permanent %}&#9989;{% else %}&#10060;{% endif %}</p>
+                                <i class="fas fa-exclamation-circle"></i>
+                                {% if noffle.private %}
+                                    <input id="private" type="checkbox" data-toggle="toggle" checked>
+                                {% else %}
+                                    <input id="private" type="checkbox" data-toggle="toggle">
+                                {% endif %}
+                                <label for="private">Private</label>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="col-12 mb-5">
+                    <h4 class="text-danger">You haven't got any Noffles set!</h4>
+                    <p>Set your Noffles now!</p>
+                    <a href="{{ url_for('set_noffles') }}" class="btn btn-close-modal">Set my Noffles</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
     {% if not user.is_admin %}
-        <button type="button" class="btn btn-primary btn-delete mt-5" data-toggle="modal" data-target="#delete-modal">
-            Delete Your Account
-        </button>
+    <div class="row">
+        <div class="col-12 text-center">
+            <button type="button" class="btn btn-primary btn-delete mt-5" data-toggle="modal" data-target="#delete-modal">
+                Delete Your Account
+            </button>
+        </div>
+    </div>
     {% endif %}
 
     <!-- Modal -->

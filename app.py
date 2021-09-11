@@ -111,19 +111,25 @@ def register():
 def profile(username):
     noffles = mongo.db.noffles.find()
     try:
-        user = mongo.db.users.find_one({"username": username})
+        user = mongo.db.users.find_one({"username": session["user"]})
         if session["user"]:
             return render_template(
                 "profile.html", noffles=noffles, user=user)
     except BaseException:
-        return redirect(url_for("landing"))
+        flash("You need to be logged in to access this page")
+        return redirect(url_for("login"))
     return redirect(url_for("landing"))
 
 
 @app.route('/office')
 def office(name=None):
+    try:
+        user = mongo.db.users.find_one({"username": session["user"]})
+    except BaseException:
+        flash("You need to be logged in to access this page")
+        return redirect(url_for("login"))
     noffles = mongo.db.noffles.find()
-    return render_template('office.html', name=name, noffles=noffles)
+    return render_template('office.html', name=name, noffles=noffles, user=user)
 
 
 @app.route('/manage_noffles')
@@ -131,17 +137,16 @@ def manage_noffles(name=None):
     # Show categories to admin user
     try:
         user = mongo.db.users.find_one({"username": session["user"]})
+        if user["is_admin"] is False:
+            flash("You need to be an admin to access this page")
+            return redirect(url_for("office"))
+            noffles = mongo.db.noffles.find()
+            return render_template(
+                'manage_noffles.html', name=name, noffles=noffles, user=user)
     except BaseException:
         flash("You need to be logged in to access this page")
         return redirect(url_for("login"))
 
-    if user["is_admin"] is False:
-        flash("You need to be an admin to access this page")
-        return redirect(url_for("office"))
-
-    noffles = mongo.db.noffles.find()
-    return render_template(
-        'manage_noffles.html', name=name, noffles=noffles, user=user)
 
 
 @app.route('/manage_users')

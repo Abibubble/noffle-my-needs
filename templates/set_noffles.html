@@ -8,11 +8,22 @@
                 <div class="col-sm-12 col-md-4 col-lg-3">
                     <div class="card noffle-card">
                         <div class="card-body">
-                            <h5 class="card-title"><i class="{{ noffle.icon }}"></i> {{ noffle.name }}</h5>
+                            <div class="row card-title">
+                                <div class="col-2"><i class="{{ noffle.icon }} fa-2x noffle-icon"></i></div>
+                                <div class="col-10"><h5>{{ noffle.name }}</h5></div>
+                            </div>
+                            <hr>
                             <p class="card-text">{{ noffle.description }}</p>
-                            <p>Permanent: {{ noffle.permanent }}</p>
-                            <p>Private: {{ noffle.private }}</p>
-                            <a href="#" class="text-info">Use this Noffle</a>
+                            <p class="card-text">Permanent: {% if noffle.permanent %}&#9989;{% else %}&#10060;{% endif %}</p>
+                            <i class="fas fa-exclamation-circle"></i>
+                            {% if noffle.private %}
+                                <input id="private" type="checkbox" data-toggle="toggle" checked>
+                            {% else %}
+                                <input id="private" type="checkbox" data-toggle="toggle">
+                            {% endif %}
+                            <label for="private">Private</label>
+                            <br>
+                            <button class="btn btn-large btn-info border-black">Use this Noffle</a>
                         </div>
                     </div>
                 </div>

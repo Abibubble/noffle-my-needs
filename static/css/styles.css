@@ -2,6 +2,8 @@
 
 .noffle-card {
     height: 260px;
+    margin-bottom: 10px;
+    overflow-y: scroll;
 }
 
 .user-card {
@@ -12,4 +14,8 @@
     max-height: 200px;
     margin: auto;
     width: fit-content !important;
+}
+
+.border-black {
+    border: 2px solid black !important;
 }

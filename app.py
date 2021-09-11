@@ -21,27 +21,95 @@ mongo = PyMongo(app)
 @app.route('/landing')
 def landing(name=None):
     noffles = mongo.db.noffles.find()
-    return render_template('index.html', name=name, noffles=noffles)
+    return render_template('landing.html', name=name, noffles=noffles)
 
 
-@app.route('/login')
-def login(name=None):
-    return render_template('login.html', name=name)
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    print('trying to login')
+    if request.method == "POST":
+        # check if username already exists
+        existing_user = mongo.db.users.find_one(
+            {"username": request.form.get("username").lower()})
+
+        if existing_user:
+            # ensure hashed password matches user input
+            if check_password_hash(
+                    existing_user["password"], request.form.get("password")):
+                session["user"] = request.form.get("username").lower()
+                return render_template("index.html")
+            else:
+                # invalid passwword match
+                print("Incorrect Username and/or Password")
+                """
+                Add redirect url for profile page once it is created
+                """
+                return render_template("login.html")
+
+        else:
+            # username does not exist
+            print("Incorrect Username and/or Password")
+            return render_template("login.html")
+
+    return render_template("login.html")
 
 
 @app.route('/logout')
-def logout(name=None):
-    return render_template('logout.html', name=name)
+def logout():
+    session.pop("user")
+    return render_template('index.html')
 
 
-@app.route('/register')
-def register(name=None):
-    return render_template('register.html', name=name)
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        # check if the username already exists in database
+        existing_user = mongo.db.users.find_one(
+            {"username": request.form.get("username").lower()})
+
+        if existing_user:
+            print("Username already exists")
+            return redirect(url_for("register"))
+
+        register = {
+            "username": request.form.get("username").lower(),
+            "password": generate_password_hash(request.form.get("password"))
+        }
+        mongo.db.users.insert_one(register)
+
+        # put the new user into 'session' cookie
+        session["user"] = request.form.get("username").lower()
+        print(session)
+        print("Hi, {}. Welcome to Noffle My Needs.".format(
+                        request.form.get("username").capitalize()))
+        """
+        Add redirect url for profile page once it is created
+        """
+        return render_template("index.html")
+    return render_template('register.html')
 
 
-@app.route('/admin')
-def admin(name=None):
-    return render_template('admin.html', name=name)
+@app.route('/profile')
+def profile(name=None):
+    return render_template('profile.html', name=name)
+
+
+@app.route('/office')
+def office(name=None):
+    noffles = mongo.db.noffles.find()
+    return render_template('office.html', name=name, noffles=noffles)
+
+
+@app.route('/manage_noffles')
+def manage_noffles(name=None):
+    noffles = mongo.db.noffles.find()
+    return render_template('manage_noffles.html', name=name, noffles=noffles)
+
+
+@app.route('/set_noffles')
+def set_noffles(name=None):
+    noffles = mongo.db.noffles.find()
+    return render_template('set_noffles.html', name=name, noffles=noffles)
 
 
 if __name__ == "__main__":

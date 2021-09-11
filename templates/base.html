@@ -2,23 +2,45 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <!-- Metas -->
+    <meta name="description" content="An office map-style site which allows all employees to express their needs through the workday, to create a fully accessible workplace.">
+    <meta name="keywords" content="noffle, needs, accessibility, a11y, ally, allies, office, work, workplace, workspace, employee, employees, employer">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="canonical" href="https://noffle-my-needs.herokuapp.com/">
+    <meta name="robots" content="index, follow">
+    <!-- Facebook, LinkedIn, Google -->
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Noffle My Needs" />
+    <meta property="og:description" content="An office map-style site which allows all employees to express their needs through the workday, to create a fully accessible workplace." />
+    <meta property="og:image" content="./static/docs/img/finalsite.png" />
+    <meta property="og:url" content="https://noffle-my-needs.herokuapp.com/" />
+    <meta property="og:site_name" content="Noffle My Needs" />
+    <!-- Twitter -->
+    <meta name="twitter:title" content="Noffle My Needs">
+    <meta name="twitter:description" content="An office map-style site which allows all employees to express their needs through the workday, to create a fully accessible workplace.">
+    <meta name="twitter:image" content="./static/docs/img/finalsite.png">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Libre+Barcode+128+Text&display=swap" rel="stylesheet">
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/static/img/site.webmanifest" crossorigin="use-credentials">
+    <!-- Local stylesheets -->
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" type="text/css" />
     <!-- Bootstrap-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
         integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
         integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <!-- Other CSS styles -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-
-    <title>Noffle My Needs</title>
+    <title>Noffle My Needs{% block extra_title %}{% endblock %}</title>
 </head>
 
 <body>

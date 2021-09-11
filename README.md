@@ -137,11 +137,11 @@ In addition to the First Time and Returning Visitor Goals, as an administrator o
 
 ### Wireframes
 
-[Here are the wireframes for desktop, mobile and tablet for this project](assets/docs/wireframes.pdf).
+[Here are the wireframes for desktop, mobile and tablet for this project](static/docs/img/wireframes.pdf).
 
 ### User Journey
 
-![User journey map](user-journey.png)
+![User journey map](static/docs/img/user-journey.png)
 
 ### Features
 
@@ -626,11 +626,11 @@ We tested this website using DevTools Lighthouse feature, and got these results:
 
 #### Desktop Lighthouse
 
-![Lighthouse desktop first try](assets/docs/lighthouse.png)
+![Lighthouse desktop first try](static/docs/img/lighthouse.png)
 
 #### Mobile Lighthouse
 
-![Lighthouse mobile first try](assets/docs/lighthousemobile.png)
+![Lighthouse mobile first try](static/docs/img/lighthousemobile.png)
 
 #### Performance
 

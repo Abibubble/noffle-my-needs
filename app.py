@@ -175,6 +175,23 @@ def set_noffles(name=None):
     return render_template('set_noffles.html', name=name, noffles=noffles)
 
 
+@app.route('/add_noffle/<noffle_id>')
+def add_noffle(noffle_id):
+    noffles = mongo.db.noffles.find()
+    noffle = mongo.db.noffles.find_one({"_id": noffle_id})
+    user = mongo.db.users.find_one({"username": session["user"]})
+    user["noffles"].append(noffle)
+    return render_template('set_noffles.html', noffles=noffles)
+
+
+def delete_account(username):
+    # Allow user to delete their own account
+    mongo.db.users.remove({"username": username})
+    flash("User Successfully Deleted")
+    session.pop("user")
+    return redirect(url_for("landing"))
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),

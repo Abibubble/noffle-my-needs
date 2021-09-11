@@ -1,5 +1,70 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h2>Profile</h2>
+    <h2>{{ user.username }}'s Profile</h2>
+    <hr>
+    <h3>Update Your Details</h3>
+    <div class="row">
+        <form class="col-12" method="POST" action="{{ url_for('register') }}">
+            <i class="fas fa-user-plus"></i>
+            <input value="{{ user.username }}" id="username" name="username" type="text" minlength="5" maxlength="15" pattern="^[a-zA-Z0-9!-.@_]{5,15}$" required>
+            <label for="username">Username</label>
+            <br>
+            <i class="fas fa-user-lock"></i>
+            <input id="old_password" name="old_password" type="password" minlength="5" maxlength="20" pattern="^[a-zA-Z0-9!£%~#$%&()*+,-./?@^_~]{5,15}$" required>
+            <label for="old_password">Old Password</label>
+            <br>
+            <i class="fas fa-user-lock"></i>
+            <input id="password" name="password" type="password" minlength="5" maxlength="20" pattern="^[a-zA-Z0-9!£%~#$%&()*+,-./?@^_~]{5,15}$" required>
+            <label for="password">New Password</label>
+            <br>
+            <i class="fas fa-user-lock"></i>
+            <input id="password_confirm" name="password_confirm" type="password" minlength="5" maxlength="20" pattern="^[a-zA-Z0-9!£%~#$%&()*+,-./?@^_~]{5,15}$" required>
+            <label for="password_confirm">Confirm New Password</label>
+            <br>
+            <i class="fas fa-genderless"></i>
+            <input id="pronouns" name="pronouns" type="text" minlength="5" maxlength="40" required>
+            <label for="pronouns">Pronouns (format she/her, he/him, they/them)</label>
+            <br>
+            <i class="fas fa-image"></i>
+            <input id="image_no" name="image_no" type="number" required>
+            <label for="image_no">Image Number</label>
+            <br>
+            <button type="submit">
+                Update Details
+            </button>
+        </form>
+    </div>
+    <hr>
+    <h3 class="pt-4">View your Noffles</h3>
+    {% if user.noffles[0] %}
+        {% for noffle in user.noffles %}
+            <div class="col-sm-12 col-md-4 col-lg-3">
+                <div class="card noffle-card">
+                    <div class="card-body">
+                        <div class="row card-title">
+                            <div class="col-2"><i class="{{ noffle.icon }} fa-2x noffle-icon"></i></div>
+                            <div class="col-10"><h5>{{ noffle.name }}</h5></div>
+                        </div>
+                        <hr>
+                        <p class="card-text">{{ noffle.description }}</p>
+                        <p class="card-text">Permanent: {% if noffle.permanent %}&#9989;{% else %}&#10060;{% endif %}</p>
+                        <i class="fas fa-exclamation-circle"></i>
+                        {% if noffle.private %}
+                            <input id="private" type="checkbox" data-toggle="toggle" checked>
+                        {% else %}
+                            <input id="private" type="checkbox" data-toggle="toggle">
+                        {% endif %}
+                        <label for="private">Private</label>
+                        <br>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="col-sm-12 col-md-4 col-lg-3">
+            <h4 class="text-danger">You haven't got any Noffles set!</h4>
+            <a href="{{ url_for('set_noffles') }}">Set your Noffles now!</a>
+        </div>
+    {% endif %}
 {% endblock %}

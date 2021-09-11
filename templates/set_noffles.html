@@ -2,30 +2,33 @@
 
 {% block content %}
     <h2>Set My Noffles</h2>
+    <hr>
+    <p>To set a Noffle, click on the card, and choose whether you'd like it to be private or public.</p>
+    <p>Public Noffles can be seen by everyone on the site. Private Noffles can only be seen by your managers.</p>
     <div class="container">
         <div class="row">
             {% for noffle in noffles %}
                 <div class="col-sm-12 col-md-4 col-lg-3">
-                    <div class="card noffle-card">
-                        <div class="card-body">
-                            <div class="row card-title">
-                                <div class="col-2"><i class="{{ noffle.icon }} fa-2x noffle-icon"></i></div>
-                                <div class="col-10"><h5>{{ noffle.name }}</h5></div>
+                    <a href="{{ url_for('add_noffle', noffle_id=noffle._id) }}">
+                        <div class="card noffle-card">
+                            <div class="card-body">
+                                <div class="row card-title">
+                                    <div class="col-2"><i class="{{ noffle.icon }} fa-2x noffle-icon"></i></div>
+                                    <div class="col-10"><h5>{{ noffle.name }}</h5></div>
+                                </div>
+                                <hr>
+                                <p class="card-text">{{ noffle.description }}</p>
+                                <p class="card-text">Permanent: {% if noffle.permanent %}&#9989;{% else %}&#10060;{% endif %}</p>
+                                <i class="fas fa-exclamation-circle"></i>
+                                {% if noffle.private %}
+                                    <input id="private" type="checkbox" data-toggle="toggle" checked>
+                                {% else %}
+                                    <input id="private" type="checkbox" data-toggle="toggle">
+                                {% endif %}
+                                <label for="private">Private</label>
                             </div>
-                            <hr>
-                            <p class="card-text">{{ noffle.description }}</p>
-                            <p class="card-text">Permanent: {% if noffle.permanent %}&#9989;{% else %}&#10060;{% endif %}</p>
-                            <i class="fas fa-exclamation-circle"></i>
-                            {% if noffle.private %}
-                                <input id="private" type="checkbox" data-toggle="toggle" checked>
-                            {% else %}
-                                <input id="private" type="checkbox" data-toggle="toggle">
-                            {% endif %}
-                            <label for="private">Private</label>
-                            <br>
-                            <button class="btn btn-large btn-info border-black">Use this Noffle</a>
                         </div>
-                    </div>
+                    </a>
                 </div>
             {% endfor %}
         </div>

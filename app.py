@@ -1,23 +1,27 @@
-from flask import Flask, redirect, render_template
-from flask_pymongo import PyMongo
-
-# for accessing the databse uri from Heroku
 import os
-
-# if os.path.exists('env.py'):
-#     import env
+from flask import (
+    Flask, flash, render_template,
+    redirect, request, session, url_for)
+from flask_pymongo import PyMongo
+from bson.objectid import ObjectId
+from werkzeug.security import generate_password_hash, check_password_hash
+if os.path.exists("env.py"):
+    import env
 
 app = Flask(__name__)
 
-# # connect to the database with Heroku env variables
-# app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME")
-# app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
-# app.secret_key = os.environ.get("SECRET_KEY")
-# MONGO_URI = os.environ.get('MONGO_URI')
+app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME")
+app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
+app.secret_key = os.environ.get("SECRET_KEY")
+
+mongo = PyMongo(app)
+
 
 @app.route('/')
-def hello(name=None):
-    return render_template('index.html', name=name)
+@app.route('/landing')
+def landing(name=None):
+    noffles = mongo.db.noffles.find()
+    return render_template('index.html', name=name, noffles=noffles)
 
 
 @app.route('/login')
@@ -38,3 +42,9 @@ def register(name=None):
 @app.route('/admin')
 def admin(name=None):
     return render_template('admin.html', name=name)
+
+
+if __name__ == "__main__":
+    app.run(host=os.environ.get("IP"),
+            port=int(os.environ.get("PORT")),
+            debug=False)

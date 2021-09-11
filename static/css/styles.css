@@ -1,3 +1,65 @@
+/* ----------------------------------------------------------------------------------- Variables */
+
+:root {
+    --alto: #D0D0D0;
+    --gallery: #ECECEC;
+    --wild-sand: #F5F5F5;
+    --pastel-yellow: #FEF3D2;
+    --pastel-red: #FBE6E6;
+    --pastel-green: #E3F1D4;
+    --pastel-blue: #D7EFF5;
+}
+
+/* ----------------------------------------------------------------------------------- Overall */
+
+body {
+    height: calc(100% - 66px);
+    padding-bottom: 66px;
+}
+
+main {
+    padding-top: 52px;
+}
+
+a {
+    color: black !important;
+    text-decoration: none !important;
+}
+
+/* ----------------------------------------------------------------------------------- Navbar and Footer */
+
+
+nav, footer {
+    color: black !important;
+    background-color: var(--alto);
+}
+
+nav {
+    border-bottom: 2px solid black;
+}
+
+.navbar {
+    padding: 0 !important;
+}
+
+.nav-item {
+    margin-right: 10px;
+    padding: 5px 0 5px 10px;
+}
+
+.nav-link {
+    height: 100%;
+    width: 100%;
+}
+
+footer {
+    border-top: 2px solid black;
+}
+
+.right-justify {
+    justify-content: right;
+}
+
 /* ----------------------------------------------------------------------------------- Cards */
 
 .noffle-card {
@@ -8,6 +70,7 @@
 
 .user-card {
     height: 400px;
+    overflow-y: scroll;
 }
 
 .card-img-top {

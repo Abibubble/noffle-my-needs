@@ -48,7 +48,7 @@
 <body>
 
     <!--Navbar-->
-    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-sm fixed-top">
         <div class="container">
             <a class="navbar-brand" href="{{ url_for('landing') }}">Noffle My Needs</a>
 
@@ -57,38 +57,45 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse" id="navbarToggler">
-                <ul class="navbar-nav mr-auto">
+            <div class="collapse navbar-collapse right-justify" id="navbarToggler">
+                <ul class="nav navbar-nav">
+                    {% if session.user %}
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{{ url_for('office') }}">Office</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('profile', username=session['user']) }}">Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('set_noffles') }}">Set My Noffles</a>
+                        </li>
+                        {% if user %}
+                            {% if user["is_admin"] %}
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ url_for('manage_users') }}">Manage Users</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ url_for('manage_noffles') }}">Manage Noffles</a>
+                                </li>
+                            {% endif %}
+                        {% endif %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+                        </li>
+                    {% else %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('login') }}">Login</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('register') }}">Register</a>
                     </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{ url_for('office') }}">Office</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('profile', username=session['user']) }}">Profile</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('set_noffles') }}">Set My Noffles</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('manage_users') }}">Manage Users</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('manage_noffles') }}">Manage Noffles</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
-                    </li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
     </nav>
 
-    <main class="container">
+    <main class="container mt-4">
 
         <!-- Flash messages -->
         <div>
@@ -113,9 +120,28 @@
     </main>
 
     <!-- Footer -->
-    <footer>
-        <!-- Auto-updating copyright -->
-        <p class="copyright">Copyright &copy; A11y Allies <span id="copyright"></span></p>
+    <footer class="fixed-bottom align-middle">
+        <div class="row">
+            <div class="col-2 text-center">
+                <a href="https://github.com/Abibubble">Abi Harrison</a><br>
+            </div>
+            <div class="col-2 text-center">
+                <a href="https://github.com/andrewdempsey2018">Andrew Dempsey</a><br>
+            </div>
+            <div class="col-2 text-center">
+                <a href="https://github.com/CarlaBuongiorno">Carla Buongiorno</a><br>
+            </div>
+            <div class="col-2 text-center">
+                <a href="https://github.com/Henriqueperoni">Henrique Peroni</a><br>
+            </div>
+            <div class="col-2 text-center">
+                <a href="https://github.com/monika-hrda">Monika Hrda</a>
+            </div>
+            <div class="col-2 text-center">
+                <!-- Auto-updating copyright -->
+                <small class="copyright">Copyright &copy; A11y Allies <span id="copyright"></span></small>
+            </div>
+        </div>
     </footer>
 
     <!-- Import Javascript file-->

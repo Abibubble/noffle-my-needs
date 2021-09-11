@@ -1,5 +1,32 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
 {% block content %}
     <h2>Register</h2>
+    <div class="row">
+        <form class="col-12" method="POST" action="{{ url_for('register') }}">
+            <i class="fas fa-user-plus"></i>
+            <input id="username" name="username" type="text" minlength="5" maxlength="15" pattern="^[a-zA-Z0-9!-.@_]{5,15}$" required>
+            <label for="username">Username</label>
+            <br>
+            <i class="fas fa-user-lock"></i>
+            <input id="password" name="password" type="password" minlength="5" maxlength="20" pattern="^[a-zA-Z0-9!£%~#$%&()*+,-./?@^_~]{5,15}$" required>
+            <label for="password">Password</label>
+            <br>
+            <i class="fas fa-user-lock"></i>
+            <input id="password_confirm" name="password_confirm" type="password" minlength="5" maxlength="20" pattern="^[a-zA-Z0-9!£%~#$%&()*+,-./?@^_~]{5,15}$" required>
+            <label for="password_confirm">Confirm Password</label>
+            <br>
+            <button type="submit">
+                Register
+            </button>
+        </form>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <p>
+                Already registered? <a href="{{ url_for('login') }}">Log In</a>
+            </p>
+        </div>
+    </div>
 {% endblock %}

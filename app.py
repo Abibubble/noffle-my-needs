@@ -92,6 +92,8 @@ def register():
             "last_name": request.form.get("last_name").lower(),
             "pronouns": request.form.get("pronouns").lower(),
             "image_no": request.form.get("image_no"),
+            "is_admin": False,
+            "noffles": []
         }
         mongo.db.users.insert_one(register)
 
@@ -126,15 +128,40 @@ def office(name=None):
 
 @app.route('/manage_noffles')
 def manage_noffles(name=None):
+    # Show categories to admin user
+    try:
+        user = mongo.db.users.find_one({"username": session["user"]})
+    except BaseException:
+        flash("You need to be logged in to access this page")
+        return redirect(url_for("login"))
+
+    if user["is_admin"] is False:
+        flash("You need to be an admin to access this page")
+        return redirect(url_for("office"))
+
     noffles = mongo.db.noffles.find()
-    return render_template('manage_noffles.html', name=name, noffles=noffles)
+    return render_template(
+        'manage_noffles.html', name=name, noffles=noffles, user=user)
 
 
 @app.route('/manage_users')
 def manage_users(name=None):
+    # Show categories to admin user
+    try:
+        user = mongo.db.users.find_one({"username": session["user"]})
+    except BaseException:
+        flash("You need to be logged in to access this page")
+        return redirect(url_for("login"))
+
+    if user["is_admin"] is False:
+        flash("You need to be an admin to access this page")
+        return redirect(url_for("office"))
+
     noffles = mongo.db.noffles.find()
+    users = mongo.db.users.find()
     return render_template(
-        'manage_users.html', name=name, noffles=noffles, user=session["user"])
+        'manage_users.html', name=name, noffles=noffles,
+        users=users, user=user)
 
 
 @app.route('/set_noffles')

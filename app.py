@@ -21,7 +21,7 @@ mongo = PyMongo(app)
 @app.route('/landing')
 def landing(name=None):
     noffles = mongo.db.noffles.find()
-    return render_template('index.html', name=name, noffles=noffles)
+    return render_template('landing.html', name=name, noffles=noffles)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -89,12 +89,30 @@ def register():
     return render_template('register.html')
 
 
-@app.route('/admin')
-def admin(name=None):
-    return render_template('admin.html', name=name)
+@app.route('/profile')
+def profile(name=None):
+    return render_template('profile.html', name=name)
+
+
+@app.route('/office')
+def office(name=None):
+    noffles = mongo.db.noffles.find()
+    return render_template('office.html', name=name, noffles=noffles)
+
+
+@app.route('/manage_noffles')
+def manage_noffles(name=None):
+    noffles = mongo.db.noffles.find()
+    return render_template('manage_noffles.html', name=name, noffles=noffles)
+
+
+@app.route('/set_noffles')
+def set_noffles(name=None):
+    noffles = mongo.db.noffles.find()
+    return render_template('set_noffles.html', name=name, noffles=noffles)
 
 
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
-            debug=True)
+            debug=False)

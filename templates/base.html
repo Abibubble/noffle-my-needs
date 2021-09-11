@@ -86,11 +86,29 @@
         </div>
     </nav>
 
-    <!-- main content container -->
-    <div class="container">
-        {% block content %}
-        {% endblock %}
-    </div>
+    <main class="container">
+
+        <!-- Flash messages -->
+        <div>
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="row">
+                            <div class="col-12">
+                                <h4>{{ message }}</h4>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
+
+        <!-- Main content container -->
+        <div>
+            {% block content %}
+            {% endblock %}
+        </div>
+    </main>
 
     <!-- Footer -->
     <footer>

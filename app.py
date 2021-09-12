@@ -20,8 +20,14 @@ mongo = PyMongo(app)
 @app.route('/')
 @app.route('/landing')
 def landing(name=None):
+    # Find if a user is logged in
+    try:
+        user = mongo.db.users.find_one({"username": session["user"]})
+    except BaseException:
+        user = mongo.db.users.find()
+
     noffles = mongo.db.noffles.find()
-    return render_template('landing.html', name=name, noffles=noffles)
+    return render_template('landing.html', name=name, noffles=noffles, user=user)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -52,23 +58,31 @@ def login():
 
 @app.route('/logout')
 def logout():
+    # Find if a user is logged in for the navbar
+    print("*", session["user"], "*")
     try:
         user = mongo.db.users.find_one({"username": session["user"]})
-        for noffle in user.noffles:
-            if not noffle.permanent:
-                user.noffles.pop(noffle)
-
-        # Remove user from session cookies and log out
-        session.pop("user")
+        # For some reason, this doesn't work without the print statement below.
+        # No clue why. Please tell Abi if you figure out why, or how to fix it!!
+        print(user)
         flash("You have been logged out")
     except BaseException:
+        user = mongo.db.users.find()
         flash("You're already logged out!")
-
+        return redirect(url_for("landing"))
+    # Remove user from session cookies and log out
+    session.pop("user")
     return redirect(url_for("landing"))
 
 
 @app.route('/register', methods=["GET", "POST"])
 def register():
+    # Find if a user is logged in
+    try:
+        user = mongo.db.users.find_one({"username": session["user"]})
+    except BaseException:
+        user = mongo.db.users.find()
+
     if request.method == 'POST':
         # Set variables
         username = request.form.get("username").lower()
@@ -102,20 +116,27 @@ def register():
         flash("Hi, {}. Welcome to Noffle My Needs.".format(
                         request.form.get("username").capitalize()))
 
-        return render_template("set_noffles.html", user=session["user"])
+        return render_template("set_noffles.html", noffles=noffles, user=user)
 
     return render_template('register.html')
 
 
 @app.route("/profile/<username>", methods=["GET", "POST"])
 def profile(username):
-    noffles = mongo.db.noffles.find()
+    # Find if a user is logged in
     try:
         user = mongo.db.users.find_one({"username": session["user"]})
-        if session["user"]:
-            return render_template(
-                "profile.html", noffles=noffles, user=user)
     except BaseException:
+        user = mongo.db.users.find()
+
+    noffles = ""
+    for noffle in user["noffles"]:
+        noffles += noffle
+    noffles = mongo.db.noffles.find({"_id": ObjectId(noffles)})
+    if session["user"]:
+        return render_template(
+            "profile.html", noffles=noffles, user=user)
+    else:
         flash("You need to be logged in to access this page")
         return redirect(url_for("login"))
     return redirect(url_for("landing"))
@@ -123,9 +144,12 @@ def profile(username):
 
 @app.route('/office')
 def office(name=None):
+    # Find if a user is logged in
     try:
         user = mongo.db.users.find_one({"username": session["user"]})
     except BaseException:
+        user = mongo.db.users.find()
+
         flash("You need to be logged in to access this page")
         return redirect(url_for("login"))
     noffles = mongo.db.noffles.find()
@@ -134,30 +158,36 @@ def office(name=None):
 
 @app.route('/manage_noffles')
 def manage_noffles(name=None):
-    # Show categories to admin user
+    # Find if a user is logged in
     try:
         user = mongo.db.users.find_one({"username": session["user"]})
-        if user["is_admin"] is False:
-            flash("You need to be an admin to access this page")
-            return redirect(url_for("office"))
-            noffles = mongo.db.noffles.find()
-            return render_template(
-                'manage_noffles.html', name=name, noffles=noffles, user=user)
     except BaseException:
+        user = mongo.db.users.find()
         flash("You need to be logged in to access this page")
         return redirect(url_for("login"))
 
+    # Show categories to admin user
+    if user["is_admin"] is False:
+        flash("You need to be an admin to access this page")
+        return redirect(url_for("office"))
+    else:
+        noffles = mongo.db.noffles.find()
+        return render_template(
+            'manage_noffles.html', name=name, noffles=noffles, user=user)
+    return redirect(url_for("login"))
 
 
 @app.route('/manage_users')
 def manage_users(name=None):
-    # Show categories to admin user
+    # Find if a user is logged in
     try:
         user = mongo.db.users.find_one({"username": session["user"]})
     except BaseException:
+        user = mongo.db.users.find()
         flash("You need to be logged in to access this page")
         return redirect(url_for("login"))
 
+    # Show users to admin only
     if user["is_admin"] is False:
         flash("You need to be an admin to access this page")
         return redirect(url_for("office"))
@@ -169,10 +199,79 @@ def manage_users(name=None):
         users=users, user=user)
 
 
+@app.route("/admin_toggle/<user_id>")
+def admin_toggle(user_id):
+    # Allow admin to give or remove admin rights on other users
+    user = mongo.db.users.find_one({"_id": ObjectId(user_id)})
+
+    if user["is_admin"] is False:
+        mongo.db.users.update(
+            {"_id": ObjectId(user_id)}, {"$set": {"is_admin": True}})
+        flash("User Admin Rights Added")
+    else:
+        mongo.db.users.update(
+            {"_id": ObjectId(user_id)}, {"$set": {"is_admin": False}})
+        flash("User Admin Rights Removed")
+
+    return redirect(url_for("manage_users"))
+
+
+@app.route("/delete_user/<user_id>")
+def delete_user(user_id):
+    # Allow admin user to delete other users
+    mongo.db.users.remove({"_id": ObjectId(user_id)})
+    flash("User Successfully Deleted")
+    return redirect(url_for("manage_users"))
+
+
 @app.route('/set_noffles')
 def set_noffles(name=None):
+    # Find if a user is logged in
+    try:
+        user = mongo.db.users.find_one({"username": session["user"]})
+    except BaseException:
+        user = mongo.db.users.find()
+        flash("You need to be logged in to access this page")
+        return redirect(url_for("login"))
     noffles = mongo.db.noffles.find()
-    return render_template('set_noffles.html', name=name, noffles=noffles)
+    return render_template(
+        'set_noffles.html', name=name, noffles=noffles, user=user)
+
+
+@app.route('/add_noffle/<noffle_id>')
+def add_noffle(noffle_id):
+    # Find if a user is logged in
+    try:
+        user = mongo.db.users.find_one({"username": session["user"]})
+    except BaseException:
+        user = mongo.db.users.find()
+        flash("You need to be logged in to access this page")
+        return redirect(url_for("login"))
+
+    # Add noffle to their profile
+    noffles = mongo.db.noffles.find()
+    noffle = mongo.db.noffles.find_one({"_id": noffle_id})
+    user = mongo.db.users.find_one({"username": session["user"]})
+    user["noffles"].append(noffle)
+    return render_template(
+        'set_noffles.html', noffles=noffles, user=user)
+
+
+@app.route('/delete_account/<username>')
+def delete_account(username):
+    # Find if a user is logged in
+    try:
+        user = mongo.db.users.find_one({"username": session["user"]})
+    except BaseException:
+        user = mongo.db.users.find()
+        flash("You need to be logged in to access this page")
+        return redirect(url_for("login"))
+
+    # Allow user to delete their own account
+    mongo.db.users.remove({"username": username})
+    flash("User Successfully Deleted")
+    session.pop("user")
+    return redirect(url_for("landing"))
 
 
 if __name__ == "__main__":

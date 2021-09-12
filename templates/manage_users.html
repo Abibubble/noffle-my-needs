@@ -1,25 +1,41 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h2>Manage Users</h2>
-    <div class="container">
-        <div class="row">
-            {% for user in users %}
-                <div class="col-sm-12 col-md-4 col-lg-3">
-                    <div class="card user-card">
-                        <img class="card-img-top" src="/static/img/avatar{{ user.image_no }}.jpeg" alt="Icon for {{ user.username }}">
-                        <div class="card-body">
-                            <h5 class="card-title">Name: {{ user.first_name }} {{ user.last_name }} ({{ user.pronouns }})</h5>
-                            <p class="card-text">Username: {{ user.username }}</p>
-                            <p class="card-text">Has admin rights: {{ user.is_admin }}</p>
-                            Noffles: <ul>
-                                {% for noffle in user.noffles %}
-                                    <li><i class="{{ noffle.icon }}"></i> {{ noffle.name }} - {{ noffle.description }}</li>
-                                {% endfor %}
-                            </ul>
-                        </div>
+<h2>Manage Users</h2>
+<div class="container">
+    <div class="row">
+        {% for user in users %}
+        <div class="col-sm-12 col-md-4 col-lg-3">
+            <!-- <div class="card user-card"> changed to noffle card-->
+            <div class="card noffle-card">
+                <img class="card-img-top" src="/static/img/avatar{{ user.image_no }}.jpeg"
+                    alt="Icon for {{ user.username }}">
+                <div class="card-body">
+                    <h5 class="card-title">Name: {{ user.first_name }} {{ user.last_name }} ({{ user.pronouns }})</h5>
+                    <p class="card-text">Username: {{ user.username }}</p>
+
+                    <p class="card-text">Has admin rights: {{ user.is_admin }}</p>
+                    {% if user.is_admin %}
+                    <a class="btn" href="{{ url_for('admin_toggle', user_id=user._id) }}"><i
+                            class="fas fa-lock-open"></i>Remove admin rights</a>
+                    {% else %}
+                    <a class="btn" href="{{ url_for('admin_toggle', user_id=user._id) }}"><i
+                            class="fas fa-lock"></i></i>Make user admin</a>
+                    {% endif %}
+
+
+                    <div>
+                        Noffles: <ul>
+                            {% for noffle in user.noffles %}
+                            <li><i class="{{ noffle.icon }}"></i> {{ noffle.name }} - {{ noffle.description }}</li>
+                            {% endfor %}
+                        </ul>
                     </div>
                 </div>
-            {% endfor %}
+
+                <a class="btn btn-danger btn-sm" href="{{ url_for('delete_user', user_id=user._id) }}">Delete User</a>
+            </div>
         </div>
+        {% endfor %}
     </div>
+</div>
 {% endblock %}

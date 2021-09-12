@@ -113,5 +113,32 @@ input, textarea {
 @media(max-width:992px){
     .login-form {
         max-width: 90%;
-    }
+}
+  
+/* ----------------------------------------------------------------------------------- Buttons */
+
+.btn-close-modal,
+.btn-delete,
+.btn-red,
+.btn-blue,
+.btn-green,
+.btn-yellow {
+    color: black !important;
+    border: 2px solid black !important;
+}
+
+.btn-close-modal, .btn-blue {
+    background-color: var(--pastel-blue) !important;
+}
+
+.btn-delete, .btn-red {
+    background-color: var(--pastel-red) !important;
+}
+
+.btn-green {
+    background-color: var(--pastel-green) !important;
+}
+
+.btn-yellow {
+    background-color: var(--pastel-yellow) !important;
 }

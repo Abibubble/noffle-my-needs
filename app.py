@@ -204,12 +204,12 @@ def office(name=None):
     noffles = mongo.db.noffles.find()
     
     noffle_dict = {}
-    for user in users:
+    for managed_user in users:
         noffles_list = []
-        for noffle in user['noffles']:
+        for noffle in managed_user['noffles']:
             my_noffles = mongo.db.noffles.find_one({"_id": ObjectId(noffle)})
             noffles_list.append(my_noffles)
-        noffle_dict[str(user['username'])] = noffles_list
+        noffle_dict[str(managed_user['username'])] = noffles_list
 
     users = mongo.db.users.find()
     noffles = mongo.db.noffles.find()
@@ -248,19 +248,19 @@ def manage_users(name=None):
         flash("You need to be logged in to access this page")
         return redirect(url_for("login"))
 
-    users = mongo.db.users.find()
-    noffle_dict = {}
-    for user in users:
-        noffles_list = []
-        for noffle in user['noffles']:
-            my_noffles = mongo.db.noffles.find_one({"_id": ObjectId(noffle)})
-            noffles_list.append(my_noffles)
-        noffle_dict[str(user['username'])] = noffles_list
-
     # Show users to admin only
     if user["is_admin"] is False:
         flash("You need to be an admin to access this page")
         return redirect(url_for("office"))
+
+    users = mongo.db.users.find()
+    noffle_dict = {}
+    for managed_user in users:
+        noffles_list = []
+        for noffle in managed_user['noffles']:
+            my_noffles = mongo.db.noffles.find_one({"_id": ObjectId(noffle)})
+            noffles_list.append(my_noffles)
+        noffle_dict[str(managed_user['username'])] = noffles_list
 
     noffles = mongo.db.noffles.find()
     users = mongo.db.users.find()

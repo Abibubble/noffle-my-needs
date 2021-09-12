@@ -131,15 +131,16 @@ def profile(username):
         user = mongo.db.users.find_one({"username": session["user"]})
     except BaseException:
         user = mongo.db.users.find()
-
+        
+    noffles = []
     try:
         for noffle in user["noffles"]:
-            noffles += noffle
-        noffles = mongo.db.noffles.find({"_id": ObjectId(noffles)})
+            my_noffles = mongo.db.noffles.find_one({"_id": ObjectId(noffle)})
+            noffles.append(my_noffles)      
     except BaseException:
         noffles = []
-
     if session["user"]:
+        print(noffles)
         return render_template(
             "profile.html", noffles=noffles, user=user)
     else:

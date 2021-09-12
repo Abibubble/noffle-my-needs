@@ -29,9 +29,11 @@ a {
 /* ----------------------------------------------------------------------------------- Navbar and Footer */
 
 
-nav, footer {
+nav,
+footer {
     color: black !important;
     background-color: var(--alto);
+    z-index: 3;
 }
 
 nav {
@@ -60,6 +62,50 @@ footer {
     justify-content: right;
 }
 
+/* ----------------------------------------------------------------------------------- Landing Page */
+
+/* Photo by Georgie Cobbs on Unsplash */
+#hero-image {
+    background-image: url("../img/hero_image.jpg");
+    background-size: cover;
+    height: 60vh;
+    width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    background-position: bottom;
+    background-color: var(--pastel-green);
+}
+
+.hero-text-overlay {
+    background-color: rgba(227, 241, 212, 0.5);
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 20%;
+    margin-left: auto;
+    margin-right: auto;
+    height: 160px;
+    width: 30%;
+    padding: 20px;
+}
+
+.hero-heading,
+.hero-text {
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+}
+
+h2.about-heading {
+    padding: 20px;
+}
+
+p.about-text {
+    padding: 0 40px 0 40px;
+}
+
 /* ----------------------------------------------------------------------------------- Cards */
 
 .noffle-card {
@@ -71,17 +117,17 @@ footer {
 .card-overlay {
     width: 100%;
     height: 100%;
-    background:black !important;
+    background: black !important;
     z-index: 1546465;
-} 
+}
 
 .user-card {
-    height: 400px;
+    height: 360px;
     overflow-y: scroll;
 }
 
 .card-img-top {
-    max-height: 200px;
+    max-height: 100px;
     margin: auto;
     width: fit-content !important;
 }
@@ -90,19 +136,28 @@ footer {
     border: 2px solid black !important;
 }
 
+.card-header {
+    height: 75px;
+}
+
 /* ----------------------------------------------------------------------------------- Login and Register Forms */
 
-.login-form {
+.form-area {
     max-width: 50%;
     border: 2px solid black;
     padding: 30px;
 }
 
-.link-register {
+.profile-login-form {
+    max-width: 100%;
+}
+
+.link-register, .link-login {
     text-decoration: underline !important;
 }
 
-input, textarea {
+input,
+textarea {
     background-color: var(--gallery) !important;
 }
 
@@ -110,19 +165,30 @@ input, textarea {
     border: 2px solid black !important;
 }
 
-.form-control:focus {
-  border-color: var(--alto) !important;
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(0, 0, 0, 0.6) !important;
+.center-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-/* ----------------------------------------------------------------------------------- Media Queries */
+/* ----------------------------------------------------------------------------------- Hover, Focus */
 
-@media(max-width:992px){
-    .login-form {
-        max-width: 90%;
-    }
+.form-control:focus,
+.form-control:hover {
+    border-color: var(--alto) !important;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(0, 0, 0, 0.6) !important;
 }
-  
+
+.nav-item:focus,
+.nav-item:hover {
+    background-color: var(--gallery) !important;
+}
+
+a:hover,
+a:focus {
+    color: brown !important;
+}
+
 /* ----------------------------------------------------------------------------------- Buttons */
 
 .btn-close-modal,
@@ -135,11 +201,13 @@ input, textarea {
     border: 2px solid black !important;
 }
 
-.btn-close-modal, .btn-blue {
+.btn-close-modal,
+.btn-blue {
     background-color: var(--pastel-blue) !important;
 }
 
-.btn-delete, .btn-red {
+.btn-delete,
+.btn-red {
     background-color: var(--pastel-red) !important;
 }
 
@@ -149,4 +217,19 @@ input, textarea {
 
 .btn-yellow {
     background-color: var(--pastel-yellow) !important;
+}
+
+/* ----------------------------------------------------------------------------------- Overlay */
+
+.card-overlay {
+    background-color: var(--gallery) !important;
+    z-index: 2;
+} 
+
+/* ----------------------------------------------------------------------------------- Media Queries */
+
+@media(max-width:992px) {
+    .login-form {
+        max-width: 90%;
+    }
 }

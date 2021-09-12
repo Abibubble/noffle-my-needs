@@ -107,7 +107,8 @@ def register():
             "pronouns": request.form.get("pronouns").lower(),
             "image_no": request.form.get("image_no"),
             "is_admin": False,
-            "noffles": []
+            "noffles": [],
+            "panic": False
         }
         mongo.db.users.insert_one(register)
 
@@ -266,12 +267,18 @@ def add_noffle(noffle_id):
 
     # Check if noffle is selected, and it to profile if it isn't
     if noffle_id in user['noffles']:
-        flash('Noffle {current_noffle["name"]} deleted')
+        flash(f'Noffle {current_noffle["name"]} deleted')
+        if current_noffle["name"] == 'Panic button':
+            mongo.db.users.update(
+                {"_id": ObjectId(user["_id"])}, {"$set": {"panic": False}})
         mongo.db.users.update(
             {'_id': ObjectId(user['_id'])}, {'$pull': {'noffles': noffle_id}})
         return redirect(url_for("set_noffles", noffles=noffles, user=user))
     else:
         flash(f'Noffle {current_noffle["name"]} added')
+        if current_noffle["name"] == 'Panic button':
+            mongo.db.users.update(
+                {"_id": ObjectId(user["_id"])}, {"$set": {"panic": True}})
         mongo.db.users.update(
                 {'_id': ObjectId(user['_id'])}, {'$push': {'noffles': noffle_id}})
         return redirect(url_for("set_noffles", noffles=noffles, user=user))

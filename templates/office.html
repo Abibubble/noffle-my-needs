@@ -7,7 +7,7 @@
             {% for user in users %}
                 <div class="col-sm-12 col-md-4 col-lg-2">
                     <div class="card office-card">
-                        <div class="card-body {% if user.panic =='Panic button'%}btn-red{% else %}btn-green{% endif %}">
+                        <div class="card-body {% if user.panic == true %}btn-red{% else %}btn-green{% endif %}">
                             <div class="row card-title">
                                 <div class="col-12">
                                     <h5>{{ user.first_name }} {{ user.last_name }} ({{ user.pronouns }})</h5>

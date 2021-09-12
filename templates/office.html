@@ -6,18 +6,12 @@
         <div class="row">
             {% for user in users %}
                 <div class="col-sm-12 col-md-4 col-lg-2">
-                    <div class="card noffle-card">
-                        <div class="card-body">
+                    <div class="card office-card">
+                        <div class="card-body {% if user.panic =='Panic button'%}btn-red{% else %}btn-green{% endif %}">
                             <div class="row card-title">
                                 <div class="col-12">
                                     <h5>{{ user.first_name }} {{ user.last_name }} ({{ user.pronouns }})</h5>
                                 </div>
-                            </div>
-                            <hr>
-                            <div class="row card-text">
-                                {% for noffle in user.noffles %}
-                                    {{noffle}}
-                                {% endfor %}
                             </div>
                         </div>
                     </div>

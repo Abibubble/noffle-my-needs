@@ -112,6 +112,13 @@ input, textarea {
     border: 2px solid black !important;
 }
 
+/* ----------------------------------------------------------------------------------- Profile */
+
+.avatar-profile {
+    height: 150px;
+    margin-left: 30%;
+}
+
 /* ----------------------------------------------------------------------------------- Hover, Focus */
 
 .form-control:focus,

@@ -7,12 +7,13 @@
             {% for noffle in noffles %}
                 <div class="col-sm-12 col-md-4 col-lg-3">
                     <div class="card noffle-card">
+                        {{ noffle._id }}
                         <div class="card-body">
                             <h5 class="card-title"><i class="{{ noffle.icon }}"></i> {{ noffle.name }}</h5>
                             <p class="card-text">{{ noffle.description }}</p>
                             <p>Permanent: {{ noffle.permanent }}</p>
                             <p>Private: {{ noffle.private }}</p>
-                            <a href="#" class="text-info">Use this Noffle</a>
+                            <a href="{{ url_for('set_noffle', noffle_id=noffle._id) }}" class="text-info">Use this Noffle</a>
                         </div>
                     </div>
                 </div>

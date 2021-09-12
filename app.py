@@ -37,7 +37,7 @@ def login():
             if check_password_hash(
                     existing_user["password"], request.form.get("password")):
                 session["user"] = request.form.get("username").lower()
-                return render_template("index.html")
+                return render_template("landing.html")
             else:
                 # invalid passwword match
                 print("Incorrect Username and/or Password")
@@ -85,7 +85,7 @@ def register():
         """
         Add redirect url for profile page once it is created
         """
-        return render_template("index.html")
+        return render_template("landing.html")
     return render_template('register.html')
 
 
@@ -107,12 +107,24 @@ def manage_noffles(name=None):
 
 
 @app.route('/set_noffles')
-def set_noffles(name=None):
+def set_noffles():
     noffles = mongo.db.noffles.find()
-    return render_template('set_noffles.html', name=name, noffles=noffles)
+    username = mongo.db.users.find_one(
+        {"username": session["user"]})["username"]
+       
+    return render_template('set_noffles.html', username=username,  noffles=noffles)
+
+
+@app.route('/set_noffle')
+def set_noffle(noffle_id):
+    noffles = mongo.db.noffles.find()
+    username = mongo.db.users.find_one(
+        {"username": session["user"]})["username"]
+    print('noffle_id')    
+    return render_template('set_noffles.html',  noffles=noffles)
 
 
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
-            debug=False)
+            debug=True)

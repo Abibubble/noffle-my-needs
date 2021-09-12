@@ -169,6 +169,31 @@ def manage_users(name=None):
         users=users, user=user)
 
 
+@app.route("/admin_toggle/<user_id>")
+def admin_toggle(user_id):
+    # Allow admin to give or remove admin rights on other users
+    user = mongo.db.users.find_one({"_id": ObjectId(user_id)})
+
+    if user["is_admin"] is False:
+        mongo.db.users.update(
+            {"_id": ObjectId(user_id)}, {"$set": {"is_admin": True}})
+        flash("User Admin Rights Added")
+    else:
+        mongo.db.users.update(
+            {"_id": ObjectId(user_id)}, {"$set": {"is_admin": False}})
+        flash("User Admin Rights Removed")
+
+    return redirect(url_for("manage_users"))
+
+
+@app.route("/delete_user/<user_id>")
+def delete_user(user_id):
+    # Allow admin user to delete other users
+    mongo.db.users.remove({"_id": ObjectId(user_id)})
+    flash("User Successfully Deleted")
+    return redirect(url_for("manage_users"))
+
+
 @app.route('/set_noffles')
 def set_noffles(name=None):
     noffles = mongo.db.noffles.find()
@@ -178,4 +203,4 @@ def set_noffles(name=None):
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
-            debug=False)
+            debug=True)

@@ -20,8 +20,14 @@ mongo = PyMongo(app)
 @app.route('/')
 @app.route('/landing')
 def landing(name=None):
+    # Find if a user is logged in
+    try:
+        user = mongo.db.users.find_one({"username": session["user"]})
+    except BaseException:
+        user = mongo.db.users.find()
+
     noffles = mongo.db.noffles.find()
-    return render_template('landing.html', name=name, noffles=noffles)
+    return render_template('landing.html', name=name, noffles=noffles, user=user)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -52,23 +58,29 @@ def login():
 
 @app.route('/logout')
 def logout():
+    # Find if a user is logged in for the navbar
+    print("*", session["user"], "*")
     try:
         user = mongo.db.users.find_one({"username": session["user"]})
-        for noffle in user.noffles:
-            if not noffle.permanent:
-                user.noffles.pop(noffle)
-
-        # Remove user from session cookies and log out
-        session.pop("user")
+        print(user)
         flash("You have been logged out")
     except BaseException:
+        user = mongo.db.users.find()
         flash("You're already logged out!")
-
+        return redirect(url_for("landing"))
+    # Remove user from session cookies and log out
+    session.pop("user")
     return redirect(url_for("landing"))
 
 
 @app.route('/register', methods=["GET", "POST"])
 def register():
+    # Find if a user is logged in
+    try:
+        user = mongo.db.users.find_one({"username": session["user"]})
+    except BaseException:
+        user = mongo.db.users.find()
+
     if request.method == 'POST':
         # Set variables
         username = request.form.get("username").lower()
@@ -109,13 +121,17 @@ def register():
 
 @app.route("/profile/<username>", methods=["GET", "POST"])
 def profile(username):
-    noffles = mongo.db.noffles.find()
+    # Find if a user is logged in
     try:
         user = mongo.db.users.find_one({"username": session["user"]})
-        if session["user"]:
-            return render_template(
-                "profile.html", noffles=noffles, user=user)
     except BaseException:
+        user = mongo.db.users.find()
+
+    noffles = mongo.db.noffles.find()
+    if session["user"]:
+        return render_template(
+            "profile.html", noffles=noffles, user=user)
+    else:
         flash("You need to be logged in to access this page")
         return redirect(url_for("login"))
     return redirect(url_for("landing"))
@@ -123,9 +139,12 @@ def profile(username):
 
 @app.route('/office')
 def office(name=None):
+    # Find if a user is logged in
     try:
         user = mongo.db.users.find_one({"username": session["user"]})
     except BaseException:
+        user = mongo.db.users.find()
+
         flash("You need to be logged in to access this page")
         return redirect(url_for("login"))
     noffles = mongo.db.noffles.find()
@@ -134,30 +153,36 @@ def office(name=None):
 
 @app.route('/manage_noffles')
 def manage_noffles(name=None):
-    # Show categories to admin user
+    # Find if a user is logged in
     try:
         user = mongo.db.users.find_one({"username": session["user"]})
-        if user["is_admin"] is False:
-            flash("You need to be an admin to access this page")
-            return redirect(url_for("office"))
-            noffles = mongo.db.noffles.find()
-            return render_template(
-                'manage_noffles.html', name=name, noffles=noffles, user=user)
     except BaseException:
+        user = mongo.db.users.find()
         flash("You need to be logged in to access this page")
         return redirect(url_for("login"))
 
+    # Show categories to admin user
+    if user["is_admin"] is False:
+        flash("You need to be an admin to access this page")
+        return redirect(url_for("office"))
+    else:
+        noffles = mongo.db.noffles.find()
+        return render_template(
+            'manage_noffles.html', name=name, noffles=noffles, user=user)
+    return redirect(url_for("login"))
 
 
 @app.route('/manage_users')
 def manage_users(name=None):
-    # Show categories to admin user
+    # Find if a user is logged in
     try:
         user = mongo.db.users.find_one({"username": session["user"]})
     except BaseException:
+        user = mongo.db.users.find()
         flash("You need to be logged in to access this page")
         return redirect(url_for("login"))
 
+    # Show users to admin only
     if user["is_admin"] is False:
         flash("You need to be an admin to access this page")
         return redirect(url_for("office"))
@@ -171,12 +196,28 @@ def manage_users(name=None):
 
 @app.route('/set_noffles')
 def set_noffles(name=None):
+    # Find if a user is logged in
+    try:
+        user = mongo.db.users.find_one({"username": session["user"]})
+    except BaseException:
+        user = mongo.db.users.find()
+        flash("You need to be logged in to access this page")
+        return redirect(url_for("login"))
     noffles = mongo.db.noffles.find()
     return render_template('set_noffles.html', name=name, noffles=noffles)
 
 
 @app.route('/add_noffle/<noffle_id>')
 def add_noffle(noffle_id):
+    # Find if a user is logged in
+    try:
+        user = mongo.db.users.find_one({"username": session["user"]})
+    except BaseException:
+        user = mongo.db.users.find()
+        flash("You need to be logged in to access this page")
+        return redirect(url_for("login"))
+
+    # Add noffle to their profile
     noffles = mongo.db.noffles.find()
     noffle = mongo.db.noffles.find_one({"_id": noffle_id})
     user = mongo.db.users.find_one({"username": session["user"]})
@@ -186,6 +227,14 @@ def add_noffle(noffle_id):
 
 @app.route('/delete_account/<username>')
 def delete_account(username):
+    # Find if a user is logged in
+    try:
+        user = mongo.db.users.find_one({"username": session["user"]})
+    except BaseException:
+        user = mongo.db.users.find()
+        flash("You need to be logged in to access this page")
+        return redirect(url_for("login"))
+
     # Allow user to delete their own account
     mongo.db.users.remove({"username": username})
     flash("User Successfully Deleted")

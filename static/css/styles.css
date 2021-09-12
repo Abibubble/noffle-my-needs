@@ -29,7 +29,8 @@ a {
 /* ----------------------------------------------------------------------------------- Navbar and Footer */
 
 
-nav, footer {
+nav,
+footer {
     color: black !important;
     background-color: var(--alto);
     z-index: 3;
@@ -61,12 +62,63 @@ footer {
     justify-content: right;
 }
 
+/* ----------------------------------------------------------------------------------- Landing Page */
+
+/* Photo by Georgie Cobbs on Unsplash */
+#hero-image {
+    background-image: url("../img/hero_image.jpg");
+    background-size: cover;
+    height: 60vh;
+    width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    background-position: bottom;
+    background-color: var(--pastel-green);
+}
+
+.hero-text-overlay {
+    background-color: rgba(227, 241, 212, 0.5);
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 20%;
+    margin-left: auto;
+    margin-right: auto;
+    height: 160px;
+    width: 30%;
+    padding: 20px;
+}
+
+.hero-heading,
+.hero-text {
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+}
+
+h2.about-heading {
+    padding: 20px;
+}
+
+p.about-text {
+    padding: 0 40px 0 40px;
+}
+
 /* ----------------------------------------------------------------------------------- Cards */
 
 .noffle-card {
     height: 260px;
     margin-bottom: 10px;
     overflow-y: scroll;
+}
+
+.card-overlay {
+    width: 100%;
+    height: 100%;
+    background: black !important;
+    z-index: 1546465;
 }
 
 .user-card {
@@ -104,7 +156,8 @@ footer {
     text-decoration: underline !important;
 }
 
-input, textarea {
+input,
+textarea {
     background-color: var(--gallery) !important;
 }
 
@@ -122,8 +175,8 @@ input, textarea {
 
 .form-control:focus,
 .form-control:hover {
-  border-color: var(--alto) !important;
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(0, 0, 0, 0.6) !important;
+    border-color: var(--alto) !important;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(0, 0, 0, 0.6) !important;
 }
 
 .nav-item:focus,
@@ -148,11 +201,13 @@ a:focus {
     border: 2px solid black !important;
 }
 
-.btn-close-modal, .btn-blue {
+.btn-close-modal,
+.btn-blue {
     background-color: var(--pastel-blue) !important;
 }
 
-.btn-delete, .btn-red {
+.btn-delete,
+.btn-red {
     background-color: var(--pastel-red) !important;
 }
 
@@ -173,7 +228,7 @@ a:focus {
 
 /* ----------------------------------------------------------------------------------- Media Queries */
 
-@media(max-width:992px){
+@media(max-width:992px) {
     .login-form {
         max-width: 90%;
     }

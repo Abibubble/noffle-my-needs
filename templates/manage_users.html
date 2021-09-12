@@ -17,8 +17,11 @@
                                 <details>
                                     <summary>Noffles</summary>
                                     <ul>
-                                        {% for noffle in user.noffles %}
-                                            <li><i class="{{ noffle.icon }}"></i> {{ noffle.name }} - {{ noffle.description }}</li>
+                                        {% for noffle in noffle_dict[user.username] %}
+                                            <li class="mb-2">
+                                                <i class="{{ noffle.icon }}"></i>
+                                                <strong>{{ noffle.name }}</strong> - {{ noffle.description }}
+                                            </li>
                                         {% endfor %}
                                     </ul>
                                 </details>

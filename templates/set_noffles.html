@@ -11,7 +11,7 @@
                 <div class="col-sm-12 col-md-4 col-lg-3">
                     <a href="{{ url_for('add_noffle', noffle_id=noffle._id) }}">
                         <div class="card noffle-card">
-                            <div class="card-body h-100 {% if noffle._id|string in user_noffles %}card-overlay{% endif %} {% if noffle.permanent %}btn-yellow{% elif noffle.name=='Panic button'%}btn-red{% else %}btn-blue{% endif %}">
+                            <div class="card-body h-100 {% if noffle.permanent %}btn-yellow{% elif noffle.name=='Panic button'%}btn-red{% else %}btn-blue{% endif %}">
                                 <div class="row card-title">
                                     
                                     {% if noffle._id|string in user_noffles %}

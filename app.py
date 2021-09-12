@@ -307,6 +307,14 @@ def delete_noffle(noffle_id):
     # Allow admin user to delete noffles
     flash(f'Noffle Successfully Deleted')
     mongo.db.noffles.remove({"_id": ObjectId(noffle_id)})
+    users = mongo.db.users.find()
+    for user in users:
+        for noffle in user["noffles"]:
+            if noffle == noffle_id:
+                mongo.db.users.update(
+                    {'_id': ObjectId(user['_id'])}, {'$pull': {'noffles': noffle_id}})
+    flash("Noffle Successfully Deleted")
+
     return redirect(url_for("manage_noffles"))
 
 
@@ -406,7 +414,6 @@ def new_noffle():
         return render_template("manage_noffles.html", noffles=noffles, user=user)
 
     return render_template("new_noffle.html", noffles=noffles, user=user)
-
 
 @app.route('/delete_account/<username>')
 def delete_account(username):

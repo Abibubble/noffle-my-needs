@@ -234,8 +234,10 @@ def set_noffles(name=None):
         flash("You need to be logged in to access this page")
         return redirect(url_for("login"))
     noffles = mongo.db.noffles.find()
+    user_noffles = user['noffles']
+
     return render_template(
-        'set_noffles.html', name=name, noffles=noffles, user=user)
+        'set_noffles.html', name=name, noffles=noffles, user=user, user_noffles=user_noffles)
 
 
 @app.route('/add_noffle/<noffle_id>')
@@ -252,7 +254,19 @@ def add_noffle(noffle_id):
     noffles = mongo.db.noffles.find()
     noffle = mongo.db.noffles.find_one({"_id": noffle_id})
     user = mongo.db.users.find_one({"username": session["user"]})
-    user["noffles"].append(noffle)
+
+    # Check if noffle is select, and it to profile if it's don't
+    if noffle_id in user['noffles']:
+        flash('Noffle deleted')
+        mongo.db.users.update(
+                {'_id': ObjectId(user['_id'])}, {'$pull': {'noffles': noffle_id}})
+        return redirect(url_for("set_noffles", noffles=noffles, user=user))
+    else:
+        flash('Noffle added')
+        mongo.db.users.update(
+                {'_id': ObjectId(user['_id'])}, {'$push': {'noffles': noffle_id}})
+        return redirect(url_for("set_noffles", noffles=noffles, user=user))
+    print('---')
     return render_template(
         'set_noffles.html', noffles=noffles, user=user)
 

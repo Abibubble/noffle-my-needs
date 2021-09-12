@@ -44,7 +44,7 @@
             </div>
         </div>
         <div class="col-5 offset-2 p-4 border">
-            <!-- {% if noffles[0] %} -->
+            {% if noffles[0] %}
                 {% for noffle in noffles %}
                     <div class="col-sm-12 col-md-6 mb-5">
                         <div class="card noffle-card">
@@ -67,13 +67,13 @@
                         </div>
                     </div>
                 {% endfor %}
-            <!-- {% else %} -->
+            {% else %}
                 <div class="col-12 mb-5">
                     <h4 class="text-danger">You haven't got any Noffles set!</h4>
                     <p>Set your Noffles now!</p>
                     <a href="{{ url_for('set_noffles') }}" class="btn btn-close-modal">Set my Noffles</a>
                 </div>
-            <!-- {% endif %} -->
+            {% endif %}
         </div>
     </div>
     {% if not user.is_admin %}

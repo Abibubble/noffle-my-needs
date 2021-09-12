@@ -83,6 +83,8 @@ def register():
     except BaseException:
         user = mongo.db.users.find()
 
+    noffles = mongo.db.noffles.find()
+
     if request.method == 'POST':
         # Set variables
         username = request.form.get("username").lower()
@@ -107,7 +109,8 @@ def register():
             "pronouns": request.form.get("pronouns").lower(),
             "image_no": request.form.get("image_no"),
             "is_admin": False,
-            "noffles": []
+            "noffles": [],
+            "panic": False
         }
         mongo.db.users.insert_one(register)
 
@@ -267,12 +270,18 @@ def add_noffle(noffle_id):
 
     # Check if noffle is selected, and it to profile if it isn't
     if noffle_id in user['noffles']:
-        flash('Noffle {current_noffle["name"]} deleted')
+        flash(f'Noffle {current_noffle["name"]} deleted')
+        if current_noffle["name"] == 'Panic button':
+            mongo.db.users.update(
+                {"_id": ObjectId(user["_id"])}, {"$set": {"panic": False}})
         mongo.db.users.update(
             {'_id': ObjectId(user['_id'])}, {'$pull': {'noffles': noffle_id}})
         return redirect(url_for("set_noffles", noffles=noffles, user=user))
     else:
         flash(f'Noffle {current_noffle["name"]} added')
+        if current_noffle["name"] == 'Panic button':
+            mongo.db.users.update(
+                {"_id": ObjectId(user["_id"])}, {"$set": {"panic": True}})
         mongo.db.users.update(
                 {'_id': ObjectId(user['_id'])}, {'$push': {'noffles': noffle_id}})
         return redirect(url_for("set_noffles", noffles=noffles, user=user))
@@ -301,4 +310,4 @@ def delete_account(username):
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
-            debug=True)
+            debug=False)

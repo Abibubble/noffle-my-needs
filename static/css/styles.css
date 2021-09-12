@@ -26,6 +26,16 @@ a {
     text-decoration: none !important;
 }
 
+.mp-0 {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.tap-target {
+    min-height: 48px;
+    min-width: 48px;
+}
+
 /* ----------------------------------------------------------------------------------- Navbar and Footer */
 
 
@@ -124,9 +134,14 @@ p.about-text {
 }
 
 .office-card {
-    height: 180px;
+    height: 200px;
     overflow-y: scroll;
     margin-bottom: 10px;
+}
+
+.office-card-body {
+    padding-top: 5px !important;
+    padding-bottom: 10px !important;
 }
 
 .card-img-top {
@@ -140,7 +155,8 @@ p.about-text {
 }
 
 .card-header {
-    height: 75px;
+    height: fit-content;
+    height: -moz-fit-content;
 }
 
 /* ----------------------------------------------------------------------------------- Login and Register Forms */
@@ -168,11 +184,16 @@ textarea {
     border: 2px solid black !important;
 }
 
-/* ----------------------------------------------------------------------------------- Profile */
+/* ----------------------------------------------------------------------------------- Avatars */
 
 .avatar-profile {
     height: 150px;
     margin-left: 30%;
+}
+
+.avatar-office {
+    max-height: 75px;
+    margin-left: 25%;
 }
 
 /* ----------------------------------------------------------------------------------- Hover, Focus */

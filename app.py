@@ -176,7 +176,7 @@ def update_user(user_id):
 
         if password != password_confirm:
             flash("Oh no! Your passwords don't match")
-            return redirect(url_for("profile"))
+            return redirect(url_for("profile", username=username))
 
         update_user = {
             "username": request.form.get("username").lower(),
@@ -187,7 +187,7 @@ def update_user(user_id):
         mongo.db.users.update_one(
             {"_id": ObjectId(user["_id"])}, {'$set': update_user})
 
-    return render_template('profile.html', user=user, noffles=noffles)
+    return redirect(url_for("profile", username=username))
 
 
 @app.route('/office')

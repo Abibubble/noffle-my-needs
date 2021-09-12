@@ -45,33 +45,37 @@
         </div>
         <div class="col-5 offset-2 p-4 border">
             {% if noffles[0] %}
-                {% for noffle in noffles %}
-                    <div class="col-sm-12 col-md-6 mb-5">
-                        <div class="card noffle-card">
-                            <div class="card-body {% if noffle.permanent %}btn-yellow{% elif noffle.name=='Panic button'%}btn-red{% else %}btn-blue{% endif %}">
-                                <div class="row card-title">
-                                    <div class="col-2"><i class="{{ noffle.icon }} fa-2x noffle-icon"></i></div>
-                                    <div class="col-10"><h5>{{ noffle.name }}</h5></div>
+                <div class="row">
+                    {% for noffle in noffles %}
+                        <div class="col-sm-12 col-md-6 mb-3">
+                            <div class="card noffle-card">
+                                <div class="card-body {% if noffle.permanent %}btn-yellow{% elif noffle.name=='Panic button'%}btn-red{% else %}btn-blue{% endif %}">
+                                    <div class="row card-title">
+                                        <div class="col-2"><i class="{{ noffle.icon }} fa-2x noffle-icon"></i></div>
+                                        <div class="col-9 offset-1"><h5>{{ noffle.name }}</h5></div>
+                                    </div>
+                                    <hr>
+                                    <p class="card-text">{{ noffle.description }}</p>
+                                    <i class="fas fa-exclamation-circle"></i>
+                                    {% if noffle.private %}
+                                        <input id="private" type="checkbox" data-toggle="toggle" checked>
+                                    {% else %}
+                                        <input id="private" type="checkbox" data-toggle="toggle">
+                                    {% endif %}
+                                    <label for="private">Private</label>
+                                    <br>
                                 </div>
-                                <hr>
-                                <p class="card-text">{{ noffle.description }}</p>
-                                <i class="fas fa-exclamation-circle"></i>
-                                {% if noffle.private %}
-                                    <input id="private" type="checkbox" data-toggle="toggle" checked>
-                                {% else %}
-                                    <input id="private" type="checkbox" data-toggle="toggle">
-                                {% endif %}
-                                <label for="private">Private</label>
-                                <br>
                             </div>
                         </div>
-                    </div>
-                {% endfor %}
+                    {% endfor %}
+                </div>
             {% else %}
-                <div class="col-12 mb-5">
-                    <h4 class="text-danger">You haven't got any Noffles set!</h4>
-                    <p>Set your Noffles now!</p>
-                    <a href="{{ url_for('set_noffles') }}" class="btn btn-close-modal">Set my Noffles</a>
+                <div class="row">
+                    <div class="col-12 mb-5">
+                        <h4 class="text-danger">You haven't got any Noffles set!</h4>
+                        <p>Set your Noffles now!</p>
+                        <a href="{{ url_for('set_noffles') }}" class="btn btn-close-modal">Set my Noffles</a>
+                    </div>
                 </div>
             {% endif %}
         </div>

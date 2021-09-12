@@ -110,19 +110,24 @@ input, textarea {
     border: 2px solid black !important;
 }
 
-.form-control:focus {
+/* ----------------------------------------------------------------------------------- Hover, Focus */
+
+.form-control:focus,
+.form-control:hover {
   border-color: var(--alto) !important;
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(0, 0, 0, 0.6) !important;
 }
 
-/* ----------------------------------------------------------------------------------- Media Queries */
-
-@media(max-width:992px){
-    .login-form {
-        max-width: 90%;
-    }
+.nav-item:focus,
+.nav-item:hover {
+    background-color: var(--gallery) !important;
 }
-  
+
+a:hover,
+a:focus {
+    color: brown !important;
+}
+
 /* ----------------------------------------------------------------------------------- Buttons */
 
 .btn-close-modal,
@@ -149,4 +154,12 @@ input, textarea {
 
 .btn-yellow {
     background-color: var(--pastel-yellow) !important;
+}
+
+/* ----------------------------------------------------------------------------------- Media Queries */
+
+@media(max-width:992px){
+    .login-form {
+        max-width: 90%;
+    }
 }

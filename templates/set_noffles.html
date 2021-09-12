@@ -13,12 +13,11 @@
                         <div class="card noffle-card">
                             <div class="card-body h-100 {% if noffle._id|string in user_noffles %}card-overlay{% endif %} {% if noffle.permanent %}btn-yellow{% elif noffle.name=='Panic button'%}btn-red{% else %}btn-blue{% endif %}">
                                 <div class="row card-title">
-                                    {% if user_noffles %}
-                                        {% if noffle._id|string in user_noffles %}
-                                            <p>Selected</p>
-                                        {% else %}
-                                            <p>Not Selected</p>
-                                        {% endif %}
+                                    
+                                    {% if noffle._id|string in user_noffles %}
+                                        <div class="row"><i class="fas fa-check-square fa-2x mb-2 d-flex justify-content-end"></i></div>
+                                    {% else %}
+                                        <div class="row"><i class="fas fa-times fa-2x mb-2 d-flex justify-content-end"></i></div>
                                     {% endif %}
                                     <div class="col-2"><i class="{{ noffle.icon }} fa-2x noffle-icon"></i></div>
                                     <div class="col-10"><h5>{{ noffle.name }}</h5></div>

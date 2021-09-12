@@ -61,11 +61,18 @@ def login():
 def logout():
     # Find if a user is logged in for the navbar
     print("*", session["user"], "*")
+    
     try:
         user = mongo.db.users.find_one({"username": session["user"]})
-        # For some reason, this doesn't work without the print statement below.
-        # No clue why. Please tell Abi if you figure out why, or how to fix it!!
-        print(user)
+        """
+        Check the noffles that are not permament and delete from 
+        the user's noffles when logout
+        """
+        for noffle in user["noffles"]:
+            my_noffles = mongo.db.noffles.find_one({"_id": ObjectId(noffle)})
+            if not my_noffles['permanent']:
+                noffle_id = str(my_noffles['_id'])
+                mongo.db.users.update({'_id': ObjectId(user['_id'])}, {'$pull': {'noffles': noffle_id}})
         flash("You have been logged out")
     except BaseException:
         user = mongo.db.users.find()
@@ -209,12 +216,12 @@ def office(name=None):
 
     # Display all noffles the user has set
     noffle_dict = {}
-    for user in users:
+    for managed_user in users:
         noffles_list = []
-        for noffle in user['noffles']:
+        for noffle in managed_user['noffles']:
             my_noffles = mongo.db.noffles.find_one({"_id": ObjectId(noffle)})
             noffles_list.append(my_noffles)
-        noffle_dict[str(user['username'])] = noffles_list
+        noffle_dict[str(managed_user['username'])] = noffles_list
 
     users = mongo.db.users.find()
     noffles = mongo.db.noffles.find()
@@ -253,21 +260,21 @@ def manage_users(name=None):
         flash("You need to be logged in to access this page")
         return redirect(url_for("login"))
 
-    users = mongo.db.users.find()
-
-    # Display all noffles the user has set
-    noffle_dict = {}
-    for user in users:
-        noffles_list = []
-        for noffle in user['noffles']:
-            my_noffles = mongo.db.noffles.find_one({"_id": ObjectId(noffle)})
-            noffles_list.append(my_noffles)
-        noffle_dict[str(user['username'])] = noffles_list
-
     # Show users to admin only
     if user["is_admin"] is False:
         flash("You need to be an admin to access this page")
         return redirect(url_for("office"))
+
+    users = mongo.db.users.find()
+
+    # Display all noffles the user has set
+    noffle_dict = {}
+    for managed_user in users:
+        noffles_list = []
+        for noffle in managed_user['noffles']:
+            my_noffles = mongo.db.noffles.find_one({"_id": ObjectId(noffle)})
+            noffles_list.append(my_noffles)
+        noffle_dict[str(managed_user['username'])] = noffles_list
 
     noffles = mongo.db.noffles.find()
     users = mongo.db.users.find()
@@ -305,6 +312,7 @@ def delete_user(user_id):
 @app.route("/delete_noffle/<noffle_id>")
 def delete_noffle(noffle_id):
     # Allow admin user to delete noffles
+    flash(f'Noffle Successfully Deleted')
     mongo.db.noffles.remove({"_id": ObjectId(noffle_id)})
     users = mongo.db.users.find()
 
@@ -316,6 +324,7 @@ def delete_noffle(noffle_id):
                     {'_id': ObjectId(user['_id'])}, {'$pull': {'noffles': noffle_id}})
 
     flash("Noffle Successfully Deleted")
+
     return redirect(url_for("manage_noffles"))
 
 
@@ -352,7 +361,7 @@ def add_noffle(noffle_id):
     user = mongo.db.users.find_one({"username": session["user"]})
     current_noffle = mongo.db.noffles.find_one({"_id": ObjectId(noffle_id)})
 
-    # Check if noffle is selected, and it to profile if it isn't
+    # Check if noffle is selected, and add it to profile if it isn't
     if noffle_id in user['noffles']:
         flash(f'Noffle {current_noffle["name"]} deleted')
         if current_noffle["name"] == 'Panic button':
@@ -393,12 +402,12 @@ def new_noffle():
 
     if request.method == 'POST':
         # Set variables for form
-        noffle_name = request.form.get("noffle.name").lower()
-        # Check if the noffle already exists in database
+        noffle_name = request.form.get("name")
+        # Check if the username already exists in database
         existing_noffle = mongo.db.noffles.find_one({"name": noffle_name})
 
         if existing_noffle:
-            flash(f'Noffle {noffle.name} already exists')
+            flash(f'Noffle {noffle_name} already exists')
             return redirect(url_for("manage_noffles"))
 
         new_noffle_addition = {
@@ -411,11 +420,10 @@ def new_noffle():
         mongo.db.noffles.insert_one(new_noffle_addition)
 
         # Put the new user into 'session' cookie
-        flash(f'Noffle {noffle.name} has been added')
+        flash(f'Noffle {noffle_name} has been added')
         return render_template("manage_noffles.html", noffles=noffles, user=user)
 
-    return render_template("manage_noffles.html", noffles=noffles, user=user)
-
+    return render_template("new_noffle.html", noffles=noffles, user=user)
 
 @app.route('/delete_account/<username>')
 def delete_account(username):

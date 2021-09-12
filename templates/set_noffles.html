@@ -11,14 +11,13 @@
                 <div class="col-sm-12 col-md-4 col-lg-3">
                     <a href="{{ url_for('add_noffle', noffle_id=noffle._id) }}">
                         <div class="card noffle-card">
-                            <div class="card-body">
+                            <div class="card-body {% if noffle.permanent %}btn-yellow{% elif noffle.name=='Panic button'%}btn-red{% else %}btn-blue{% endif %}">
                                 <div class="row card-title">
                                     <div class="col-2"><i class="{{ noffle.icon }} fa-2x noffle-icon"></i></div>
                                     <div class="col-10"><h5>{{ noffle.name }}</h5></div>
                                 </div>
                                 <hr>
                                 <p class="card-text">{{ noffle.description }}</p>
-                                <p class="card-text">Permanent: {% if noffle.permanent %}&#9989;{% else %}&#10060;{% endif %}</p>
                                 <i class="fas fa-exclamation-circle"></i>
                                 {% if noffle.private %}
                                     <input id="private" type="checkbox" data-toggle="toggle" checked>

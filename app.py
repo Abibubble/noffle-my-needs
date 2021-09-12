@@ -298,8 +298,8 @@ def delete_user(user_id):
 @app.route("/delete_noffle/<noffle_id>")
 def delete_noffle(noffle_id):
     # Allow admin user to delete noffles
+    flash(f'Noffle Successfully Deleted')
     mongo.db.noffles.remove({"_id": ObjectId(noffle_id)})
-    flash("Noffle Successfully Deleted")
     return redirect(url_for("manage_noffles"))
 
 
@@ -377,12 +377,12 @@ def new_noffle():
 
     if request.method == 'POST':
         # Set variables for form
-        noffle_name = request.form.get("noffle.name").lower()
+        noffle_name = request.form.get("name")
         # Check if the username already exists in database
         existing_noffle = mongo.db.noffles.find_one({"name": noffle_name})
 
         if existing_noffle:
-            flash(f'Noffle {noffle.name} already exists')
+            flash(f'Noffle {noffle_name} already exists')
             return redirect(url_for("manage_noffles"))
 
         new_noffle_addition = {
@@ -395,11 +395,10 @@ def new_noffle():
         mongo.db.noffles.insert_one(new_noffle_addition)
 
         # Put the new user into 'session' cookie
-        flash(f'Noffle {noffle.name} has been added')
+        flash(f'Noffle {noffle_name} has been added')
         return render_template("manage_noffles.html", noffles=noffles, user=user)
 
-    return render_template("manage_noffles.html", noffles=noffles, user=user)
-
+    return render_template("new_noffle.html", noffles=noffles, user=user)
 
 
 @app.route('/delete_account/<username>')

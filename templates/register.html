@@ -1,48 +1,76 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h2>Register</h2>
-    <div class="row">
-        <form class="col-12" method="POST" action="{{ url_for('register') }}">
-            <i class="fas fa-user-plus"></i>
-            <input id="username" name="username" type="text" minlength="5" maxlength="15" pattern="^[a-zA-Z0-9!-.@_]{5,15}$" required>
-            <label for="username">Username</label>
-            <br>
-            <i class="fas fa-user-lock"></i>
-            <input id="password" name="password" type="password" minlength="5" maxlength="20" pattern="^[a-zA-Z0-9!£%~#$%&()*+,-./?@^_~]{5,15}$" required>
-            <label for="password">Password</label>
-            <br>
-            <i class="fas fa-user-lock"></i>
-            <input id="password_confirm" name="password_confirm" type="password" minlength="5" maxlength="20" pattern="^[a-zA-Z0-9!£%~#$%&()*+,-./?@^_~]{5,15}$" required>
-            <label for="password_confirm">Confirm Password</label>
-            <br>
-            <i class="fas fa-address-card"></i>
-            <input id="first_name" name="first_name" type="text" minlength="5" maxlength="20" required>
-            <label for="first_name">First Name</label>
-            <br>
-            <i class="fas fa-address-card"></i>
-            <input id="last_name" name="last_name" type="text" minlength="5" maxlength="40" required>
-            <label for="last_name">Last Name</label>
-            <br>
-            <i class="fas fa-genderless"></i>
-            <input id="pronouns" name="pronouns" type="text" minlength="5" maxlength="40" required>
-            <label for="pronouns">Pronouns (format she/her, he/him, they/them)</label>
-            <br>
-            <i class="fas fa-image"></i>
-            <input id="image_no" name="image_no" type="number" required>
-            <label for="image_no">Image Number</label>
-            <br>
-            <button type="submit">
-                Register
-            </button>
-        </form>
-    </div>
-
-    <div class="row">
-        <div class="col-12">
-            <p>
-                Already registered? <a href="{{ url_for('login') }}">Log In</a>
-            </p>
+    <section class="container">
+        <div class="row">
+            <h2 class="text-center mb-5">Register</h2>
         </div>
-    </div>
+        <div class="container">
+            <div class="row login-form rounded mx-auto mb-2">
+                <form method="POST" action="{{ url_for('register') }}">
+                    <div class="form-group row mb-4">
+                        <div class="col-2"><i class="fas fa-2x fa-user"></i></div>
+                        <label for="username" class="sr-only">Username</label>
+                        <div class="col-10">
+                            <input type="text" class="form-control" name="username" id="username" minlength="5" maxlength="15" 
+                                pattern="^[a-zA-Z0-9!-.@_]{5,15}$" placeholder="Username" required>
+                        </div>
+                    </div>
+                    <div class="form-group row mb-2">
+                        <div class="col-2"><i class="fas fa-2x fa-key"></i></div>
+                        <label for="password" class="sr-only">Password</label>
+                        <div class="col-10">
+                            <input type="password" name="password" id="password" minlength="5" maxlength="20" 
+                                pattern="^[a-zA-Z0-9!£%~#$%&()*+,-./?@^_~]{5,15}$" class="form-control" placeholder="Password" required>
+                        </div>
+                    </div>
+                    <div class="form-group row mb-2">
+                        <div class="col-2"><i class="fas fa-2x fa-key"></i></div>
+                        <label for="password_confirm" class="sr-only">Confirm Password</label>
+                        <div class="col-10">
+                            <input id="password_confirm" name="password_confirm" placeholder="Confirm Password" class="form-control" type="password" minlength="5" maxlength="20" pattern="^[a-zA-Z0-9!£%~#$%&()*+,-./?@^_~]{5,15}$" required>
+                        </div>
+                    </div>
+                    <div class="form-group row mb-2">
+                        <div class="col-2"><i class="fas fa-2x fa-address-card"></i></div>
+                        <label for="first_name" class="sr-only">First Name</label>
+                        <div class="col-10">
+                            <input id="first_name" name="first_name" placeholder="First Name" class="form-control" type="text" minlength="5" maxlength="20" required>
+                        </div>
+                    </div>
+                    <div class="form-group row mb-2">
+                        <div class="col-2"><i class="fas fa-2x fa-address-card"></i></div>
+                        <label for="last_name" class="sr-only">Last Name</label>
+                        <div class="col-10">
+                            <input id="last_name" name="last_name" placeholder="Last Name" type="text" class="form-control" minlength="5" maxlength="40" required>
+                        </div>
+                    </div>
+                    <div class="form-group row mb-2">
+                        <div class="col-2"><i class="fas fa-2x fa-genderless"></i></div>
+                        <label for="pronouns" class="sr-only">Pronouns</label>
+                        <div class="col-10">
+                            <input id="pronouns" name="pronouns" type="text" minlength="5" maxlength="40" class="form-control" placeholder="(Pronouns - format she/her, he/him, they/them" required>
+                        </div>
+                    </div>
+                    <div class="form-group row mb-2">
+                        <div class="col-2"><i class="fas fa-2x fa-image"></i></div>
+                        <label for="image_no" class="sr-only">Image Number</label>
+                        <div class="col-10">
+                            <input id="image_no" name="image_no" placeholder="Avatar image number" type="number" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <button name="login" id="login" class="btn login-btn btn-green mt-3" type="submit">Log In</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 text-center">
+                <p>
+                    New here? <a href="{{ url_for('register') }}" class="link-register">Register</a>
+                </p>
+            </div>
+        </div>
+    </section>
 {% endblock %}

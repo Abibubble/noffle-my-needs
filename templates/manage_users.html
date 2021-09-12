@@ -23,16 +23,18 @@
                                     </ul>
                                 </details>
                             </div>
-                            {% if user.is_admin %}
-                                <a class="btn btn-blue btn-sm w-100" href="{{ url_for('admin_toggle', user_id=user._id) }}">
-                                    <i class="fas fa-lock-open"></i> Remove admin rights
-                                </a>
-                            {% else %}
-                                <a class="btn btn-green btn-sm w-100" href="{{ url_for('admin_toggle', user_id=user._id) }}">
-                                    <i class="fas fa-lock"></i></i> Make user admin
-                                </a>
+                            {% if user.username != "masteradmin" %}
+                                {% if user.is_admin %}
+                                    <a class="btn btn-blue btn-sm w-100" href="{{ url_for('admin_toggle', user_id=user._id) }}">
+                                        <i class="fas fa-lock-open"></i> Remove admin rights
+                                    </a>
+                                {% else %}
+                                    <a class="btn btn-green btn-sm w-100" href="{{ url_for('admin_toggle', user_id=user._id) }}">
+                                        <i class="fas fa-lock"></i></i> Make user admin
+                                    </a>
+                                {% endif %}
+                                <a class="btn btn-red btn-sm w-100 mt-2" href="{{ url_for('delete_user', user_id=user._id) }}">Delete User</a>
                             {% endif %}
-                            <a class="btn btn-red btn-sm w-100 mt-2" href="{{ url_for('delete_user', user_id=user._id) }}">Delete User</a>
                         </div>
                     </div>
                 </div>

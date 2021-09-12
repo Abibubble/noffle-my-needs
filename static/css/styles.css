@@ -67,7 +67,7 @@ footer {
 #hero-image {
     background-image: url("../img/hero_image.jpg");
     background-size: cover;
-    height: 60vh;
+    height: 50vh;
     width: 100%;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -79,7 +79,7 @@ footer {
     background-color: var(--pastel-green);
 }
 
-.hero-text-overlay {
+div.hero-text-overlay {
     background-color: rgba(227, 241, 212, 0.5);
     position: absolute;
     left: 0;
@@ -87,14 +87,18 @@ footer {
     top: 20%;
     margin-left: auto;
     margin-right: auto;
-    height: 160px;
-    width: 30%;
+    height: 140px;
+    width: 50%;
     padding: 20px;
 }
 
-.hero-heading,
-.hero-text {
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+h1.hero-heading,
+h4.hero-text {
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
+}
+
+h4.hero-text {
+    margin-top: 10px;
 }
 
 h2.about-heading {
@@ -104,6 +108,27 @@ h2.about-heading {
 p.about-text {
     padding: 0 40px 0 40px;
 }
+
+@media screen and (min-width: 576px) {
+    #hero-image {
+        height: 60vh;
+    }
+
+    div.hero-text-overlay {
+        height: 160px;
+        width: 40%;
+    }
+
+    h1.hero-heading {
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    div.hero-text-overlay {
+        width: 30%;
+    }
+  }
 
 /* ----------------------------------------------------------------------------------- Cards */
 

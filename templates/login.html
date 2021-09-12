@@ -2,41 +2,47 @@
 
 {% block content %}
 <section class="container">
-    <h2 class="text-center">Log In</h2>
-    <form method="POST" action="{{ url_for('login') }}">
-        <div class="row">
-            <div class="form-group">
-                <span><i class="fas fa-user"></i></span>
-                <label for="username" class="sr-only">Username</label>
-                <input type="text" name="username" id="username" minlength="5" maxlength="15" 
-                    pattern="^[a-zA-Z0-9!-.@_]{5,15}$" class="form-control" placeholder="Username" required>
-            </div>
+    <div class="row">
+        <h2 class="text-center mb-5">Log In</h2>
+    </div>
+    <div class="container">
+        <div class="row login-form rounded mx-auto mb-2">
+            <form method="POST" action="{{ url_for('login') }}">
+                <div class="form-group row mb-4">
+                    <div class="col-2"><i class="fas fa-2x fa-user"></i></div>
+                    <label for="username" class="sr-only">Username</label>
+                    <div class="col-10">
+                        <input type="text" class="form-control" name="username" id="username" minlength="5" maxlength="15" 
+                            pattern="^[a-zA-Z0-9!-.@_]{5,15}$" placeholder="Username" required>
+                    </div>
+                </div>
+                <div class="form-group row mb-2">
+                    <div class="col-2"><i class="fas fa-2x fa-key"></i></div>
+                    <label for="password" class ="sr-only">Password</label>
+                    <div class="col-10">
+                        <input type="password" name="password" id="password" minlength="5" maxlength="20" 
+                            pattern="^[a-zA-Z0-9!£%~#$%&()*+,-./?@^_~]{5,15}$" class="form-control" placeholder="Password" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="offset-2 col-10 show-password" for="show-password">
+                        <input type="checkbox" id="show-password" onclick="showPassword()">
+                        <span>Show Password</span>
+                    </label>
+                </div>
+                <div class="row">
+                    <button name="login" id="login" class="btn login-btn btn-green mt-3" type="submit">Log In</button>
+                </div>
+            </form>
         </div>
-        <div class="row">
-            <div class="form-group">
-                <span><i class="fas fa-key"></i></span>
-                <label for="password" class ="sr-only">Password</label>
-                <input type="password" name="password" id="password" minlength="5" maxlength="20" 
-                    pattern="^[a-zA-Z0-9!£%~#$%&()*+,-./?@^_~]{5,15}$" class="form-control" placeholder="Passsword" required>
-            </div>
+    </div>
+    <div class="row">
+        <div class="col-12 text-center">
+            <p>
+                New here? <a href="{{ url_for('register') }}" class="link-register">Register</a>
+            </p>
         </div>
-        <div class="row">
-            <label class="show-password" for="show-password">
-                <input type="checkbox" id="show-password" onclick="showPassword()">
-                <span>Show Password</span>
-            </label>
-        </div>
-        <div class="row">
-            <button name="login" id="login" class="btn login-btn" type="submit">Log In</button>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <p>
-                    New here? <a href="{{ url_for('register') }}">Register</a>
-                </p>
-            </div>
-        </div>
-    </form>
+    </div>
 </section>
 
 {% endblock %}

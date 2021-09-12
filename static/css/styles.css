@@ -83,6 +83,38 @@ footer {
     border: 2px solid black !important;
 }
 
+/* ----------------------------------------------------------------------------------- Login and Register Forms */
+
+.login-form {
+    max-width: 50%;
+    border: 2px solid black;
+    padding: 30px;
+}
+
+.link-register {
+    text-decoration: underline !important;
+}
+
+input, textarea {
+    background-color: var(--gallery) !important;
+}
+
+.form-control {
+    border: 2px solid black !important;
+}
+
+.form-control:focus {
+  border-color: var(--alto) !important;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(0, 0, 0, 0.6) !important;
+}
+
+/* ----------------------------------------------------------------------------------- Media Queries */
+
+@media(max-width:992px){
+    .login-form {
+        max-width: 90%;
+}
+  
 /* ----------------------------------------------------------------------------------- Buttons */
 
 .btn-close-modal,

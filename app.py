@@ -61,11 +61,18 @@ def login():
 def logout():
     # Find if a user is logged in for the navbar
     print("*", session["user"], "*")
+    
     try:
         user = mongo.db.users.find_one({"username": session["user"]})
-        # For some reason, this doesn't work without the print statement below.
-        # No clue why. Please tell Abi if you figure out why, or how to fix it!!
-        print(user)
+        """
+        Check the noffles that are not permament and delete from 
+        the user's noffles when logout
+        """
+        for noffle in user["noffles"]:
+            my_noffles = mongo.db.noffles.find_one({"_id": ObjectId(noffle)})
+            if not my_noffles['permanent']:
+                noffle_id = str(my_noffles['_id'])
+                mongo.db.users.update({'_id': ObjectId(user['_id'])}, {'$pull': {'noffles': noffle_id}})
         flash("You have been logged out")
     except BaseException:
         user = mongo.db.users.find()
@@ -335,7 +342,7 @@ def add_noffle(noffle_id):
     user = mongo.db.users.find_one({"username": session["user"]})
     current_noffle = mongo.db.noffles.find_one({"_id": ObjectId(noffle_id)})
 
-    # Check if noffle is selected, and it to profile if it isn't
+    # Check if noffle is selected, and add it to profile if it isn't
     if noffle_id in user['noffles']:
         flash(f'Noffle {current_noffle["name"]} deleted')
         if current_noffle["name"] == 'Panic button':
@@ -377,4 +384,4 @@ def delete_account(username):
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
-            debug=False)
+            debug=True)

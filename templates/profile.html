@@ -6,42 +6,42 @@
     <div class="row">
         <div class="col-5 border p-4">
             <div class="login-form profile-login-form rounded mx-auto mb-2">
-                <form method="POST" action="{{ url_for('register') }}">
+                <form method="POST" action="{{ url_for('update_user', user_id=user._id) }}">
                     <div class="form-group row mb-4">
                         <div class="col-2"><i class="fas fa-2x fa-user"></i></div>
                         <label for="username" class="sr-only">Username</label>
                         <div class="col-10">
-                            <input type="text" class="form-control" name="username" id="username" minlength="5" maxlength="15" 
+                            <input type="text" value="{{ user.username }}" class="form-control" name="username" id="username" minlength="5" maxlength="15" 
                                 pattern="^[a-zA-Z0-9!-.@_]{5,15}$" placeholder="Username" required>
                         </div>
                     </div>
                     <div class="form-group row mb-2">
                         <div class="col-2"><i class="fas fa-2x fa-key"></i></div>
-                        <label for="password" class="sr-only">Password</label>
+                        <label for="password" class="sr-only">New Password</label>
                         <div class="col-10">
                             <input type="password" name="password" id="password" minlength="5" maxlength="20" 
-                                pattern="^[a-zA-Z0-9!£%~#$%&()*+,-./?@^_~]{5,15}$" class="form-control" placeholder="Password" required>
+                                pattern="^[a-zA-Z0-9!£%~#$%&()*+,-./?@^_~]{5,15}$" class="form-control" placeholder="Password">
                         </div>
                     </div>
                     <div class="form-group row mb-2">
                         <div class="col-2"><i class="fas fa-2x fa-key"></i></div>
-                        <label for="password_confirm" class="sr-only">Confirm Password</label>
+                        <label for="password_confirm" class="sr-only">Confirm New Password</label>
                         <div class="col-10">
-                            <input id="password_confirm" name="password_confirm" placeholder="Confirm Password" class="form-control" type="password" minlength="5" maxlength="20" pattern="^[a-zA-Z0-9!£%~#$%&()*+,-./?@^_~]{5,15}$" required>
+                            <input id="password_confirm" name="password_confirm" placeholder="Confirm Password" class="form-control" type="password" minlength="5" maxlength="20" pattern="^[a-zA-Z0-9!£%~#$%&()*+,-./?@^_~]{5,15}$">
                         </div>
                     </div>
                     <div class="form-group row mb-2">
                         <div class="col-2"><i class="fas fa-2x fa-genderless"></i></div>
                         <label for="pronouns" class="sr-only">Pronouns</label>
                         <div class="col-10">
-                            <input id="pronouns" name="pronouns" type="text" minlength="5" maxlength="40" class="form-control" placeholder="Pronouns - (she/her, he/him, they/them)" required>
+                            <input id="pronouns" value="{{ user.pronouns }}" name="pronouns" type="text" minlength="5" maxlength="40" class="form-control" placeholder="Pronouns - (she/her, he/him, they/them)" required>
                         </div>
                     </div>
                     <div class="form-group row mb-2">
                         <div class="col-2"><i class="fas fa-2x fa-image"></i></div>
                         <label for="image_no" class="sr-only">Image Number</label>
                         <div class="col-10">
-                            <input id="image_no" name="image_no" placeholder="Avatar image number" type="number" class="form-control" required>
+                            <input id="image_no" value="{{ user.image_no }}" name="image_no" placeholder="Avatar image number" min="1" max="13" type="number" class="form-control" required>
                         </div>
                     </div>
                     <div class="row">
@@ -81,7 +81,7 @@
                     <div class="col-12 mb-5">
                         <h4 class="text-danger">You haven't got any Noffles set!</h4>
                         <p>Set your Noffles now!</p>
-                        <a href="{{ url_for('set_noffles') }}" class="btn btn-close-modal">Set my Noffles</a>
+                        <a role="button" href="{{ url_for('set_noffles') }}" class="btn btn-close-modal">Set my Noffles</a>
                     </div>
                 </div>
             {% endif %}

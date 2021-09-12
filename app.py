@@ -140,7 +140,8 @@ def profile(username):
         user = mongo.db.users.find()
         flash("You need to be logged in to access this page")
         return redirect(url_for("login"))
-        
+
+    # Display all noffles the user has set
     noffles = []
     try:
         for noffle in user["noffles"]:
@@ -148,6 +149,7 @@ def profile(username):
             noffles.append(my_noffles)      
     except BaseException:
         noffles = []
+
     if session["user"]:
         return render_template(
             "profile.html", noffles=noffles, user=user)
@@ -167,6 +169,8 @@ def update_user(user_id):
         user = mongo.db.users.find()
         flash("You need to be logged in to access this page")
         return redirect(url_for("login"))
+
+    # Display all noffles the user has set
     noffles = []
     try:
         for noffle in user["noffles"]:
@@ -209,7 +213,8 @@ def office(name=None):
 
     users = mongo.db.users.find()
     noffles = mongo.db.noffles.find()
-    
+
+    # Display all noffles the user has set
     noffle_dict = {}
     for managed_user in users:
         noffles_list = []
@@ -261,6 +266,8 @@ def manage_users(name=None):
         return redirect(url_for("office"))
 
     users = mongo.db.users.find()
+
+    # Display all noffles the user has set
     noffle_dict = {}
     for managed_user in users:
         noffles_list = []
@@ -308,11 +315,14 @@ def delete_noffle(noffle_id):
     flash(f'Noffle Successfully Deleted')
     mongo.db.noffles.remove({"_id": ObjectId(noffle_id)})
     users = mongo.db.users.find()
+
+    # Remove the deleted noffle from all users
     for user in users:
         for noffle in user["noffles"]:
             if noffle == noffle_id:
                 mongo.db.users.update(
                     {'_id': ObjectId(user['_id'])}, {'$pull': {'noffles': noffle_id}})
+
     flash("Noffle Successfully Deleted")
 
     return redirect(url_for("manage_noffles"))

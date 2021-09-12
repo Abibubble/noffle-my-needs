@@ -21,7 +21,7 @@ mongo = PyMongo(app)
 @app.route('/')
 @app.route('/landing')
 def landing(name=None):
-    # Find if a user is logged in
+    # Find if a user is logged in for navlinks
     try:
         user = mongo.db.users.find_one({"username": session["user"]})
     except BaseException:
@@ -78,7 +78,7 @@ def logout():
 
 @app.route('/register', methods=["GET", "POST"])
 def register():
-    # Find if a user is logged in
+    # Find if a user is logged in for navlinks
     try:
         user = mongo.db.users.find_one({"username": session["user"]})
     except BaseException:
@@ -87,7 +87,7 @@ def register():
     noffles = mongo.db.noffles.find()
 
     if request.method == 'POST':
-        # Set variables
+        # Set variables for form
         username = request.form.get("username").lower()
         password = request.form.get("password")
         password_confirm = request.form.get("password_confirm")
@@ -126,7 +126,7 @@ def register():
 
 @app.route("/profile/<username>", methods=["GET", "POST"])
 def profile(username):
-    # Find if a user is logged in
+    # Find if a user is logged in for navlinks
     try:
         user = mongo.db.users.find_one({"username": session["user"]})
     except BaseException:
@@ -153,7 +153,7 @@ def profile(username):
 
 @app.route('/update_user/<user_id>', methods=["GET", "POST"])
 def update_user(user_id):
-    # Find the logged in user
+    # Find the logged in user for navlinks
     try:
         user = mongo.db.users.find_one({"_id": ObjectId(user_id)})
     except BaseException:
@@ -169,7 +169,7 @@ def update_user(user_id):
         noffles = []
 
     if request.method == 'POST':
-        # Set variables
+        # Set variables for the form
         username = request.form.get("username").lower()
         password = request.form.get("password")
         password_confirm = request.form.get("password_confirm")
@@ -192,7 +192,7 @@ def update_user(user_id):
 
 @app.route('/office')
 def office(name=None):
-    # Find if a user is logged in
+    # Find if a user is logged in for navlinks
     try:
         user = mongo.db.users.find_one({"username": session["user"]})
     except BaseException:
@@ -219,7 +219,7 @@ def office(name=None):
 
 @app.route('/manage_noffles')
 def manage_noffles(name=None):
-    # Find if a user is logged in
+    # Find if a user is logged in for navlinks
     try:
         user = mongo.db.users.find_one({"username": session["user"]})
     except BaseException:
@@ -240,7 +240,7 @@ def manage_noffles(name=None):
 
 @app.route('/manage_users')
 def manage_users(name=None):
-    # Find if a user is logged in
+    # Find if a user is logged in for navlinks
     try:
         user = mongo.db.users.find_one({"username": session["user"]})
     except BaseException:
@@ -294,9 +294,17 @@ def delete_user(user_id):
     return redirect(url_for("manage_users"))
 
 
+@app.route("/delete_noffle/<noffle_id>")
+def delete_noffle(noffle_id):
+    # Allow admin user to delete noffles
+    mongo.db.noffles.remove({"_id": ObjectId(noffle_id)})
+    flash("Noffle Successfully Deleted")
+    return redirect(url_for("manage_noffles"))
+
+
 @app.route('/set_noffles')
 def set_noffles(name=None):
-    # Find if a user is logged in
+    # Find if a user is logged in for navlinks
     try:
         user = mongo.db.users.find_one({"username": session["user"]})
     except BaseException:
@@ -313,7 +321,7 @@ def set_noffles(name=None):
 
 @app.route('/add_noffle/<noffle_id>')
 def add_noffle(noffle_id):
-    # Find if a user is logged in
+    # Find if a user is logged in for navlinks
     try:
         user = mongo.db.users.find_one({"username": session["user"]})
     except BaseException:
@@ -351,7 +359,7 @@ def add_noffle(noffle_id):
 
 @app.route('/delete_account/<username>')
 def delete_account(username):
-    # Find if a user is logged in
+    # Find if a user is logged in for navlinks
     try:
         user = mongo.db.users.find_one({"username": session["user"]})
     except BaseException:

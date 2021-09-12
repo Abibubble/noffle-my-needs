@@ -165,10 +165,11 @@ textarea {
     border: 2px solid black !important;
 }
 
-.center-icon {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+/* ----------------------------------------------------------------------------------- Profile */
+
+.avatar-profile {
+    height: 150px;
+    margin-left: 30%;
 }
 
 /* ----------------------------------------------------------------------------------- Hover, Focus */

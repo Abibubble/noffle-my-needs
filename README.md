@@ -137,7 +137,7 @@ In addition to the First Time and Returning Visitor Goals, as an administrator o
 
 ### Wireframes
 
-[Here are the wireframes for desktop, mobile and tablet for this project](static/docs/img/wireframes.pdf).
+[Here are the wireframes for desktop, mobile and tablet for this project](static/docs/wireframes.pdf).
 
 ### User Journey
 

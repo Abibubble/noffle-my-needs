@@ -129,16 +129,20 @@ def profile(username):
     except BaseException:
         user = mongo.db.users.find()
 
-    noffles = ""
-    for noffle in user["noffles"]:
-        noffles += noffle
-    noffles = mongo.db.noffles.find({"_id": ObjectId(noffles)})
+    try:
+        for noffle in user["noffles"]:
+            noffles += noffle
+        noffles = mongo.db.noffles.find({"_id": ObjectId(noffles)})
+    except BaseException:
+        noffles = []
+
     if session["user"]:
         return render_template(
             "profile.html", noffles=noffles, user=user)
     else:
         flash("You need to be logged in to access this page")
         return redirect(url_for("login"))
+
     return redirect(url_for("landing"))
 
 
@@ -149,11 +153,14 @@ def office(name=None):
         user = mongo.db.users.find_one({"username": session["user"]})
     except BaseException:
         user = mongo.db.users.find()
-
         flash("You need to be logged in to access this page")
         return redirect(url_for("login"))
+
+    users = mongo.db.users.find()
     noffles = mongo.db.noffles.find()
-    return render_template('office.html', name=name, noffles=noffles, user=user)
+
+    return render_template(
+        'office.html', name=name, noffles=noffles, user=user, users=users)
 
 
 @app.route('/manage_noffles')
@@ -233,6 +240,7 @@ def set_noffles(name=None):
         user = mongo.db.users.find()
         flash("You need to be logged in to access this page")
         return redirect(url_for("login"))
+
     noffles = mongo.db.noffles.find()
     user_noffles = user['noffles']
 
@@ -250,23 +258,24 @@ def add_noffle(noffle_id):
         flash("You need to be logged in to access this page")
         return redirect(url_for("login"))
 
-    # Add noffle to their profile
+    # Find noffle and user
     noffles = mongo.db.noffles.find()
     noffle = mongo.db.noffles.find_one({"_id": noffle_id})
     user = mongo.db.users.find_one({"username": session["user"]})
+    current_noffle = mongo.db.noffles.find_one({"_id": ObjectId(noffle_id)})
 
-    # Check if noffle is select, and it to profile if it's don't
+    # Check if noffle is selected, and it to profile if it isn't
     if noffle_id in user['noffles']:
-        flash('Noffle deleted')
+        flash('Noffle {current_noffle["name"]} deleted')
         mongo.db.users.update(
-                {'_id': ObjectId(user['_id'])}, {'$pull': {'noffles': noffle_id}})
+            {'_id': ObjectId(user['_id'])}, {'$pull': {'noffles': noffle_id}})
         return redirect(url_for("set_noffles", noffles=noffles, user=user))
     else:
-        flash('Noffle added')
+        flash(f'Noffle {current_noffle["name"]} added')
         mongo.db.users.update(
                 {'_id': ObjectId(user['_id'])}, {'$push': {'noffles': noffle_id}})
         return redirect(url_for("set_noffles", noffles=noffles, user=user))
-    print('---')
+
     return render_template(
         'set_noffles.html', noffles=noffles, user=user)
 

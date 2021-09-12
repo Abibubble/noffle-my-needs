@@ -118,13 +118,6 @@ p.about-text {
     overflow-y: scroll;
 }
 
-.card-overlay {
-    width: 100%;
-    height: 100%;
-    background: black !important;
-    z-index: 1546465;
-}
-
 .user-card {
     height: 360px;
     overflow-y: scroll;

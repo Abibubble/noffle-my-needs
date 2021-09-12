@@ -248,6 +248,15 @@ def manage_users(name=None):
         flash("You need to be logged in to access this page")
         return redirect(url_for("login"))
 
+    users = mongo.db.users.find()
+    noffle_dict = {}
+    for user in users:
+        noffles_list = []
+        for noffle in user['noffles']:
+            my_noffles = mongo.db.noffles.find_one({"_id": ObjectId(noffle)})
+            noffles_list.append(my_noffles)
+        noffle_dict[str(user['username'])] = noffles_list
+
     # Show users to admin only
     if user["is_admin"] is False:
         flash("You need to be an admin to access this page")
@@ -255,7 +264,10 @@ def manage_users(name=None):
 
     noffles = mongo.db.noffles.find()
     users = mongo.db.users.find()
-    return render_template('register.html', user=user, noffles=noffles)
+
+    return render_template(
+        'manage_users.html', name=name, noffles=noffles,
+        users=users, user=user, noffle_dict=noffle_dict)
 
 
 @app.route("/admin_toggle/<user_id>")
@@ -410,4 +422,4 @@ def delete_account(username):
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
-            debug=True)
+            debug=False)

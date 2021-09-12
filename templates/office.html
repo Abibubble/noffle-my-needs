@@ -14,6 +14,11 @@
                                         <h5>{{ user.first_name|capitalize }} {{ user.last_name|capitalize }} ({{ user.pronouns }})</h5>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    {% for icon in noffle_dict[user.username] %}
+                                        <div class="col-2 m-2"><i class="{{ icon['icon'] }} fa-2x noffle-icon"></i></div>
+                                    {% endfor %}
+                                </div>
                             </div>
                         </div>
                     </a>
@@ -37,8 +42,12 @@
                                 {% endif %}
                                 <p>Username: {{ user.username }}</p>
                                 Noffles: <ul>
-                                    {% for noffle in user.noffles %}
-                                        <li>{{ noffle }}</li>
+                                    {% for noffle in noffle_dict[user.username] %}
+                                        <div class="card noffle-card">
+                                            <h2>{{ noffle['name'] }}</h2>
+                                            <p>{{noffle['description']}}</p>
+                                            <i class="{{ noffle['icon'] }} fa-2x noffle-icon"></i>
+                                        </div>
                                     {% endfor %}
                                 </ul>
                             </div>

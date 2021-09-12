@@ -4,12 +4,7 @@
     <section class="container">
         <h2 class="mb-3">A11y Corp</h2>
         <div class="row">
-            {{noffle_dict}}
-            {% for n in noffle_dict %}
-                {{n}}
-            {% endfor %}
             {% for user in users %}
-            
                 <div class="col-sm-12 col-md-4 col-lg-2">
                     <a href="#" role="button" data-toggle="modal" data-target="#user-modal-{{ user._id }}">
                         <div class="card office-card">
@@ -19,13 +14,11 @@
                                         <h5>{{ user.first_name|capitalize }} {{ user.last_name|capitalize }} ({{ user.pronouns }})</h5>
                                     </div>
                                 </div>
-                                
-                                {% for n in noffle_dict['user'] %}
-                                    {{n}}
-                                {% endfor %}
-                                {% for noffle in user.noffles %}
-                                    {{noffle}}
-                                {% endfor %}
+                                <div class="row">
+                                    {% for icon in noffle_dict[user.username] %}
+                                        <div class="col-2 m-2"><i class="{{ icon }} fa-2x noffle-icon"></i></div>
+                                    {% endfor %}
+                                </div>
                             </div>
                         </div>
                     </a>

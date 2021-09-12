@@ -90,7 +90,7 @@ footer {
 
 /* ----------------------------------------------------------------------------------- Login and Register Forms */
 
-.login-form {
+.form-area {
     max-width: 50%;
     border: 2px solid black;
     padding: 30px;
@@ -100,7 +100,7 @@ footer {
     max-width: 100%;
 }
 
-.link-register {
+.link-register, .link-login {
     text-decoration: underline !important;
 }
 
@@ -110,6 +110,12 @@ input, textarea {
 
 .form-control {
     border: 2px solid black !important;
+}
+
+.center-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* ----------------------------------------------------------------------------------- Hover, Focus */

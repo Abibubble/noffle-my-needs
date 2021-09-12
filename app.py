@@ -62,6 +62,8 @@ def logout():
     print("*", session["user"], "*")
     try:
         user = mongo.db.users.find_one({"username": session["user"]})
+        # For some reason, this doesn't work without the print statement below.
+        # No clue why. Please tell Abi if you figure out why, or how to fix it!!
         print(user)
         flash("You have been logged out")
     except BaseException:
@@ -114,7 +116,7 @@ def register():
         flash("Hi, {}. Welcome to Noffle My Needs.".format(
                         request.form.get("username").capitalize()))
 
-        return render_template("set_noffles.html", noffles=noffles, user=session["user"])
+        return render_template("set_noffles.html", noffles=noffles, user=user)
 
     return render_template('register.html')
 
@@ -204,7 +206,8 @@ def set_noffles(name=None):
         flash("You need to be logged in to access this page")
         return redirect(url_for("login"))
     noffles = mongo.db.noffles.find()
-    return render_template('set_noffles.html', name=name, noffles=noffles)
+    return render_template(
+        'set_noffles.html', name=name, noffles=noffles, user=user)
 
 
 @app.route('/add_noffle/<noffle_id>')
@@ -222,7 +225,8 @@ def add_noffle(noffle_id):
     noffle = mongo.db.noffles.find_one({"_id": noffle_id})
     user = mongo.db.users.find_one({"username": session["user"]})
     user["noffles"].append(noffle)
-    return render_template('set_noffles.html', noffles=noffles)
+    return render_template(
+        'set_noffles.html', noffles=noffles, user=user)
 
 
 @app.route('/delete_account/<username>')
@@ -245,4 +249,4 @@ def delete_account(username):
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
-            debug=False)
+            debug=True)

@@ -33,6 +33,7 @@ nav,
 footer {
     color: black !important;
     background-color: var(--alto);
+    z-index: 3;
 }
 
 nav {
@@ -146,12 +147,12 @@ p.about-text {
 }
 
 .user-card {
-    height: 400px;
+    height: 360px;
     overflow-y: scroll;
 }
 
 .card-img-top {
-    max-height: 200px;
+    max-height: 100px;
     margin: auto;
     width: fit-content !important;
 }
@@ -160,9 +161,13 @@ p.about-text {
     border: 2px solid black !important;
 }
 
+.card-header {
+    height: 75px;
+}
+
 /* ----------------------------------------------------------------------------------- Login and Register Forms */
 
-.login-form {
+.form-area {
     max-width: 50%;
     border: 2px solid black;
     padding: 30px;
@@ -172,7 +177,7 @@ p.about-text {
     max-width: 100%;
 }
 
-.link-register {
+.link-register, .link-login {
     text-decoration: underline !important;
 }
 
@@ -183,6 +188,13 @@ textarea {
 
 .form-control {
     border: 2px solid black !important;
+}
+
+/* ----------------------------------------------------------------------------------- Profile */
+
+.avatar-profile {
+    height: 150px;
+    margin-left: 30%;
 }
 
 /* ----------------------------------------------------------------------------------- Hover, Focus */
@@ -232,6 +244,13 @@ a:focus {
 .btn-yellow {
     background-color: var(--pastel-yellow) !important;
 }
+
+/* ----------------------------------------------------------------------------------- Overlay */
+
+.card-overlay {
+    background-color: var(--gallery) !important;
+    z-index: 2;
+} 
 
 /* ----------------------------------------------------------------------------------- Media Queries */
 

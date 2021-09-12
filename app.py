@@ -121,7 +121,7 @@ def register():
                         request.form.get("username").capitalize()))
         return render_template("set_noffles.html", noffles=noffles, user=user)
 
-    return render_template('register.html')
+    return render_template('register.html', user=user)
 
 
 @app.route("/profile/<username>", methods=["GET", "POST"])
@@ -131,6 +131,8 @@ def profile(username):
         user = mongo.db.users.find_one({"username": session["user"]})
     except BaseException:
         user = mongo.db.users.find()
+        flash("You need to be logged in to access this page")
+        return redirect(url_for("login"))
         
     noffles = []
     try:
@@ -140,7 +142,6 @@ def profile(username):
     except BaseException:
         noffles = []
     if session["user"]:
-        print(noffles)
         return render_template(
             "profile.html", noffles=noffles, user=user)
     else:
@@ -148,6 +149,45 @@ def profile(username):
         return redirect(url_for("login"))
 
     return redirect(url_for("landing"))
+
+
+@app.route('/update_user/<user_id>', methods=["GET", "POST"])
+def update_user(user_id):
+    # Find the logged in user
+    try:
+        user = mongo.db.users.find_one({"_id": ObjectId(user_id)})
+    except BaseException:
+        user = mongo.db.users.find()
+        flash("You need to be logged in to access this page")
+        return redirect(url_for("login"))
+    noffles = []
+    try:
+        for noffle in user["noffles"]:
+            my_noffles = mongo.db.noffles.find_one({"_id": ObjectId(noffle)})
+            noffles.append(my_noffles)      
+    except BaseException:
+        noffles = []
+
+    if request.method == 'POST':
+        # Set variables
+        username = request.form.get("username").lower()
+        password = request.form.get("password")
+        password_confirm = request.form.get("password_confirm")
+
+        if password != password_confirm:
+            flash("Oh no! Your passwords don't match")
+            return redirect(url_for("profile", username=username))
+
+        update_user = {
+            "username": request.form.get("username").lower(),
+            "password": generate_password_hash(password),
+            "pronouns": request.form.get("pronouns").lower(),
+            "image_no": request.form.get("image_no"),
+        }
+        mongo.db.users.update_one(
+            {"_id": ObjectId(user["_id"])}, {'$set': update_user})
+
+    return redirect(url_for("profile", username=username))
 
 
 @app.route('/office')
@@ -162,9 +202,19 @@ def office(name=None):
 
     users = mongo.db.users.find()
     noffles = mongo.db.noffles.find()
+    
+    noffle_dict = {}
+    for user in users:
+        noffles_list = []
+        for noffle in user['noffles']:
+            my_noffles = mongo.db.noffles.find_one({"_id": ObjectId(noffle)})
+            noffles_list.append(my_noffles)
+        noffle_dict[str(user['username'])] = noffles_list
 
+    users = mongo.db.users.find()
+    noffles = mongo.db.noffles.find()
     return render_template(
-        'office.html', name=name, noffles=noffles, user=user, users=users)
+        'office.html', name=name, noffles=noffles, user=user, users=users, noffle_dict=noffle_dict) # Double check if user is being used somewhere on the office page
 
 
 @app.route('/manage_noffles')
@@ -233,6 +283,14 @@ def delete_user(user_id):
     mongo.db.users.remove({"_id": ObjectId(user_id)})
     flash("User Successfully Deleted")
     return redirect(url_for("manage_users"))
+
+
+@app.route("/delete_noffle/<noffle_id>")
+def delete_noffle(noffle_id):
+    # Allow admin user to delete noffles
+    mongo.db.noffles.remove({"_id": ObjectId(noffle_id)})
+    flash("Noffle Successfully Deleted")
+    return redirect(url_for("manage_noffles"))
 
 
 @app.route('/set_noffles')

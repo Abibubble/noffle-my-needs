@@ -83,6 +83,8 @@ def register():
     except BaseException:
         user = mongo.db.users.find()
 
+    noffles = mongo.db.noffles.find()
+
     if request.method == 'POST':
         # Set variables
         username = request.form.get("username").lower()

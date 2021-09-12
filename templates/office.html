@@ -11,7 +11,7 @@
                             <div class="card-body {% if user.panic == true %}btn-red{% else %}btn-green{% endif %}">
                                 <div class="row card-title">
                                     <div class="col-12">
-                                        <h5>{{ user.first_name }} {{ user.last_name }} ({{ user.pronouns }})</h5>
+                                        <h5>{{ user.first_name|capitalize }} {{ user.last_name|capitalize }} ({{ user.pronouns }})</h5>
                                     </div>
                                 </div>
                             </div>

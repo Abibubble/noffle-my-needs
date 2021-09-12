@@ -60,6 +60,38 @@ footer {
     justify-content: right;
 }
 
+/* ----------------------------------------------------------------------------------- Landing Page */
+
+/* Photo by Georgie Cobbs on Unsplash */
+#hero-image {
+    background-image: url("../img/hero_image.jpg");
+    background-size: cover;
+  height: 60vh;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background-position: bottom;
+  background-color: var(--pastel-green);
+}
+
+.hero-text-overlay {
+    background-color: rgba(227, 241, 212, 0.5);
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 20%;
+    margin-left: auto;
+    margin-right: auto;
+    height: 160px;
+    width: 30%;
+    padding: 20px;
+  }
+  
+
 /* ----------------------------------------------------------------------------------- Cards */
 
 .noffle-card {

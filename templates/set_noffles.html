@@ -14,10 +14,12 @@
                             <div class="card noffle-card">
                                 <div class="card-body {% if noffle.permanent %}btn-yellow{% elif noffle.name=='Panic button'%}btn-red{% else %}btn-blue{% endif %}">
                                     <div class="row card-title">
-                                        {% if noffle._id|string in user_noffles %}
-                                            <p>Selected</p>
-                                        {% else %}
-                                            <p>Not Selected</p>
+                                        {% if user_noffles %}
+                                            {% if noffle._id|string in user_noffles %}
+                                                <p>Selected</p>
+                                            {% else %}
+                                                <p>Not Selected</p>
+                                            {% endif %}
                                         {% endif %}
                                         <div class="col-2"><i class="{{ noffle.icon }} fa-2x noffle-icon"></i></div>
                                         <div class="col-10"><h5>{{ noffle.name }}</h5></div>

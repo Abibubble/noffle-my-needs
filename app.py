@@ -7,6 +7,7 @@ from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
 if os.path.exists("env.py"):
     import env
+    
 
 app = Flask(__name__)
 
@@ -118,7 +119,6 @@ def register():
         session["user"] = request.form.get("username").lower()
         flash("Hi, {}. Welcome to Noffle My Needs.".format(
                         request.form.get("username").capitalize()))
-
         return render_template("set_noffles.html", noffles=noffles, user=user)
 
     return render_template('register.html')

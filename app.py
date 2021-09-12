@@ -129,7 +129,10 @@ def profile(username):
     except BaseException:
         user = mongo.db.users.find()
 
-    noffles = mongo.db.noffles.find()
+    noffles = ""
+    for noffle in user["noffles"]:
+        noffles += noffle
+    noffles = mongo.db.noffles.find({"_id": ObjectId(noffles)})
     if session["user"]:
         return render_template(
             "profile.html", noffles=noffles, user=user)
@@ -274,4 +277,4 @@ def delete_account(username):
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
-            debug=True)
+            debug=False)

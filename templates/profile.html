@@ -44,18 +44,17 @@
             </div>
         </div>
         <div class="col-5 offset-2 p-4 border">
-            {% if user.noffles[0] %}
-                {% for noffle in user.noffles %}
-                    <div class="col-sm-12 col-md-4 col-lg-3 mb-5">
+            {% if noffles[0] %}
+                {% for noffle in noffles %}
+                    <div class="col-sm-12 col-md-6 mb-5">
                         <div class="card noffle-card">
-                            <div class="card-body">
+                            <div class="card-body {% if noffle.permanent %}btn-yellow{% else %}btn-blue{% endif %}">
                                 <div class="row card-title">
                                     <div class="col-2"><i class="{{ noffle.icon }} fa-2x noffle-icon"></i></div>
                                     <div class="col-10"><h5>{{ noffle.name }}</h5></div>
                                 </div>
                                 <hr>
                                 <p class="card-text">{{ noffle.description }}</p>
-                                <p class="card-text">Permanent: {% if noffle.permanent %}&#9989;{% else %}&#10060;{% endif %}</p>
                                 <i class="fas fa-exclamation-circle"></i>
                                 {% if noffle.private %}
                                     <input id="private" type="checkbox" data-toggle="toggle" checked>
@@ -78,13 +77,13 @@
         </div>
     </div>
     {% if not user.is_admin %}
-    <div class="row">
-        <div class="col-12 text-center">
-            <button type="button" class="btn btn-primary btn-delete mt-5" data-toggle="modal" data-target="#delete-modal">
-                Delete Your Account
-            </button>
+        <div class="row">
+            <div class="col-12 text-center">
+                <button type="button" class="btn btn-primary btn-delete mt-5" data-toggle="modal" data-target="#delete-modal">
+                    Delete Your Account
+                </button>
+            </div>
         </div>
-    </div>
     {% endif %}
 
     <!-- Modal -->

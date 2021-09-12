@@ -4,7 +4,8 @@
     <h2>{{ user.username }}'s Profile</h2>
     <hr>
     <div class="row">
-        <div class="col-5 border p-4">
+        <div class="col-5 border p-3">
+            <img class="avatar-profile" src="/static/img/avatar{{ user.image_no }}.png" alt="Icon for {{ user.username }}">
             <div class="login-form profile-login-form rounded mx-auto mb-2">
                 <form method="POST" action="{{ url_for('update_user', user_id=user._id) }}">
                     <div class="form-group row mb-4">
@@ -81,7 +82,7 @@
                     <div class="col-12 mb-5">
                         <h4 class="text-danger">You haven't got any Noffles set!</h4>
                         <p>Set your Noffles now!</p>
-                        <a href="{{ url_for('set_noffles') }}" class="btn btn-close-modal">Set my Noffles</a>
+                        <a role="button" href="{{ url_for('set_noffles') }}" class="btn btn-close-modal">Set my Noffles</a>
                     </div>
                 </div>
             {% endif %}

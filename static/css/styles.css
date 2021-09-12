@@ -26,10 +26,21 @@ a {
     text-decoration: none !important;
 }
 
+.mp-0 {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.tap-target {
+    min-height: 48px;
+    min-width: 48px;
+}
+
 /* ----------------------------------------------------------------------------------- Navbar and Footer */
 
 
-nav, footer {
+nav,
+footer {
     color: black !important;
     background-color: var(--alto);
     z-index: 3;
@@ -61,6 +72,54 @@ footer {
     justify-content: right;
 }
 
+/* ----------------------------------------------------------------------------------- Landing Page */
+
+/* Photo by Georgie Cobbs on Unsplash */
+#hero-image {
+    background-image: url("../img/hero_image.jpg");
+    background-size: cover;
+    height: 50vh;
+    width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    background-position: bottom;
+    background-color: var(--pastel-green);
+}
+
+div.hero-text-overlay {
+    background-color: rgba(227, 241, 212, 0.5);
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 20%;
+    margin-left: auto;
+    margin-right: auto;
+    height: 140px;
+    width: 50%;
+    padding: 20px;
+}
+
+h1.hero-heading,
+h4.hero-text {
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
+}
+
+h4.hero-text {
+    margin-top: 10px;
+}
+
+h2.about-heading {
+    padding: 20px;
+}
+
+p.about-text {
+    padding: 0 40px 0 40px;
+}
+
 /* ----------------------------------------------------------------------------------- Cards */
 
 .noffle-card {
@@ -74,6 +133,17 @@ footer {
     overflow-y: scroll;
 }
 
+.office-card {
+    height: 200px;
+    overflow-y: scroll;
+    margin-bottom: 10px;
+}
+
+.office-card-body {
+    padding-top: 5px !important;
+    padding-bottom: 10px !important;
+}
+
 .card-img-top {
     max-height: 100px;
     margin: auto;
@@ -85,7 +155,8 @@ footer {
 }
 
 .card-header {
-    height: 75px;
+    height: fit-content;
+    height: -moz-fit-content;
 }
 
 /* ----------------------------------------------------------------------------------- Login and Register Forms */
@@ -104,7 +175,8 @@ footer {
     text-decoration: underline !important;
 }
 
-input, textarea {
+input,
+textarea {
     background-color: var(--gallery) !important;
 }
 
@@ -112,18 +184,24 @@ input, textarea {
     border: 2px solid black !important;
 }
 
-.center-icon {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+/* ----------------------------------------------------------------------------------- Avatars */
+
+.avatar-profile {
+    height: 150px;
+    margin-left: 30%;
+}
+
+.avatar-office {
+    max-height: 75px;
+    margin-left: 25%;
 }
 
 /* ----------------------------------------------------------------------------------- Hover, Focus */
 
 .form-control:focus,
 .form-control:hover {
-  border-color: var(--alto) !important;
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(0, 0, 0, 0.6) !important;
+    border-color: var(--alto) !important;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(0, 0, 0, 0.6) !important;
 }
 
 .nav-item:focus,
@@ -148,11 +226,13 @@ a:focus {
     border: 2px solid black !important;
 }
 
-.btn-close-modal, .btn-blue {
+.btn-close-modal,
+.btn-blue {
     background-color: var(--pastel-blue) !important;
 }
 
-.btn-delete, .btn-red {
+.btn-delete,
+.btn-red {
     background-color: var(--pastel-red) !important;
 }
 
@@ -189,5 +269,26 @@ a:focus {
 @media(max-width:992px){
     .form-area {
         max-width: 90%;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    div.hero-text-overlay {
+        width: 30%;
+    }
+}
+
+@media screen and (min-width: 576px) {
+    #hero-image {
+        height: 60vh;
+    }
+
+    div.hero-text-overlay {
+        height: 160px;
+        width: 40%;
+    }
+
+    h1.hero-heading {
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
     }
 }

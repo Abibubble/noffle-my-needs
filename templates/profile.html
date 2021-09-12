@@ -5,41 +5,48 @@
     <hr>
     <div class="row">
         <div class="col-5 border p-4">
-            <div class="row">
-                <form class="col-12" method="POST" action="{{ url_for('register') }}">
-                    <i class="fas fa-user-plus"></i>
-                    <label for="username">Username</label>
-                    <br>
-                    <input class="mb-3 w-100" value="{{ user.username }}" id="username" name="username" type="text" minlength="5" maxlength="15" pattern="^[a-zA-Z0-9!-.@_]{5,15}$" required>
-                    <br>
-                    <i class="fas fa-user-lock"></i>
-                    <label for="old_password">Old Password</label>
-                    <br>
-                    <input class="mb-3 w-100" id="old_password" name="old_password" type="password" minlength="5" maxlength="20" pattern="^[a-zA-Z0-9!£%~#$%&()*+,-./?@^_~]{5,15}$" required>
-                    <br>
-                    <i class="fas fa-user-lock"></i>
-                    <label for="password">New Password</label>
-                    <br>
-                    <input class="mb-3 w-100" id="password" name="password" type="password" minlength="5" maxlength="20" pattern="^[a-zA-Z0-9!£%~#$%&()*+,-./?@^_~]{5,15}$" required>
-                    <br>
-                    <i class="fas fa-user-lock"></i>
-                    <label for="password_confirm">Confirm New Password</label>
-                    <br>
-                    <input class="mb-3 w-100" id="password_confirm" name="password_confirm" type="password" minlength="5" maxlength="20" pattern="^[a-zA-Z0-9!£%~#$%&()*+,-./?@^_~]{5,15}$" required>
-                    <br>
-                    <i class="fas fa-genderless"></i>
-                    <label for="pronouns">Pronouns (format she/her, he/him, they/them)</label>
-                    <br>
-                    <input class="mb-3 w-100" value="{{ user.pronouns }}" id="pronouns" name="pronouns" type="text" minlength="5" maxlength="40" required>
-                    <br>
-                    <i class="fas fa-image"></i>
-                    <label for="image_no">Image Number</label>
-                    <br>
-                    <input class="mb-3 w-100" value="{{ user.image_no }}" id="image_no" name="image_no" type="number" required>
-                    <br>
-                    <button type="submit" class="btn btn-green">
-                        Update Details
-                    </button>
+            <div class="login-form profile-login-form rounded mx-auto mb-2">
+                <form method="POST" action="{{ url_for('register') }}">
+                    <div class="form-group row mb-4">
+                        <div class="col-2"><i class="fas fa-2x fa-user"></i></div>
+                        <label for="username" class="sr-only">Username</label>
+                        <div class="col-10">
+                            <input type="text" class="form-control" name="username" id="username" minlength="5" maxlength="15" 
+                                pattern="^[a-zA-Z0-9!-.@_]{5,15}$" placeholder="Username" required>
+                        </div>
+                    </div>
+                    <div class="form-group row mb-2">
+                        <div class="col-2"><i class="fas fa-2x fa-key"></i></div>
+                        <label for="password" class="sr-only">Password</label>
+                        <div class="col-10">
+                            <input type="password" name="password" id="password" minlength="5" maxlength="20" 
+                                pattern="^[a-zA-Z0-9!£%~#$%&()*+,-./?@^_~]{5,15}$" class="form-control" placeholder="Password" required>
+                        </div>
+                    </div>
+                    <div class="form-group row mb-2">
+                        <div class="col-2"><i class="fas fa-2x fa-key"></i></div>
+                        <label for="password_confirm" class="sr-only">Confirm Password</label>
+                        <div class="col-10">
+                            <input id="password_confirm" name="password_confirm" placeholder="Confirm Password" class="form-control" type="password" minlength="5" maxlength="20" pattern="^[a-zA-Z0-9!£%~#$%&()*+,-./?@^_~]{5,15}$" required>
+                        </div>
+                    </div>
+                    <div class="form-group row mb-2">
+                        <div class="col-2"><i class="fas fa-2x fa-genderless"></i></div>
+                        <label for="pronouns" class="sr-only">Pronouns</label>
+                        <div class="col-10">
+                            <input id="pronouns" name="pronouns" type="text" minlength="5" maxlength="40" class="form-control" placeholder="Pronouns - (she/her, he/him, they/them)" required>
+                        </div>
+                    </div>
+                    <div class="form-group row mb-2">
+                        <div class="col-2"><i class="fas fa-2x fa-image"></i></div>
+                        <label for="image_no" class="sr-only">Image Number</label>
+                        <div class="col-10">
+                            <input id="image_no" name="image_no" placeholder="Avatar image number" type="number" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <button name="login" id="login" class="btn login-btn btn-green mt-3" type="submit">Update Details</button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -47,7 +54,7 @@
             {% if noffles[0] %}
                 <div class="row">
                     {% for noffle in noffles %}
-                        <div class="col-sm-12 col-md-6 mb-3">
+                        <div class="col-sm-12 col-md-6 mb-2">
                             <div class="card noffle-card">
                                 <div class="card-body {% if noffle.permanent %}btn-yellow{% elif noffle.name=='Panic button'%}btn-red{% else %}btn-blue{% endif %}">
                                     <div class="row card-title">

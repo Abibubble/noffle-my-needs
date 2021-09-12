@@ -121,7 +121,7 @@ def register():
                         request.form.get("username").capitalize()))
         return render_template("set_noffles.html", noffles=noffles, user=user)
 
-    return render_template('register.html')
+    return render_template('register.html', user=user)
 
 
 @app.route("/profile/<username>", methods=["GET", "POST"])
@@ -149,6 +149,45 @@ def profile(username):
         return redirect(url_for("login"))
 
     return redirect(url_for("landing"))
+
+
+@app.route('/update_user/<user_id>', methods=["GET", "POST"])
+def update_user(user_id):
+    # Find the logged in user
+    try:
+        user = mongo.db.users.find_one({"_id": ObjectId(user_id)})
+    except BaseException:
+        user = mongo.db.users.find()
+        flash("You need to be logged in to access this page")
+        return redirect(url_for("login"))
+    noffles = []
+    try:
+        for noffle in user["noffles"]:
+            my_noffles = mongo.db.noffles.find_one({"_id": ObjectId(noffle)})
+            noffles.append(my_noffles)      
+    except BaseException:
+        noffles = []
+
+    if request.method == 'POST':
+        # Set variables
+        username = request.form.get("username").lower()
+        password = request.form.get("password")
+        password_confirm = request.form.get("password_confirm")
+
+        if password != password_confirm:
+            flash("Oh no! Your passwords don't match")
+            return redirect(url_for("profile", username=username))
+
+        update_user = {
+            "username": request.form.get("username").lower(),
+            "password": generate_password_hash(password),
+            "pronouns": request.form.get("pronouns").lower(),
+            "image_no": request.form.get("image_no"),
+        }
+        mongo.db.users.update_one(
+            {"_id": ObjectId(user["_id"])}, {'$set': update_user})
+
+    return redirect(url_for("profile", username=username))
 
 
 @app.route('/office')

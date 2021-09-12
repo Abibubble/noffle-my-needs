@@ -471,23 +471,23 @@ The W3C Markup Validator, W3C CSS Validator and JSHint were used to validate the
 
 ##### Easily navigate the site
 
-* How
+* The navigation bar is easy to understand and always there for ease of navigation on the site. The logo at the top left of the page takes the user back to the home page at any given point.
 
 ##### Intuitively and easily understand what to do
 
-* How
+* Upon landing on the site, a user is greated and can clearly see what the site is about by the small description under the 'About Noffle My Needs' heading. Clicking on the button below this section takes a user directly to where they need to by in order to begin selecting their Noffles :- 'Set My Noffles' page. Each page and each step taken by a user, leeds a user through the site to the appropriate pages.
 
 ##### Register for an account
 
-* How
+* A user is able to register an acount by clicking the 'Register' link in the Menu, or by clicking the Register button at the bottom of the landing page. A form will be presented to the user to complete and a message is displayed to welcome the new user if everything was successful.
 
 ##### Set my Noffles
 
-* How
+* Upon registration or loggingd in, a user is immediately taken to the 'Set My Noffles' page. Here, the user can click on as many Noffles as they wish, along with setting them to 'private' mode. In this case the Noffles are only diplayed to those with administration rights.
 
 ##### Get visual feedback when an action on the site is completed
 
-* How
+* 
 
 #### Returning Visitor
 

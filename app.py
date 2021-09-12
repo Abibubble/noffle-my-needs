@@ -255,9 +255,7 @@ def manage_users(name=None):
 
     noffles = mongo.db.noffles.find()
     users = mongo.db.users.find()
-    return render_template(
-        'manage_users.html', name=name, noffles=noffles,
-        users=users, user=user)
+    return render_template('register.html', user=user, noffles=noffles)
 
 
 @app.route("/admin_toggle/<user_id>")
@@ -348,6 +346,50 @@ def add_noffle(noffle_id):
         'set_noffles.html', noffles=noffles, user=user)
 
 
+@app.route('/new_noffle', methods=["GET", "POST"])
+def new_noffle():
+    # Find if a user is logged in for navlinks
+    try:
+        user = mongo.db.users.find_one({"username": session["user"]})
+    except BaseException:
+        user = mongo.db.users.find()
+        flash("You need to be logged in to access this page")
+        return redirect(url_for("login"))
+
+    # Show users to admin only
+    if user["is_admin"] is False:
+        flash("You need to be an admin to access this page")
+        return redirect(url_for("office"))
+
+    noffles = mongo.db.noffles.find()
+
+    if request.method == 'POST':
+        # Set variables for form
+        noffle_name = request.form.get("noffle.name").lower()
+        # Check if the username already exists in database
+        existing_noffle = mongo.db.noffles.find_one({"name": noffle_name})
+
+        if existing_noffle:
+            flash(f'Noffle {noffle.name} already exists')
+            return redirect(url_for("manage_noffles"))
+
+        new_noffle_addition = {
+            "name": noffle_name,
+            "description": request.form.get("description"),
+            "permanent": request.form.get("permanent"),
+            "private": request.form.get("private"),
+            "icon": request.form.get("icon")
+        }
+        mongo.db.noffles.insert_one(new_noffle_addition)
+
+        # Put the new user into 'session' cookie
+        flash(f'Noffle {noffle.name} has been added')
+        return render_template("manage_noffles.html", noffles=noffles, user=user)
+
+    return render_template("manage_noffles.html", noffles=noffles, user=user)
+
+
+
 @app.route('/delete_account/<username>')
 def delete_account(username):
     # Find if a user is logged in for navlinks
@@ -368,4 +410,4 @@ def delete_account(username):
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
-            debug=False)
+            debug=True)

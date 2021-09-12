@@ -110,27 +110,6 @@ p.about-text {
     padding: 0 40px 0 40px;
 }
 
-@media screen and (min-width: 576px) {
-    #hero-image {
-        height: 60vh;
-    }
-
-    div.hero-text-overlay {
-        height: 160px;
-        width: 40%;
-    }
-
-    h1.hero-heading {
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
-    }
-  }
-
-  @media screen and (min-width: 1024px) {
-    div.hero-text-overlay {
-        width: 30%;
-    }
-  }
-
 /* ----------------------------------------------------------------------------------- Cards */
 
 .noffle-card {
@@ -149,6 +128,12 @@ p.about-text {
 .user-card {
     height: 360px;
     overflow-y: scroll;
+}
+
+.office-card {
+    height: 180px;
+    overflow-y: scroll;
+    margin-bottom: 10px;
 }
 
 .card-img-top {
@@ -254,8 +239,29 @@ a:focus {
 
 /* ----------------------------------------------------------------------------------- Media Queries */
 
+@media screen and (min-width: 1024px) {
+    div.hero-text-overlay {
+        width: 30%;
+    }
+}
+
 @media(max-width:992px) {
     .login-form {
         max-width: 90%;
+    }
+}
+
+@media screen and (min-width: 576px) {
+    #hero-image {
+        height: 60vh;
+    }
+
+    div.hero-text-overlay {
+        height: 160px;
+        width: 40%;
+    }
+
+    h1.hero-heading {
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
     }
 }

@@ -125,19 +125,38 @@ In addition to the First Time and Returning Visitor Goals, as an administrator o
 
 ### Color Scheme
 
-* WHAT COLORS USED AND WHY
+* We have used a pastel color scheme for the site, so as to be fully WCAG AAA compliant with color contrasts throughout the site.
+* We created CSS variables and our own custom button classes to ensure our site stayed within the color scheme.
+* All text is black, or dark brown, to ensure that users don't have difficulty with color contrasts.
+* We checked all color contrasts with [WebAIM's Contrast Checker](https://webaim.org/resources/contrastchecker/).
+* We checked this site on [Toptal Color Blind Filter](https://www.toptal.com/designers/colorfilter/) to ensure that color blind users wouldn't have difficulty.
+* The colors we used are as follows:
+  * alto - #D0D0D0
+  * gallery - #ECECEC
+  * wild-sand - #F5F5F5
+  * pastel-yellow - #FEF3D2
+  * pastel-red - #FBE6E6
+  * pastel-green - #E3F1D4
+  * pastel-blue - #D7EFF5
+
+![Colors used in this site](static/docs/img/colors.png)
 
 ### Typography
 
-* WHAT FONT AND WHY
+* After a lengthy discussion, we decided to stick with the HTML standard fonts.
+* This is because they're sans-serif fonts, which are easy to read for dyslexic and visually impaired users.
+* As the standard HTML font size is 16px, we kept it at that, ensuring to not have any fonts smaller than that, to aid visually impaired users. The recommended smallest font size for accessible websites is 12px, so we're happy being above that.
 
 ### Imagery
 
-* WHAT IMAGES ARE USED AND WHY
+* The icons used are simple icons from Font Awesome, to add meaning to items.
+* These icons do not convey any meaning that text doesn't also convey, so they didn't require aria-labels.
+* The avatars were chosen so as to be gender-less, age-less, race-less, and non-human, so as to avoid excluding any users.
+* The avatars are simple designs of basic colors, so as to not be too jarring for users with ADHD.
 
 ### Wireframes
 
-[Here are the wireframes for desktop, mobile and tablet for this project](static/docs/img/wireframes.pdf).
+[Here are the wireframes for desktop, mobile and tablet for this project](static/docs/wireframes.pdf).
 
 ### User Journey
 
@@ -145,29 +164,12 @@ In addition to the First Time and Returning Visitor Goals, as an administrator o
 
 ### Features
 
-* Update a Noffle
-
-![Update a Noffle](static/docs/img/noffle.png)
-
+* Update a Noffle.
 * Create and Delete a profile.
-
-![Create and delete a profile](static/docs/img/delete-profile.png)
-
 * Create, Edit and Delete a Noffle for admin users only.
-
-![Create, Edit and Delete a Noffle](static/docs/img/noffless.png)
-
 * Edit admin rights and delete a user for admin users only.
-
-![Edit and Delete a user](static/docs/img/users.png)
-
 * Confirm to delete modal.
-
-![Confirm deletion modal](static/docs/img/modal.png)
-
 * Auto-updating copyright year.
-
-![Copyright in footer](static/docs/img/copyright.png)
 
 ### Future Features
 
@@ -177,7 +179,7 @@ In addition to the First Time and Returning Visitor Goals, as an administrator o
 
 ### Audio
 
-* No audio is used on this site.
+* No audio is used on this site, so that users who are hard of hearing are not missing out on any features.
 
 ### Navigation bar
 
@@ -194,23 +196,6 @@ The navigation bar changes depending on user status and screen size:
 | Manage Noffles | &#10060; | &#10060; | &#9989; |
 | Manage Users | &#10060; | &#10060; | &#9989; |
 | Log Out | &#10060; | &#9989; | &#9989; |
-
-* Logged in
-
-![Logged in navigation bar](static/docs/img/nav-logged-in.png)
-
-* Logged out
-
-![Logged out navigation bar](static/docs/img/nav-logged-out.png)
-
-* An admin
-
-![Admin navigation bar](static/docs/img/nav-admin.png)
-
-* On small screen sizes
-
-![Mobile navigation burger icon](static/docs/img/nav-mobile-burger.png)
-![Mobile navigation bar](static/docs/img/nav-mobile.png)
 
 [Back to Top](#title)
 
@@ -231,6 +216,7 @@ MongoDB was used to store data for this site in a database. The data has been se
 | pronouns| string |    |
 | is_admin | boolean |    |
 | noffles | array | noffles._id |
+| panic | boolean |    |
 
 | Noffles |    |
 |---|---|
@@ -298,9 +284,9 @@ MongoDB was used to store data for this site in a database. The data has been se
 
 [Font Awesome](https://fontawesome.com/) was used on all pages to add the icons.
 
-#### Google Fonts
+#### Adobe Online
 
-[Google Fonts](https://fonts.google.com/) was used to select all the fonts on the site.
+[Adobe Online](https://spark.adobe.com/tools/remove-background) was used to make the favicon image background transparent.
 
 #### Favicon.io
 
@@ -474,10 +460,8 @@ The W3C Markup Validator, W3C CSS Validator and JSHint were used to validate the
 4. JSHint GitPod Extension
     * [JSHint Extension](https://open-vsx.org/vscode/item?itemName=dbaeumer.jshint)
 
-5. PEP8 Online
-    * [PEP8 Online](http://pep8online.com/)
-
-    ![Image of PEP8 Online results](static/docs/img/pep8.png)
+5. PyLint Extension
+    * [PyLint Extension](https://pypi.org/project/pylint/)
 
 [Back to Top](#title)
 
@@ -618,7 +602,7 @@ Friends, family members, and other developers were asked to review the site and 
 
 ### Known Bugs
 
-* ANY BUGS LEFT IN THE CODE AFTER FINAL DEPLOYMENT, FOR FIXING IN FUTURE RELEASES
+* A11y Allies are unaware of any bugs left in this code. If you find any, please let us know at one of our GitHubs, which you can find below in [Credits](#credits)
 
 ### Lighthouse Testing
 
@@ -659,24 +643,28 @@ We tested this website using DevTools Lighthouse feature, and got these results:
 * [Font Awesome](https://fontawesome.com/): Library of icons used for social media and download links.
 * [Autoprefixer CSS online](https://autoprefixer.github.io/): To aid in the CSS prefixing.
 * [Boostrap](https://getbootstrap.com/): Throughout the site, to create a beautiful responsive site, without taking too much time.
-* ANY CODE WE USED FROM OTHER PEOPLE OR SITES AND WHO IT'S FROM, INCLUDING CREDITING ANYONE WHO HELPED ME FIX BUGS
-
-### Audio Credit
-
-* WHO OWNS THE AUDIO AND WHO EDITED THE AUDIO
 
 ### Content
 
-* WHO OWNS THE CONTENT OF THE SITE
+* All content was created by the [Code Institute](https://codeinstitute.net/) September 2021 Hackathon team A11y Allies.
 
 ### Media
 
-* WHO OWNS ANY MEDIA ON THE SITE, SUCH AS IMAGES AND VIDEOS
+* [Georgie Cobbs on Unsplash](https://unsplash.com/photos/bKjHgo_Lbpo)
+* The user avatars were found on [Shutterstock](https://www.shutterstock.com/image-vector/abstract-characters-geometric-comic-creature-emotions-1953566236), which we have an account for, and thus we able to get commercial licence to use the images.
+
+### Research
+
+* [The A11y Project](https://www.a11yproject.com/)
+* [Daniel Britton - Dyslexia](http://danielbritton.info/dyslexia)
+* [User Zoom](https://www.userzoom.com/ux-library/five-ways-to-make-usable-websites-for-people-with-dyslexia/)
+* [Allana Bailey](https://allanabailey.github.io/color-blind-project1/)
+* [ERC Dancing](https://ercdancing.maynoothuniversity.ie/)
 
 ### Acknowledgements
 
 * The team at [Code Institute](https://codeinstitute.net/), for teaching me the necessary skills to create this site.
-* The Hackathon team A11y Allies, who created this page. This team consists of :
+* The [Code Institute](https://codeinstitute.net/) Hackathon team A11y Allies, who created this page. This team consists of :
   * [Abi Harrison](https://github.com/Abibubble)
   * [Andrew Dempsey](https://github.com/andrewdempsey2018)
   * [Carla Buongiorno](https://github.com/CarlaBuongiorno)

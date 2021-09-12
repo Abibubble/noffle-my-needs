@@ -285,6 +285,14 @@ def delete_user(user_id):
     return redirect(url_for("manage_users"))
 
 
+@app.route("/delete_noffle/<noffle_id>")
+def delete_noffle(noffle_id):
+    # Allow admin user to delete noffles
+    mongo.db.noffles.remove({"_id": ObjectId(noffle_id)})
+    flash("Noffle Successfully Deleted")
+    return redirect(url_for("manage_noffles"))
+
+
 @app.route('/set_noffles')
 def set_noffles(name=None):
     # Find if a user is logged in

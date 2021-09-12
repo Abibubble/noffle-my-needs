@@ -159,23 +159,21 @@ def office(name=None):
         flash("You need to be logged in to access this page")
         return redirect(url_for("login"))
 
-    
-
     users = mongo.db.users.find()
     noffles = mongo.db.noffles.find()
+    
     noffle_dict = {}
-
     for user in users:
         noffles_list = []
         for noffle in user['noffles']:
             my_noffles = mongo.db.noffles.find_one({"_id": ObjectId(noffle)})
-            noffles_list.append(my_noffles['icon'])
+            noffles_list.append(my_noffles)
         noffle_dict[str(user['username'])] = noffles_list
 
     users = mongo.db.users.find()
     noffles = mongo.db.noffles.find()
     return render_template(
-        'office.html', name=name, noffles=noffles, user=user, users=users, noffle_dict=noffle_dict)
+        'office.html', name=name, noffles=noffles, user=user, users=users, noffle_dict=noffle_dict) # Double check if user is being used somewhere on the office page
 
 
 @app.route('/manage_noffles')

@@ -98,6 +98,10 @@ footer {
     padding: 30px;
 }
 
+.profile-login-form {
+    max-width: 100%;
+}
+
 .link-register {
     text-decoration: underline !important;
 }

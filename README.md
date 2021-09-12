@@ -671,7 +671,7 @@ We tested this website using DevTools Lighthouse feature, and got these results:
 
 ### Media
 
-* WHO OWNS ANY MEDIA ON THE SITE, SUCH AS IMAGES AND VIDEOS
+* [Georgie Cobbs on Unsplash](https://unsplash.com/photos/bKjHgo_Lbpo)
 
 ### Acknowledgements
 

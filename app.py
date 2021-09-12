@@ -214,7 +214,7 @@ def office(name=None):
     users = mongo.db.users.find()
     noffles = mongo.db.noffles.find()
     return render_template(
-        'office.html', name=name, noffles=noffles, user=user, users=users, noffle_dict=noffle_dict) # Double check if user is being used somewhere on the office page
+        'office.html', name=name, noffles=noffles, user=user, users=users, noffle_dict=noffle_dict)
 
 
 @app.route('/manage_noffles')
@@ -297,7 +297,6 @@ def set_noffles(name=None):
 
     noffles = mongo.db.noffles.find()
     user_noffles = user['noffles']
-    print(f"efewf{set_noffles}")
     
     return render_template(
         'set_noffles.html', name=name, noffles=noffles, user=user, user_noffles=user_noffles)

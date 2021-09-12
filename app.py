@@ -131,6 +131,8 @@ def profile(username):
         user = mongo.db.users.find_one({"username": session["user"]})
     except BaseException:
         user = mongo.db.users.find()
+        flash("You need to be logged in to access this page")
+        return redirect(url_for("login"))
         
     noffles = []
     try:
@@ -140,7 +142,6 @@ def profile(username):
     except BaseException:
         noffles = []
     if session["user"]:
-        print(noffles)
         return render_template(
             "profile.html", noffles=noffles, user=user)
     else:

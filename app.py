@@ -46,12 +46,12 @@ def login():
                 return redirect(url_for('set_noffles'))
             else:
                 # Invalid password match
-                flash("Incorrect Username and/or Password")
+                flash("Incorrect Username and/or Password", 'error')
                 return redirect(url_for('login'))
 
         else:
             # Username does not exist
-            flash("Incorrect Username and/or Password")
+            flash("Incorrect Username and/or Password", 'error')
             return render_template("login.html")
 
     return render_template("login.html")
@@ -95,11 +95,11 @@ def register():
         existing_user = mongo.db.users.find_one({"username": username})
 
         if existing_user:
-            flash("Username already exists")
+            flash("Username already exists", 'error')
             return redirect(url_for("register"))
 
         if password != password_confirm:
-            flash("Oh no! Your passwords don't match")
+            flash("Oh no! Your passwords don't match", 'error')
             return redirect(url_for("register"))
 
         register = {
@@ -131,7 +131,7 @@ def profile(username):
         user = mongo.db.users.find_one({"username": session["user"]})
     except BaseException:
         user = mongo.db.users.find()
-        flash("You need to be logged in to access this page")
+        flash("You need to be logged in to access this page", 'error')
         return redirect(url_for("login"))
         
     noffles = []
@@ -145,7 +145,7 @@ def profile(username):
         return render_template(
             "profile.html", noffles=noffles, user=user)
     else:
-        flash("You need to be logged in to access this page")
+        flash("You need to be logged in to access this page", 'error')
         return redirect(url_for("login"))
 
     return redirect(url_for("landing"))
@@ -158,7 +158,7 @@ def update_user(user_id):
         user = mongo.db.users.find_one({"_id": ObjectId(user_id)})
     except BaseException:
         user = mongo.db.users.find()
-        flash("You need to be logged in to access this page")
+        flash("You need to be logged in to access this page", 'error')
         return redirect(url_for("login"))
     noffles = []
     try:
@@ -175,7 +175,7 @@ def update_user(user_id):
         password_confirm = request.form.get("password_confirm")
 
         if password != password_confirm:
-            flash("Oh no! Your passwords don't match")
+            flash("Oh no! Your passwords don't match", 'error')
             return redirect(url_for("profile", username=username))
 
         update_user = {
@@ -197,7 +197,7 @@ def office(name=None):
         user = mongo.db.users.find_one({"username": session["user"]})
     except BaseException:
         user = mongo.db.users.find()
-        flash("You need to be logged in to access this page")
+        flash("You need to be logged in to access this page", 'error')
         return redirect(url_for("login"))
 
     users = mongo.db.users.find()
@@ -214,12 +214,12 @@ def manage_noffles(name=None):
         user = mongo.db.users.find_one({"username": session["user"]})
     except BaseException:
         user = mongo.db.users.find()
-        flash("You need to be logged in to access this page")
+        flash("You need to be logged in to access this page", 'error')
         return redirect(url_for("login"))
 
     # Show categories to admin user
     if user["is_admin"] is False:
-        flash("You need to be an admin to access this page")
+        flash("You need to be an admin to access this page", 'error')
         return redirect(url_for("office"))
     else:
         noffles = mongo.db.noffles.find()
@@ -235,12 +235,12 @@ def manage_users(name=None):
         user = mongo.db.users.find_one({"username": session["user"]})
     except BaseException:
         user = mongo.db.users.find()
-        flash("You need to be logged in to access this page")
+        flash("You need to be logged in to access this page", 'error')
         return redirect(url_for("login"))
 
     # Show users to admin only
     if user["is_admin"] is False:
-        flash("You need to be an admin to access this page")
+        flash("You need to be an admin to access this page", 'error')
         return redirect(url_for("office"))
 
     noffles = mongo.db.noffles.find()
@@ -282,7 +282,7 @@ def set_noffles(name=None):
         user = mongo.db.users.find_one({"username": session["user"]})
     except BaseException:
         user = mongo.db.users.find()
-        flash("You need to be logged in to access this page")
+        flash("You need to be logged in to access this page", 'error')
         return redirect(url_for("login"))
 
     noffles = mongo.db.noffles.find()
@@ -299,7 +299,7 @@ def add_noffle(noffle_id):
         user = mongo.db.users.find_one({"username": session["user"]})
     except BaseException:
         user = mongo.db.users.find()
-        flash("You need to be logged in to access this page")
+        flash("You need to be logged in to access this page", 'error')
         return redirect(url_for("login"))
 
     # Find noffle and user
@@ -337,7 +337,7 @@ def delete_account(username):
         user = mongo.db.users.find_one({"username": session["user"]})
     except BaseException:
         user = mongo.db.users.find()
-        flash("You need to be logged in to access this page")
+        flash("You need to be logged in to access this page", 'error')
         return redirect(url_for("login"))
 
     # Allow user to delete their own account

@@ -171,6 +171,19 @@ a:focus {
     z-index: 2;
 } 
 
+/* ----------------------------------------------------------------------------------- Flash messages */
+
+.flash-message {
+    border: 1px solid black;
+    padding: 5px;
+    background-color: var(--pastel-yellow) !important;
+    text-align: center;
+}
+
+.error {
+    color: red
+}
+
 /* ----------------------------------------------------------------------------------- Media Queries */
 
 @media(max-width:992px){

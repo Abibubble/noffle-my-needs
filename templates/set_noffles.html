@@ -32,16 +32,11 @@
                                 </div>
                                 <hr>
                                 <p class="card-text">{{ noffle.description }}</p>
-                                <div class="row">
-                                    <div class="col-12 mt-1">
-                                    {% if noffle.private %}
-                                        <input id="private" type="checkbox" class="tap-target" data-toggle="toggle" checked>
-                                    {% else %}
-                                        <input id="private" type="checkbox" class="tap-target" data-toggle="toggle">
-                                    {% endif %}
-                                    <label for="private">Private</label>
-                                    </div>
-                                </div>
+                                {% if noffle.private %}
+                                    <p class="card-text">This Noffle is private</p>
+                                {% else %}
+                                    <p class="card-text">This Noffle is public</p>
+                                {% endif %}
                             </div>
                         </div>
                     </a>

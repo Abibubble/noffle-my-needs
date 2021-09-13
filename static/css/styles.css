@@ -126,6 +126,7 @@ p.about-text {
     height: 260px;
     margin-bottom: 10px;
     overflow-y: scroll;
+    border-radius: 5px;
 }
 
 .user-card {
@@ -183,6 +184,19 @@ textarea {
 
 .form-control {
     border: 2px solid black !important;
+}
+
+.center-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ----------------------------------------------------------------------------------- Profile */
+
+.profile-form-area {
+    border: 2px solid black;
+    padding: 30px;
 }
 
 /* ----------------------------------------------------------------------------------- Carousel */

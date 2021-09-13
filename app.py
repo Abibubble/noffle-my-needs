@@ -529,13 +529,23 @@ def delete_account(username):
 # 404 page not found error
 @app.errorhandler(404)
 def not_found_error(error):
-    return render_template('404.html', error=error), 404
+    # Find if a user is logged in for navlinks
+    try:
+        user = mongo.db.users.find_one({"username": session["user"]})
+    except BaseException:
+        user = mongo.db.users.find()
+    return render_template('404.html', error=error, user=user), 404
 
 
 # 500 internal server error
 @app.errorhandler(500)
 def internal_error(error):
-    return render_template('500.html', error=error), 500
+    # Find if a user is logged in for navlinks
+    try:
+        user = mongo.db.users.find_one({"username": session["user"]})
+    except BaseException:
+        user = mongo.db.users.find()
+    return render_template('500.html', error=error, user=user), 500
 
 
 if __name__ == "__main__":

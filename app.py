@@ -357,10 +357,11 @@ def set_noffles(name=None):
 
     user_noffles = user['noffles']
     noffles = mongo.db.noffles.find()
+
+    # Separete the noffles between permanent em temporary
     permanent_noffle = []
     temporary_noffle = []
     for noffle in noffles:
-        print(noffle['name'])
         if noffle['permanent'] or noffle['name'] == 'Panic button':
             permanent_noffle.append(noffle)
         else:

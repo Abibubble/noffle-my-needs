@@ -73,14 +73,12 @@
                                         <h5>{{ noffle.name }}</h5>
                                     </div>
                                 </div>
-                                <hr>
                                 <p class="card-text">{{ noffle.description }}</p>
                                 {% if noffle.private %}
                                     <p class="card-text">This Noffle is private</p>
                                 {% else %}
                                     <p class="card-text">This Noffle is public</p>
                                 {% endif %}
-                                <label for="private-{{ noffle._id|string }}">Private</label>
                             </div>
                         </div>
                     </a>

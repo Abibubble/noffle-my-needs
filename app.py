@@ -383,7 +383,7 @@ def add_noffle(noffle_id):
 
     # Check if noffle is selected, and add it to profile if it isn't
     if noffle_id in user['noffles']:
-        flash(f'Noffle {current_noffle["name"]} deleted')
+        flash(f'Noffle {current_noffle["name"]} removed from your Noffles')
         if current_noffle["name"] == 'Panic button':
             mongo.db.users.update({"_id": ObjectId(user["_id"])},
                                   {"$set": {
@@ -395,7 +395,7 @@ def add_noffle(noffle_id):
                               }})
         return redirect(url_for("set_noffles", noffles=noffles, user=user))
     else:
-        flash(f'Noffle {current_noffle["name"]} added')
+        flash(f'Noffle {current_noffle["name"]} added to your Noffles')
         if current_noffle["name"] == 'Panic button':
             mongo.db.users.update({"_id": ObjectId(user["_id"])},
                                   {"$set": {
@@ -474,4 +474,4 @@ def delete_account(username):
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
-            debug=False)
+            debug=True)

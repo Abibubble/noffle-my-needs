@@ -24,14 +24,14 @@
                             pattern="^[a-zA-Z0-9!£%~#$%&()*+,-./?@^_~]{5,15}$" class="form-control" placeholder="Password" required>
                     </div>
                 </div>
-                <div class="row">
-                    <label class="offset-2 col-10 show-password" for="show-password">
-                        <input type="checkbox" id="show-password" onclick="showPassword()">
-                        <span>Show Password</span>
-                    </label>
+                <div class="form-group row mb-2">
+                    <div class="col-2 center-icon">
+                        <input class="tap-target" type="checkbox" id="show-password" onclick="showPassword()">
+                    </div>
+                    <label class="col-10 show-password mp-0 mt-4" for="show-password"><p>Show Password</p></label>
                 </div>
                 <div class="row">
-                    <button name="login" id="login" class="btn login-btn btn-green mt-3" type="submit">Log In</button>
+                    <button name="login" id="login" class="btn login-btn btn-green mt-3 tap-target" type="submit">Log In</button>
                 </div>
             </form>
         </div>

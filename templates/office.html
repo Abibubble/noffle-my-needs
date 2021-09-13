@@ -17,7 +17,9 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-12">
-                                        <h5>{{ user.first_name|capitalize }} {{ user.last_name|capitalize }} ({{ user.pronouns }})</h5>
+                                        <h3 class="card-heading-title">
+                                            {{ user.first_name|capitalize }} {{ user.last_name|capitalize }} ({{ user.pronouns }})
+                                        </h3>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -37,7 +39,9 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content {% if user.panic == true %}btn-red{% else %}btn-green{% endif %}">
                             <div class="modal-header">
-                                <h4 class="modal-title" id="user-modal-{{ user._id }}-label">{{ user.first_name|capitalize }} {{ user.last_name|capitalize }} ({{ user.pronouns }})</h4>
+                                <h4 class="modal-title" id="user-modal-{{ user._id }}-label">
+                                    {{ user.first_name|capitalize }} {{ user.last_name|capitalize }} ({{ user.pronouns }})
+                                </h4>
                                 <button type="button" class="close btn-close-modal tap-target" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true"><i class="fas fa-2x fa-times"></i></span>
                                 </button>
@@ -50,18 +54,18 @@
                                 {% endif %}
                                 <p><b>Username:</b> {{ user.username }}</p>
                                 <b>Noffles:</b>
-                                    {% for noffle in noffle_dict[user.username] %}
-                                        <div class="card mt-2 p-3 border-black">
-                                            <h6>
-                                                <i class="{{ noffle['icon'] }} fa-2x noffle-icon"></i>
-                                                <b>{{ noffle['name'] }}</b>
-                                            </h6>
-                                            <p>{{noffle['description']}}</p>
-                                        </div>
-                                    {% endfor %}
+                                {% for noffle in noffle_dict[user.username] %}
+                                    <div class="card mt-2 p-3 border-black">
+                                        <h6>
+                                            <i class="{{ noffle['icon'] }} fa-2x noffle-icon"></i>
+                                            <b>{{ noffle['name'] }}</b>
+                                        </h6>
+                                        <p>{{noffle['description']}}</p>
+                                    </div>
+                                {% endfor %}
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-primary btn-close-modal" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary btn-close-modal tap-target" data-dismiss="modal">Close</button>
                             </div>
                         </div>
                     </div>

@@ -56,42 +56,42 @@
     <!--Navbar-->
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="{{ url_for('landing') }}">Noffle My Needs</a>
+            <a class="navbar-brand tap-target" href="{{ url_for('landing') }}"><h1>Noffle My Needs</h1></a>
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler"
                 aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"><i class="fas fa-2x fa-bars"></i></span>
+                <span class="navbar-toggler-icon"><i class="fas fa-2x fa-bars tap-target"></i></span>
             </button>
 
             <div class="collapse navbar-collapse right-justify" id="navbarToggler">
                 <ul class="nav navbar-nav">
                     {% if session.user %}
                     <li class="nav-item active">
-                        <a class="nav-link" href="{{ url_for('office') }}">Office</a>
+                        <a class="nav-link tap-target" href="{{ url_for('office') }}">Office</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('profile', username=session['user']) }}">Profile</a>
+                        <a class="nav-link tap-target" href="{{ url_for('profile', username=session['user']) }}">Profile</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('set_noffles') }}">Set My Noffles</a>
+                        <a class="nav-link tap-target" href="{{ url_for('set_noffles') }}">Set My Noffles</a>
                     </li>
                     {% if user["is_admin"] %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('manage_users') }}">Manage Users</a>
+                        <a class="nav-link tap-target" href="{{ url_for('manage_users') }}">Manage Users</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('manage_noffles') }}">Manage Noffles</a>
+                        <a class="nav-link tap-target" href="{{ url_for('manage_noffles') }}">Manage Noffles</a>
                     </li>
                     {% endif %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+                        <a class="nav-link tap-target" href="{{ url_for('logout') }}">Logout</a>
                     </li>
                     {% else %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+                        <a class="nav-link tap-target" href="{{ url_for('login') }}">Login</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('register') }}">Register</a>
+                        <a class="nav-link tap-target" href="{{ url_for('register') }}">Register</a>
                     </li>
                     {% endif %}
                 </ul>
@@ -102,44 +102,44 @@
     <main class="container mt-4">
 
         <!-- Flash messages -->
-        <div>
+        <section>
             {% with messages = get_flashed_messages(with_categories=true) %}
                 {% if messages %}
                     {% for category, message in messages %}
                         <div class="row pb-4">
                             <div class="col-12 rounded flash-message">
-                                <h6 class="{{ category }}">{{ message }}</h6>
+                                <p class="flash {{ category }}">{{ message }}</p>
                             </div>
                         </div>
                     {% endfor %}
                 {% endif %}
             {% endwith %}
-        </div>
+        </section>
 
         <!-- Main content container -->
-        <div>
+        <section>
             {% block content %}
             {% endblock %}
-        </div>
+        </section>
     </main>
 
     <!-- Footer -->
     <footer class="fixed-bottom align-middle">
         <div class="row">
             <div class="col-sm-6 col-md-2 text-center">
-                <a href="https://github.com/Abibubble">Abi Harrison</a><br>
+                <a href="https://github.com/Abibubble" class="tap-target" rel="noopener" target="_blank">Abi Harrison</a><br>
             </div>
             <div class="col-sm-6 col-md-2 text-center">
-                <a href="https://github.com/andrewdempsey2018">Andrew Dempsey</a><br>
+                <a href="https://github.com/andrewdempsey2018" class="tap-target" rel="noopener" target="_blank">Andrew Dempsey</a><br>
             </div>
             <div class="col-sm-6 col-md-2 text-center">
-                <a href="https://github.com/CarlaBuongiorno">Carla Buongiorno</a><br>
+                <a href="https://github.com/CarlaBuongiorno" class="tap-target" rel="noopener" target="_blank">Carla Buongiorno</a><br>
             </div>
             <div class="col-sm-6 col-md-2 text-center">
-                <a href="https://github.com/Henriqueperoni">Henrique Peroni</a><br>
+                <a href="https://github.com/Henriqueperoni" class="tap-target" rel="noopener" target="_blank">Henrique Peroni</a><br>
             </div>
             <div class="col-sm-6 col-md-2 text-center">
-                <a href="https://github.com/monika-hrda">Monika Hrda</a>
+                <a href="https://github.com/monika-hrda" class="tap-target" rel="noopener" target="_blank">Monika Hrda</a>
             </div>
             <div class="col-sm-6 col-md-2 text-center">
                 <!-- Auto-updating copyright -->

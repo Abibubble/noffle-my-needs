@@ -17,8 +17,6 @@ body {
     padding-bottom: 146px;
 }
 
-
-
 main {
     padding-top: 52px;
 }
@@ -39,6 +37,10 @@ a {
 .mp-0 {
     margin: 0 !important;
     padding: 0 !important;
+}
+
+.ml-15 {
+    margin-left: 15%;
 }
 
 .tap-target {
@@ -230,7 +232,7 @@ textarea {
 }
 
 .carousel-caption {
-    margin-left: 100px;
+    margin-left: 148px;
 }
 
 /* ----------------------------------------------------------------------------------- Avatars */

@@ -94,7 +94,7 @@ footer {
 
 /* Photo by Georgie Cobbs on Unsplash */
 #hero-image {
-    background-image: url("../img/hero_image.jpg");
+    background-image: url("../img/hero.jpg");
     background-size: cover;
     height: 50vh;
     width: 100%;
@@ -116,6 +116,7 @@ footer {
     top: 20%;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 80px;
     height: 170px;
     width: 50%;
     padding: 20px;

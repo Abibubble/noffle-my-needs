@@ -138,7 +138,7 @@ def register():
         session["user"] = request.form.get("username").lower()
         flash("Hi, {}. Welcome to Noffle My Needs.".format(
             request.form.get("username").capitalize()))
-        return render_template("set_noffles.html",
+        return render_template("profile.html",
                                noffles=noffles,
                                user=user,
                                user_noffles={})
@@ -495,4 +495,4 @@ def delete_account(username):
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
-            debug=False)
+            debug=True)

@@ -455,7 +455,7 @@ For a more detailed version of these steps, go to the [Github Docs](https://docs
 The W3C Markup Validator, W3C CSS Validator and JSHint were used to validate the project to ensure there were no syntax errors within the site.
 
 1. W3C Markup Validator
-    * [HTML Results](LINK)
+    * [HTML Results](https://validator.w3.org/nu/?doc=http%3A%2F%2Fnoffle-my-needs.herokuapp.com)
 
 2. W3C CSS Validator
     * [CSS Results](LINK)
@@ -679,8 +679,8 @@ We tested this website using DevTools Lighthouse feature, and got these results:
 
 #### Accessibility
 
-* Our score was knocked down here by non-sequential header elements. This was fixed before submission.
-* This score was also knocked down due to multiple of the same ids in the 'private' checkbox. This was fixed before submission.
+* We were happy with this score.
+* All headings are sequential.
 * All images have alt text.
 * All icons have text nearby to explain use, so the icons are not required for UX.
 * All tap targets are correctly sized at a minimum of 48px by 48px, with an 8px gap between them, and aren't overlapping other content.

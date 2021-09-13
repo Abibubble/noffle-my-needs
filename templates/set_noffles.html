@@ -32,11 +32,10 @@
                                 </div>
                                 <hr>
                                 <p class="card-text">{{ noffle.description }}</p>
-                                <i class="fas fa-exclamation-circle"></i>
                                 {% if noffle.private %}
-                                    <input id="private" type="checkbox" data-toggle="toggle" checked>
+                                    <input id="private" type="checkbox" class="tap-target" data-toggle="toggle" checked>
                                 {% else %}
-                                    <input id="private" type="checkbox" data-toggle="toggle">
+                                    <input id="private" type="checkbox" class="tap-target" data-toggle="toggle">
                                 {% endif %}
                                 <label for="private">Private</label>
                             </div>
@@ -54,7 +53,6 @@
                         <div class="card noffle-card">
                             <div class="card-body h-100 {% if noffle.permanent %}btn-yellow{% elif noffle.name=='Panic button'%}btn-red{% else %}btn-blue{% endif %}">
                                 <div class="row card-title">
-                                    
                                     {% if noffle._id|string in user_noffles %}
                                         <div class="row">
                                             <i class="fas fa-check-square fa-2x mb-2 d-flex justify-content-end"></i>
@@ -75,9 +73,9 @@
                                 <p class="card-text">{{ noffle.description }}</p>
                                 <i class="fas fa-exclamation-circle"></i>
                                 {% if noffle.private %}
-                                    <input id="private" type="checkbox" data-toggle="toggle" checked>
+                                    <input id="private" type="checkbox" class="tap-target" data-toggle="toggle" checked>
                                 {% else %}
-                                    <input id="private" type="checkbox" data-toggle="toggle">
+                                    <input id="private" type="checkbox" class="tap-target" data-toggle="toggle">
                                 {% endif %}
                                 <label for="private">Private</label>
                             </div>

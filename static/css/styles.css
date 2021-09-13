@@ -145,7 +145,7 @@ footer {
 }
 
 .user-card {
-    height: 360px;
+    height: 400px;
     overflow-y: scroll;
     border: 2px solid black !important;
 }

@@ -641,6 +641,7 @@ Friends, family members, and other developers were asked to review the site and 
     * Definitely the harder challenge in the project, as we have all the user on the office page, was hard to figure out how to separate the noffles of each user. The solution was to create a dictionary with the key value equal to the username and the value itself with a list with the noffles of this user. And then in the front end, we just had to iterate through this dictionary to display what we need. With this dictionary, we could apply the same logic for each user modal with the information of their noffles.
 4. Display permanent noffles separately from temporary noffles on Set My Noffle page:
     * We tried different approaches to try to display the noffles separately. We tried to pass all the noffles to the set nofffles page and iterate through them and then with an if statement separates between temporary and permanent, but it didn't work because we would have to create a new row for each noffle. We came with the solution of separate them into two arrays in the set_noffles function and pass to the front end the noffles already separated.
+
 3. 
 ### Known Bugs
 

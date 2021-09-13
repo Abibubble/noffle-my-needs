@@ -355,14 +355,24 @@ def set_noffles(name=None):
         flash("You need to be logged in to access this page", 'error')
         return redirect(url_for("login"))
 
-    noffles = mongo.db.noffles.find()
     user_noffles = user['noffles']
+    noffles = mongo.db.noffles.find()
+
+    # Separete the noffles between permanent em temporary
+    permanent_noffle = []
+    temporary_noffle = []
+    for noffle in noffles:
+        if noffle['permanent'] or noffle['name'] == 'Panic button':
+            permanent_noffle.append(noffle)
+        else:
+            temporary_noffle.append(noffle)
 
     return render_template('set_noffles.html',
                            name=name,
-                           noffles=noffles,
                            user=user,
-                           user_noffles=user_noffles)
+                           user_noffles=user_noffles,
+                           temporary_noffle=temporary_noffle,
+                           permanent_noffle=permanent_noffle)
 
 
 @app.route('/add_noffle/<noffle_id>')

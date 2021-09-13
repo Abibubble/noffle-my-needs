@@ -633,16 +633,29 @@ Friends, family members, and other developers were asked to review the site and 
 
 ### Solved Bugs
 
-1. How to add noffles to the noffles list in the user database.
-    * As it was a list we try just to append the noffle id when a user add a new noffle, but it would always replace the previous noffle that was already there. The solution was to use the $pull and $push the functionality of MongoDB.
-2. How to display each noffle on the profile page.
-    * As we have a list of noffles id as our noffles we couldn't simply display it. The solution was to get the user from the database, and iterate through the nofffles list (with noffles id). Get this id, find the respective noffle in the database, append it to a list and then iterate through this list in the front end
-3. Display the noffle icons on the office page for each individual user.
-    * Definitely the harder challenge in the project, as we have all the user on the office page, was hard to figure out how to separate the noffles of each user. The solution was to create a dictionary with the key value equal to the username and the value itself with a list with the noffles of this user. And then in the front end, we just had to iterate through this dictionary to display what we need. With this dictionary, we could apply the same logic for each user modal with the information of their noffles.
-4. Display permanent noffles separately from temporary noffles on Set My Noffle page:
-    * We tried different approaches to try to display the noffles separately. We tried to pass all the noffles to the set nofffles page and iterate through them and then with an if statement separates between temporary and permanent, but it didn't work because we would have to create a new row for each noffle. We came with the solution of separate them into two arrays in the set_noffles function and pass to the front end the noffles already separated.
+1. Adding Noffles to the Noffles list in the user database was a challenge.
+    * We tried to add the entire Noffle object into the user database, but quickly realised we'd be better off just adding in the Noffle id.
+    * As it was a list, we tried to append the Noffle id when a user adds a new Noffle.
+    * Unfortunately, it would always replace the previous Noffle that was already there.
+    * The solution was to use the $pull and $push the functionality of MongoDB.
+2. Displaying each noffle on the profile page wasn't working.
+    * Due to bug #1, we were referring to the Noffles in the user database by Noffle id.
+    * As we have a list of Noffle ids as our Noffles we couldn't simply display it.
+    * The solution was to get the user from the database, and iterate through the Noffles list using the Noffle id.
+    * We then used this id to find the respective Noffle in the database, append it to a list, and then iterate through this list in the front end.
+3. Displaying the noffle icons on the Office page for each individual user wasn't working.
+    * Definitely the harder challenge in the project, as all users are present on the Office page.
+    * It was hard to figure out how to separate the noffles of each user.
+    * The solution was to create a dictionary with the key-value equal to the username and the value itself with a list of the Noffles of that user.
+    * Then in the front end, we had to iterate through this dictionary to display what we need.
+    * With this dictionary, we could apply the same logic for each user modal with the information of their Noffles.
+4. Displaying permanent Noffles separately from temporary Noffles on Set My Noffle page.
+    * We tried different approaches to try to display the Noffles separately.
+    * We tried to pass all the Noffles to the Set My Noffles page and iterate through them.
+    * Then with an if statement to separate between temporary and permanent Noffles.
+    * This didn't work because we would have to create a new row for each Noffle.
+    * We came up with the solution of separating them into two arrays in the set_noffles function and passing this to the front end with the Noffles already separated.
 
-3. 
 ### Known Bugs
 
 * The site breaks when the user clicks the 'Back' button on their browser.
@@ -662,19 +675,23 @@ We tested this website using DevTools Lighthouse feature, and got these results:
 
 #### Performance
 
-* EXPLAIN SCORE AND HOW WE IMPROVED IT IF NECESSARY
+* We were happy with this score, as it was only knocked down due to the use of Bootstrap.
 
 #### Accessibility
 
-* EXPLAIN SCORE AND HOW WE IMPROVED IT IF NECESSARY
+* Our score was knocked down here by non-sequential header elements. This was fixed before submission.
+* This score was also knocked down due to multiple of the same ids in the 'private' checkbox. This was fixed before submission.
+* All images have alt text.
+* All icons have text nearby to explain use, so the icons are not required for UX.
+* All tap targets are correctly sized at a minimum of 48px by 48px, with an 8px gap between them, and aren't overlapping other content.
 
 #### Best Practices
 
-* EXPLAIN SCORE AND HOW WE IMPROVED IT IF NECESSARY
+* We were happy with this score, as it was only knocked down due to the use of Bootstrap.
 
 #### SEO
 
-* EXPLAIN SCORE AND HOW WE IMPROVED IT IF NECESSARY
+* We were happy with this score.
 
 [Back to Top](#noffle-my-needs)
 

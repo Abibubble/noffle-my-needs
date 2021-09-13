@@ -14,8 +14,10 @@
 
 body {
     height: calc(100% - 66px);
-    padding-bottom: 66px;
+    padding-bottom: 146px;
 }
+
+
 
 main {
     padding-top: 52px;
@@ -112,7 +114,7 @@ footer {
     top: 20%;
     margin-left: auto;
     margin-right: auto;
-    height: 140px;
+    height: 170px;
     width: 50%;
     padding: 20px;
 }
@@ -312,7 +314,7 @@ a:focus {
 }
 
 .flash {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     margin-bottom: 0 !important;
 }
 
@@ -331,6 +333,10 @@ a:focus {
 }
 
 @media screen and (min-width: 576px) {
+    body {
+        padding-bottom: 66px;
+    }
+
     #hero-image {
         height: 60vh;
     }

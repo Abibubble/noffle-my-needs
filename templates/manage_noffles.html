@@ -28,11 +28,10 @@
                             <p class="card-text">{{ noffle.description }}</p>
                             <i class="fas fa-exclamation-circle"></i>
                             {% if noffle.private %}
-                                <input id="private-{{ noffle._id|string }}" type="checkbox" data-toggle="toggle" checked>
+                                <p class="card-text">This Noffle is private</p>
                             {% else %}
-                                <input id="private-{{ noffle._id|string }}" type="checkbox" data-toggle="toggle">
+                                <p class="card-text">This Noffle is public</p>
                             {% endif %}
-                            <label for="private-{{ noffle._id|string }}">Private</label>
                             <br>
                             <div class="mt-2">
                                 <a role="button" class="btn btn-red btn-sm w-100 mt-2 pt-2 tap-target" href="{{ url_for('delete_noffle', noffle_id=noffle._id) }}">

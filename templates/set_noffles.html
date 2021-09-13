@@ -76,9 +76,9 @@
                                 <hr>
                                 <p class="card-text">{{ noffle.description }}</p>
                                 {% if noffle.private %}
-                                    <input id="private-{{ noffle._id|string }}" type="checkbox" class="tap-target" data-toggle="toggle" checked>
+                                    <p class="card-text">This Noffle is private</p>
                                 {% else %}
-                                    <input id="private-{{ noffle._id|string }}" type="checkbox" class="tap-target" data-toggle="toggle">
+                                    <p class="card-text">This Noffle is public</p>
                                 {% endif %}
                                 <label for="private-{{ noffle._id|string }}">Private</label>
                             </div>

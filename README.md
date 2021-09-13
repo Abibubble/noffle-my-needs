@@ -728,7 +728,7 @@ We tested this website using DevTools Lighthouse feature, and got these results:
 
 ### Media
 
-* [Georgie Cobbs on Unsplash](https://unsplash.com/photos/bKjHgo_Lbpo) provided the hero image on the landing page. This image is free to use.
+* [Fauxels on Pexels](https://www.pexels.com/@fauxels?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels) provided the hero image on the landing page. This image is free to use.
 * The user avatars were found on [Shutterstock](https://www.shutterstock.com/image-vector/abstract-characters-geometric-comic-creature-emotions-1953566236), which we have an account for, and thus we able to get commercial licence to use the images.
 
 ### Research

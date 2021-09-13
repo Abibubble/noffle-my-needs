@@ -1,4 +1,5 @@
 import os
+from datetime import datetime, time
 from flask import (Flask, flash, render_template, redirect, request, session,
                    url_for)
 from flask_pymongo import PyMongo
@@ -43,7 +44,17 @@ def login():
             # Ensure hashed password matches user input
             if check_password_hash(existing_user["password"],
                                    request.form.get("password")):
-                session["user"] = request.form.get("username").lower()
+                username = request.form.get("username")
+                session["user"] = username.lower()
+                # Get time and display welcoming flash message depending on time
+                now = datetime.now()
+                current_time = now.time()
+                if current_time > time(00,00) and current_time <= time(12,00):
+                        flash(f"Good Morning, {username}")
+                elif current_time > time(12,00) and current_time <= time(18,00):
+                    flash(f"Good Afternoon, {username}")
+                else:
+                    flash(f"Good Night, {username}")
                 return redirect(url_for('set_noffles'))
             else:
                 # Invalid password match

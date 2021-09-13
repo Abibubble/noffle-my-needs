@@ -415,7 +415,7 @@ This site was deployed to Heroku by following these steps:
     | SECRET_KEY | ## YOUR SECRET_KEY ## |
 
 13. Go to the 'Deploy' tab, and click 'Enable Automatic Deployment'.
-14. In 'Manual Deploy', choose which branch you'd like to deploy from (I chose 'master' branch, this is also known as 'main').
+14. In 'Manual Deploy', choose which branch you'd like to deploy from (We chose 'main' branch, this is also known as 'master').
 15. Click 'Deploy Branch' to deploy your app onto the Heroku servers.
 16. Once the app has finished building, click 'Open App' to open your site.
 
@@ -456,18 +456,24 @@ The W3C Markup Validator, W3C CSS Validator and JSHint were used to validate the
 
 1. W3C Markup Validator
     * [HTML Results](https://validator.w3.org/nu/?doc=http%3A%2F%2Fnoffle-my-needs.herokuapp.com)
+    * The only error is that sections lack headings.
+    * This is due to the templating, as every page does have a header.
 
 2. W3C CSS Validator
-    * [CSS Results](LINK)
+    * [CSS Results](https://jigsaw.w3.org/css-validator/validator?uri=http%3A%2F%2Fnoffle-my-needs.herokuapp.com&profile=css3svg&usermedium=all&warning=1&vextwarning=&lang=en)
+    * The only errors found here are due to Bootstrap.
 
 3. markdownlint GitPod Extension
     * [markdownlint Extension](https://open-vsx.org/vscode/item?itemName=DavidAnson.vscode-markdownlint)
+    * There were no Markdown errors reported on the markdownlint extension.
 
 4. JSHint GitPod Extension
     * [JSHint Extension](https://open-vsx.org/vscode/item?itemName=dbaeumer.jshint)
+    * There were no JavaScript errors reported on the JSHint extension.
 
 5. PyLint Extension
     * [PyLint Extension](https://pypi.org/project/pylint/)
+    * There were no Python errors reported on the PyLint extension.
 
 [Back to Top](#noffle-my-needs)
 
@@ -692,6 +698,7 @@ We tested this website using DevTools Lighthouse feature, and got these results:
 #### SEO
 
 * We were happy with this score.
+* All relevant meta tags have been included for this site.
 
 [Back to Top](#noffle-my-needs)
 
@@ -711,7 +718,7 @@ We tested this website using DevTools Lighthouse feature, and got these results:
 
 ### Media
 
-* [Georgie Cobbs on Unsplash](https://unsplash.com/photos/bKjHgo_Lbpo)
+* [Georgie Cobbs on Unsplash](https://unsplash.com/photos/bKjHgo_Lbpo) provided the hero image on the landing page. This image is free to use.
 * The user avatars were found on [Shutterstock](https://www.shutterstock.com/image-vector/abstract-characters-geometric-comic-creature-emotions-1953566236), which we have an account for, and thus we able to get commercial licence to use the images.
 
 ### Research
@@ -724,7 +731,7 @@ We tested this website using DevTools Lighthouse feature, and got these results:
 
 ### Acknowledgements
 
-* The team at [Code Institute](https://codeinstitute.net/), for teaching me the necessary skills to create this site.
+* The team at [Code Institute](https://codeinstitute.net/), for teaching us the necessary skills to create this site.
 * The [Code Institute](https://codeinstitute.net/) Hackathon team A11y Allies, who created this page. This team consists of :
   * [Abi Harrison](https://github.com/Abibubble)
   * [Andrew Dempsey](https://github.com/andrewdempsey2018)

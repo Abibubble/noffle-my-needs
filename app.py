@@ -50,11 +50,11 @@ def login():
                 now = datetime.now()
                 current_time = now.time()
                 if current_time > time(00,00) and current_time <= time(12,00):
-                        flash(f"Good Morning, {username}")
+                        flash(f"Good Morning, {username.capitalize()}")
                 elif current_time > time(12,00) and current_time <= time(18,00):
-                    flash(f"Good Afternoon, {username}")
+                    flash(f"Good Afternoon, {username.capitalize()}")
                 else:
-                    flash(f"Good Night, {username}")
+                    flash(f"Good Night, {username.capitalize()}")
                 return redirect(url_for('set_noffles'))
             else:
                 # Invalid password match

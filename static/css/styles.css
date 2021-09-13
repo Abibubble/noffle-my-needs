@@ -132,6 +132,7 @@ p.about-text {
 .user-card {
     height: 360px;
     overflow-y: scroll;
+    border: 2px solid black !important;
 }
 
 .office-card {

@@ -3,13 +3,13 @@
 {% block content %}
     <h2 class="text-center">Set My Noffles</h2>
     <hr>
-    <p>To set a Noffle, click on the card, and choose whether you'd like it to be private or public.</p>
-    <p>Public Noffles can be seen by everyone on the site. Private Noffles can only be seen by your managers.</p>
+    <p class="text-center">To set a Noffle, click on the card. You can also choose whether you would like it to be private or public.</p>
+    <p class="text-center">Public Noffles can be seen by everyone on the site. Private Noffles can only be seen by your managers.</p>
     <div class="container">
         <div class="row">
-            <h2 class="text-center py-2">Permanent Noffles</h2>
+            <h3 class="text-center py-4">Permanent Noffles</h3>
             {% for noffle in permanent_noffle %}
-                <div class="col-sm-12 col-md-4 col-lg-3">
+                <div class="col-sm-12 col-md-4 col-lg-3 mb-4">
                     <a href="{{ url_for('add_noffle', noffle_id=noffle._id) }}">
                         <div class="card noffle-card">
                             <div class="card-body h-100 {% if noffle.permanent %}btn-yellow{% elif noffle.name=='Panic button'%}btn-red{% else %}btn-blue{% endif %}">
@@ -32,12 +32,16 @@
                                 </div>
                                 <hr>
                                 <p class="card-text">{{ noffle.description }}</p>
-                                {% if noffle.private %}
-                                    <input id="private" type="checkbox" class="tap-target" data-toggle="toggle" checked>
-                                {% else %}
-                                    <input id="private" type="checkbox" class="tap-target" data-toggle="toggle">
-                                {% endif %}
-                                <label for="private">Private</label>
+                                <div class="row">
+                                    <div class="col-12 mt-1">
+                                    {% if noffle.private %}
+                                        <input id="private" type="checkbox" class="tap-target" data-toggle="toggle" checked>
+                                    {% else %}
+                                        <input id="private" type="checkbox" class="tap-target" data-toggle="toggle">
+                                    {% endif %}
+                                    <label for="private">Private</label>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </a>
@@ -46,9 +50,9 @@
         </div>
 
         <div class="row mt-2">
-            <h2 class="text-center py-2">Temporary Noffles</h2>
+            <h3 class="text-center py-4">Temporary Noffles</h3>
             {% for noffle in temporary_noffle %}
-                <div class="col-sm-12 col-md-4 col-lg-3">
+                <div class="col-sm-12 col-md-4 col-lg-3 mb-4">
                     <a href="{{ url_for('add_noffle', noffle_id=noffle._id) }}">
                         <div class="card noffle-card">
                             <div class="card-body h-100 {% if noffle.permanent %}btn-yellow{% elif noffle.name=='Panic button'%}btn-red{% else %}btn-blue{% endif %}">
@@ -71,7 +75,6 @@
                                 </div>
                                 <hr>
                                 <p class="card-text">{{ noffle.description }}</p>
-                                <i class="fas fa-exclamation-circle"></i>
                                 {% if noffle.private %}
                                     <input id="private-{{ noffle._id|string }}" type="checkbox" class="tap-target" data-toggle="toggle" checked>
                                 {% else %}

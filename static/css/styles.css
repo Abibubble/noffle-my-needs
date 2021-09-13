@@ -26,6 +26,16 @@ a {
     text-decoration: none !important;
 }
 
+.mp-0 {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.tap-target {
+    min-height: 48px;
+    min-width: 48px;
+}
+
 /* ----------------------------------------------------------------------------------- Navbar and Footer */
 
 
@@ -116,6 +126,7 @@ p.about-text {
     height: 260px;
     margin-bottom: 10px;
     overflow-y: scroll;
+    border-radius: 5px;
 }
 
 .user-card {
@@ -124,9 +135,14 @@ p.about-text {
 }
 
 .office-card {
-    height: 180px;
+    height: 200px;
     overflow-y: scroll;
     margin-bottom: 10px;
+}
+
+.office-card-body {
+    padding-top: 5px !important;
+    padding-bottom: 10px !important;
 }
 
 .card-img-top {
@@ -140,7 +156,9 @@ p.about-text {
 }
 
 .card-header {
-    height: 75px;
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
 }
 
 /* ----------------------------------------------------------------------------------- Login and Register Forms */
@@ -168,11 +186,41 @@ textarea {
     border: 2px solid black !important;
 }
 
+.center-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 /* ----------------------------------------------------------------------------------- Profile */
+
+.profile-form-area {
+    border: 2px solid black;
+    padding: 30px;
+}
+
+/* ----------------------------------------------------------------------------------- Carousel */
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon,
+.carousel-caption {
+    color: black !important;
+}
+
+.carousel-caption {
+    margin-left: 100px;
+}
+
+/* ----------------------------------------------------------------------------------- Avatars */
 
 .avatar-profile {
     height: 150px;
     margin-left: 30%;
+}
+
+.avatar-office {
+    max-height: 75px;
+    margin-left: 25%;
 }
 
 /* ----------------------------------------------------------------------------------- Hover, Focus */
@@ -230,17 +278,30 @@ a:focus {
     z-index: 2;
 } 
 
+/* ----------------------------------------------------------------------------------- Flash messages */
+
+.flash-message {
+    border: 1px solid black;
+    padding: 5px;
+    background-color: var(--pastel-yellow) !important;
+    text-align: center;
+}
+
+.error {
+    color: red
+}
+
 /* ----------------------------------------------------------------------------------- Media Queries */
+
+@media(max-width:992px){
+    .form-area {
+        max-width: 90%;
+    }
+}
 
 @media screen and (min-width: 1024px) {
     div.hero-text-overlay {
         width: 30%;
-    }
-}
-
-@media(max-width:992px) {
-    .login-form {
-        max-width: 90%;
     }
 }
 

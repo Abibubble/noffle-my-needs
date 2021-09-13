@@ -11,7 +11,7 @@
 
 This project was built for the [Trust In SODA](https://www.trustinsoda.com/) and [Code Institute](https://codeinstitute.net/) Hackathon in September 2021, by the team A11y Allies. The theme is 'Building An Accessible Workplace', and we were tasked with creating a tool that helps employers create a truly accessible workspace, or improve their recruitment and onboarding experience for every person. It is designed to be responsive on a wide range of devices, whilst also being easy to navigate through, and fully accessible.
 
-![Final project image home page](static/docs/img/finalpage.png)
+![Final project image home page](static/docs/img/finalsite.png)
 
 ## Contents
 
@@ -88,7 +88,7 @@ As a first time visitor to this site, a user should be able to :
 * Easily navigate the site.
 * Intuitively and easily understand what to do.
 * Register for an account.
-* Set my noffles.
+* Set my Noffles.
 * Get visual feedback when an action on the site is completed.
 
 #### Returning Visitor Goals
@@ -111,7 +111,7 @@ In addition to the First Time and Returning Visitor Goals, as an administrator o
 * Edit or delete any state.
 * Give or remove admin rights.
 
-[Back to Top](#title)
+[Back to Top](#noffle-my-needs)
 
 ---
 
@@ -173,7 +173,7 @@ In addition to the First Time and Returning Visitor Goals, as an administrator o
 
 ### Future Features
 
-* Email verification before a user can set their noffles.
+* Email verification before a user can set their Noffles.
 * Enter user's password to delete user account.
 * Dynamic desk movement to allow for different office layouts.
 
@@ -197,7 +197,7 @@ The navigation bar changes depending on user status and screen size:
 | Manage Users | &#10060; | &#10060; | &#9989; |
 | Log Out | &#10060; | &#9989; | &#9989; |
 
-[Back to Top](#title)
+[Back to Top](#noffle-my-needs)
 
 ---
 
@@ -227,7 +227,13 @@ MongoDB was used to store data for this site in a database. The data has been se
 | private | boolean |
 | icon | string |
 
-[Back to Top](#title)
+![Overall Database](static/docs/img/noffledb-overall.png)
+
+![Users Database Example](static/docs/img/usersdb.png)
+
+![Noffles Database Example](static/docs/img/nofflesdb.png)
+
+[Back to Top](#noffle-my-needs)
 
 ---
 
@@ -348,7 +354,7 @@ MongoDB was used to store data for this site in a database. The data has been se
 
 [dnspython](https://pypi.org/project/dnspython/) was used to provide access to DNS.
 
-[Back to Top](#title)
+[Back to Top](#noffle-my-needs)
 
 ---
 
@@ -438,7 +444,7 @@ This site was deployed to Heroku by following these steps:
 
 For a more detailed version of these steps, go to the [Github Docs](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository#cloning-a-repository-to-github-desktop) page on this topic.
 
-[Back to Top](#title)
+[Back to Top](#noffle-my-needs)
 
 ---
 
@@ -463,7 +469,7 @@ The W3C Markup Validator, W3C CSS Validator and JSHint were used to validate the
 5. PyLint Extension
     * [PyLint Extension](https://pypi.org/project/pylint/)
 
-[Back to Top](#title)
+[Back to Top](#noffle-my-needs)
 
 ### Testing User Stories
 
@@ -471,69 +477,99 @@ The W3C Markup Validator, W3C CSS Validator and JSHint were used to validate the
 
 ##### Easily navigate the site
 
-* How
+* The navigation bar is easily visible on every page of the site.
+* This displays differently depending on what access the user has.
+* The navigation bar is easy to understand and always there for ease of navigation on the site.
+* The logo at the top left of the page takes the user back to the home page at any given point.
 
 ##### Intuitively and easily understand what to do
 
-* How
+* All buttons are clearly labelled.
+* All links and buttons have descriptive text.
+* Upon landing on the site, the user is greeted and can clearly see what the site is about by the small description under the 'About Noffle My Needs' heading.
+* Clicking on the button below this section takes a user directly to where they need to by in order to begin selecting their Noffles on the 'Set My Noffles' page.
+* Each page and each step taken by a user, leeds a user through the site to the appropriate pages.
 
 ##### Register for an account
 
-* How
+* The Register button is visible for all users who aren't logged in.
+* The register form is clear and easy to follow.
+* There are validation messages if you don't enter the correct format of information.
+* A user is able to register an acount by clicking the 'Register' link in the Menu, or by clicking the Register button at the bottom of the landing page.
+* A form will be presented to the user to complete and a message is displayed to welcome the new user if everything was successful.
 
 ##### Set my Noffles
 
-* How
+* Upon registration or logging in, a user is immediately taken to the 'Set My Noffles' page.
+* The user can click on as many Noffles as they wish, along with setting them to 'private' mode.
+* In this case the Noffles are only diplayed to those with administration rights.
 
 ##### Get visual feedback when an action on the site is completed
 
-* How
+* Whenever an action on the site occurs, a message is displayed to the user.
+* This message is clear, at the top of whichever page that the user is on.
 
 #### Returning Visitor
 
 ##### Log in
 
-* How
+* The Log In button is visible for all users who aren't logged in.
+* The Log In button is positioned on the navbar.
+* The form is clear and easy to follow.
 
 ##### Update their Noffles
 
-* How
+* Upon registration or logging in, a user is immediately taken to the 'Set My Noffles' page.
+* The user can then set any Noffles they like, or remove current Noffles.
+* All non-permanent Noffles are also removed from the user when they log out.
 
 ##### See the public Noffles of other users
 
-* How
+* Public Noffles of all users are displayed on the Office page.
+* Regular users can only see public Noffles on the Office page, while admin users can see all Noffles of all users.
 
 ##### Be confident that their password is be stored securely
 
-* How
+* Werkzeug's password hashing methods have been used to store all user's passwords in a secure and safe way.
 
 ##### Navigate intuitively, with no need to use the browser's back button
 
-* How
+* The navigation bar is constantly visible across the top of the site.
+* This is either the full navigation bar, or the condensed burger icon menu bar on smaller screen sizes.
 
 #### Admin
 
 ##### Be confident that a user can't to brute force their way into the restricted pages
 
-* How
+* Admin users are set with an is_admin toggle in the database, so that it doesn't rely on usernames.
+* If a user without access rights tries to access a restricted page, it presents them with the 404 page, with a navigation bar at the top to take them back to the pages they're allowed to access.
 
 ##### Edit or delete any user
 
-* How
+* Admin users are set with an is_admin toggle in the database, so that it doesn't rely on usernames.
+* If the user has the is_admin toggle set to true, then they will have access to the Manage Users page.
+* This enables the admin to edit or delete any user.
 
 ##### Add a new Noffle
 
-* How
+* Admin users are set with an is_admin toggle in the database, so that it doesn't rely on usernames.
+* If the user has the is_admin toggle set to true, then they will have access to the Manage Noffles page.
+* This enables the admin to add a new Noffle.
 
 ##### Edit or delete any Noffle
 
-* How
+* Admin users are set with an is_admin toggle in the database, so that it doesn't rely on usernames.
+* If the user has the is_admin toggle set to true, then they will have access to the Manage Noffles page.
+* This enables the admin to edit or delete any Noffle.
 
 ##### Give or remove admin rights
 
-* How
+* Admin users are set with an is_admin toggle in the database, so that it doesn't rely on usernames.
+* If the user has the is_admin toggle set to true, then they have access to the Manage Users page.
+* From there, any user can be deleted, or have their admin rights switched on or off.
+* The only user that cannot be edited is the main admin account, to ensure the site isn't left without an admin user by mistake.
 
-[Back to Top](#title)
+[Back to Top](#noffle-my-needs)
 
 ### Full Testing
 
@@ -593,7 +629,7 @@ The W3C Markup Validator, W3C CSS Validator and JSHint were used to validate the
 A large amount of testing was done to ensure that all pages were visible or hidden correctly, all buttons worked as they should, and the site worked as it should.
 Friends, family members, and other developers were asked to review the site and documentation to point out any bugs and/or user experience issues that they came across.
 
-[Back to Top](#title)
+[Back to Top](#noffle-my-needs)
 
 ### Solved Bugs
 
@@ -602,7 +638,8 @@ Friends, family members, and other developers were asked to review the site and 
 
 ### Known Bugs
 
-* A11y Allies are unaware of any bugs left in this code. If you find any, please let us know at one of our GitHubs, which you can find below in [Credits](#credits)
+* The site breaks when the user clicks the 'Back' button on their browser.
+* A11y Allies are unaware of any other bugs left in this code. If you find any, please let us know at one of our GitHubs, which you can find below in [Credits](#credits)
 
 ### Lighthouse Testing
 
@@ -632,7 +669,7 @@ We tested this website using DevTools Lighthouse feature, and got these results:
 
 * EXPLAIN SCORE AND HOW WE IMPROVED IT IF NECESSARY
 
-[Back to Top](#title)
+[Back to Top](#noffle-my-needs)
 
 ---
 
@@ -672,4 +709,4 @@ We tested this website using DevTools Lighthouse feature, and got these results:
   * [Monika Hrda](https://github.com/monika-hrda)
 * Our team facilitator [Megan Armstrong](https://www.linkedin.com/in/megan-armstrong4/).
 
-[Back to Top](#title)
+[Back to Top](#noffle-my-needs)

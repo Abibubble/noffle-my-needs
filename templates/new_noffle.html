@@ -7,41 +7,41 @@
         </div>
         <div class="container">
             <div class="row form-area rounded mx-auto mb-2">
-                <form method="POST" action="{{ url_for('register') }}">
+                <form method="POST" action="{{ url_for('new_noffle') }}">
                     <div class="form-group row mb-4">
-                        <div class="col-2 center-icon"><i class="fas fa-2x fa-user"></i></div>
+                        <div class="col-2 center-icon"><i class="fas fa-2x fa-sticky-note"></i></div>
                         <label for="name" class="sr-only">Noffle Name</label>
                         <div class="col-10">
-                            <input type="text" class="form-control" name="name" id="name" minlength="5" maxlength="15" 
-                                pattern="^[a-zA-Z]" placeholder="Noffle Name" required>
+                            <input type="text" class="form-control" name="name" id="name" minlength="5" maxlength="15" placeholder="Noffle Name" required>
                         </div>
                     </div>
                     <div class="form-group row mb-4">
-                        <div class="col-2 center-icon"><i class="fas fa-2x fa-address-card"></i></div>
+                        <div class="col-2 center-icon"><i class="far fa-2x fa-comment-alt"></i></div>
                         <label for="description" class="sr-only">Description</label>
                         <div class="col-10">
-                            <input id="description" name="description" placeholder="Description" class="form-control" type="text" minlength="3" maxlength="20" required>
+                            <input id="description" name="description" placeholder="Description" class="form-control" type="text" minlength="3" maxlength="200" required>
                         </div>
                     </div>
                     <div class="form-group row mb-4">
-                        <div class="col-2 center-icon"><i class="fas fa-2x fa-address-card"></i></div>
-                        <label for="icon">Icon - Please visit <a href="https://fontawesome.com/">Font Awesome</a>, search for your required icon, and enter the text between the `<i class="` `"></i>`</label>
+                        <p>To find an icon, please visit <a href="https://fontawesome.com/">Font Awesome</a>, search for your required icon, and enter the text between the " "</p>
+                        <div class="col-2 center-icon"><i class="fas fa-2x fa-icons"></i></div>
+                        <label for="icon" class="sr-only">Icon</label>
                         <div class="col-10">
                             <input id="icon" name="icon" placeholder="Icon" type="text" class="form-control" minlength="2" maxlength="40" required>
                         </div>
                     </div>
                     <div class="form-group row mb-4">
-                        <div class="col-2 center-icon"><i class="fas fa-2x fa-genderless"></i></div>
-                        <label for="pronouns">Permanent</label>
+                        <div class="col-2 center-icon"><i class="fas fa-2x fa-star-half-alt"></i></div>
                         <div class="col-10">
-                            <input id="pronouns" name="pronouns" type="text" minlength="5" maxlength="40" class="form-control" placeholder="(Pronouns - format she/her, he/him, they/them" required>
+                            <input id="pronouns" name="pronouns" type="checkbox">
+                            <label for="pronouns">Permanent</label>
                         </div>
                     </div>
                     <div class="form-group row mb-2">
-                        <div class="col-2 center-icon"><i class="fas fa-2x fa-image"></i></div>
-                        <label for="image_no">Private as standard</label>
+                        <div class="col-2 center-icon"><i class="fas fa-2x fa-key"></i></div>
                         <div class="col-10">
-                            <input id="image_no" name="image_no" placeholder="Avatar image number" type="number" class="form-control" required>
+                            <input id="image_no" name="image_no" type="checkbox">
+                            <label for="image_no">Private as standard</label>
                         </div>
                     </div>
                     <div class="row">

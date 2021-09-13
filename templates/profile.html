@@ -1,11 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h2 class="text-center">{{ user.username }}'s Profile</h2>
+    {% if user.username %}
+        <h2 class="text-center">{{ user.username }}'s Profile</h2>
+    {% endif %}
     <hr>
     <div class="row pb-5">
         <div class="col-12 col-md-5 p-4 profile-form-area rounded">
-            <img class="avatar-profile" src="/static/img/avatar{{ user.image_no }}.png" alt="Icon for {{ user.username }}">
+            {% if user.image_no %}
+                <img class="avatar-profile" src="/static/img/avatar{{ user.image_no }}.png" alt="Icon for {{ user.username }}">
+            {% endif %}
             <div class="login-form profile-login-form rounded mx-auto mb-2">
                 <form method="POST" action="{{ url_for('update_user', user_id=user._id) }}">
                     <div class="form-group row mb-4">

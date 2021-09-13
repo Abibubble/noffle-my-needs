@@ -139,8 +139,8 @@ def register():
         flash("Hi, {}. Welcome to Noffle My Needs.".format(
             request.form.get("username").capitalize()))
         return render_template("profile.html",
-                               noffles=noffles,
-                               user=user,
+                               noffles=[],
+                               user=username,
                                user_noffles={})
 
     return render_template('register.html', user=user)

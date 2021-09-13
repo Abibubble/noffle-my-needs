@@ -215,6 +215,40 @@ def update_user(user_id):
     return redirect(url_for("profile", username=username))
 
 
+@app.route('/admin_update_user/<user_id>', methods=["GET", "POST"])
+def admin_update_user(user_id):
+    # Find the logged in user for navlinks
+    try:
+        user = mongo.db.users.find_one({"_id": ObjectId(user_id)})
+    except BaseException:
+        user = mongo.db.users.find()
+        flash("You need to be logged in to access this page", 'error')
+        return redirect(url_for("login"))
+
+    # Display all noffles the user has set
+    noffles = []
+    try:
+        for noffle in user["noffles"]:
+            my_noffles = mongo.db.noffles.find_one({"_id": ObjectId(noffle)})
+            noffles.append(my_noffles)
+    except BaseException:
+        noffles = []
+
+    if request.method == 'POST':
+        # Set variables for the form
+        username = request.form.get("username").lower()
+
+        update_user = {
+            "username": request.form.get("username").lower(),
+            "first_name": request.form.get("first_name").lower(),
+            "last_name": request.form.get("last_name").lower(),
+        }
+        mongo.db.users.update_one({"_id": ObjectId(user["_id"])},
+                                  {'$set': update_user})
+
+    return redirect(url_for("manage_users", username=username))
+
+
 @app.route('/office')
 def office(name=None):
     # Find if a user is logged in for navlinks

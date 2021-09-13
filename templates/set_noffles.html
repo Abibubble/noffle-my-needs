@@ -7,6 +7,7 @@
     <p>Public Noffles can be seen by everyone on the site. Private Noffles can only be seen by your managers.</p>
     <div class="container">
         <div class="row">
+            <h2 class="text-center py-2">Permanent Noffles</h2>
             {% for noffle in permanent_noffle %}
                 <div class="col-sm-12 col-md-4 col-lg-3">
                     <a href="{{ url_for('add_noffle', noffle_id=noffle._id) }}">

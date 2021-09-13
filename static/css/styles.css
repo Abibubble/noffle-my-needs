@@ -48,10 +48,16 @@ footer {
 
 nav {
     border-bottom: 2px solid black;
+    min-height: 48px;
 }
 
 .navbar {
     padding: 0 !important;
+}
+
+.navbar-toggler {
+    padding: 0 !important;
+    margin-bottom: 0.5rem !important;
 }
 
 .nav-item {

@@ -167,7 +167,7 @@ In addition to the First Time and Returning Visitor Goals, as an administrator o
 * Update a Noffle.
 * Create and Delete a profile.
 * Create, Edit and Delete a Noffle for admin users only.
-* Edit admin rights and delete a user for admin users only.
+* Edit admin rights and edit or delete a user for admin users only.
 * Confirm to delete modal.
 * Auto-updating copyright year.
 
@@ -175,7 +175,7 @@ In addition to the First Time and Returning Visitor Goals, as an administrator o
 
 * Email verification before a user can set their Noffles.
 * Enter user's password to delete user account.
-* Dynamic desk movement to allow for different office layouts.
+* Dynamic desk movement on the Office page to allow for different office layouts.
 
 ### Audio
 
@@ -205,6 +205,8 @@ The navigation bar changes depending on user status and screen size:
 
 MongoDB was used to store data for this site in a database. The data has been set out in two collections, which are described below:
 
+### Users Collection
+
 | Users |    |    |
 |---|---|---|
 | _id | ObjectId |    |
@@ -218,6 +220,8 @@ MongoDB was used to store data for this site in a database. The data has been se
 | noffles | array | noffles._id |
 | panic | boolean |    |
 
+### Noffles Collection
+
 | Noffles |    |
 |---|---|
 | _id | ObjectId |
@@ -227,11 +231,17 @@ MongoDB was used to store data for this site in a database. The data has been se
 | private | boolean |
 | icon | string |
 
+### Overall Database
+
 ![Overall Database](static/docs/img/noffledb-overall.png)
 
-![Users Database Example](static/docs/img/usersdb.png)
+### Users Collection Screenshot
 
-![Noffles Database Example](static/docs/img/nofflesdb.png)
+![Users Collection Example](static/docs/img/userdb.png)
+
+### Noffles Collection Screenshot
+
+![Noffles Collection Example](static/docs/img/nofflesdb.png)
 
 [Back to Top](#noffle-my-needs)
 

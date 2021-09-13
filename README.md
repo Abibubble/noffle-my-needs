@@ -633,9 +633,15 @@ Friends, family members, and other developers were asked to review the site and 
 
 ### Solved Bugs
 
-1. WHAT THE BUG IS
-    * WHAT STEPS WE TOOK TO FIX IT
-
+1. How to add noffles to the noffles list in the user database.
+    * As it was a list we try just to append the noffle id when a user add a new noffle, but it would always replace the previous noffle that was already there. The solution was to use the $pull and $push the functionality of MongoDB.
+2. How to display each noffle on the profile page.
+    * As we have a list of noffles id as our noffles we couldn't simply display it. The solution was to get the user from the database, and iterate through the nofffles list (with noffles id). Get this id, find the respective noffle in the database, append it to a list and then iterate through this list in the front end
+3. Display the noffle icons on the office page for each individual user.
+    * Definitely the harder challenge in the project, as we have all the user on the office page, was hard to figure out how to separate the noffles of each user. The solution was to create a dictionary with the key value equal to the username and the value itself with a list with the noffles of this user. And then in the front end, we just had to iterate through this dictionary to display what we need. With this dictionary, we could apply the same logic for each user modal with the information of their noffles.
+4. Display permanent noffles separately from temporary noffles on Set My Noffle page:
+    * We tried different approaches to try to display the noffles separately. We tried to pass all the noffles to the set nofffles page and iterate through them and then with an if statement separates between temporary and permanent, but it didn't work because we would have to create a new row for each noffle. We came with the solution of separate them into two arrays in the set_noffles function and pass to the front end the noffles already separated.
+3. 
 ### Known Bugs
 
 * The site breaks when the user clicks the 'Back' button on their browser.

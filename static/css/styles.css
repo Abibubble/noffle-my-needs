@@ -293,6 +293,10 @@ a:focus {
     background-color: var(--pastel-yellow) !important;
 }
 
+.btn-error:hover {
+    color: #212529 !important;
+}
+
 /* ----------------------------------------------------------------------------------- Overlay */
 
 .card-overlay {

@@ -2,16 +2,13 @@
 
 {% block content %}
     <section class="container">
-        <div class="row">
-            <h2 class="text-center mb-5">404 - Page Not Found</h2>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <h3>Oh no! It looks like something went wrong!</h3>
-                    <a href="{{ url_for('landing') }}">Click here to return to safety</a>
-                    <img class="w-50" src="/static/img/avatar10.png" alt="A purple avatar with a magnifying glass">
-                </div>
+        <div class="row text-center">
+            <div class="col-12 d-grid">
+                <h3 class="my-3">Oh no! It looks like something went wrong!</h3>
+                <a class="btn btn-error btn-blue w-auto m-auto mb-3" href="{{ url_for('landing') }}">
+                    Click here to return to safety
+                </a>
+                <img class="w-50 m-auto" src="/static/img/404.png" alt="Arms holding a 404 error sign">
             </div>
         </div>
     </section>

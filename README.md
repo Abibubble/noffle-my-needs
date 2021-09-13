@@ -176,6 +176,7 @@ In addition to the First Time and Returning Visitor Goals, as an administrator o
 * Email verification before a user can set their Noffles.
 * Enter user's password to delete user account.
 * Dynamic desk movement on the Office page to allow for different office layouts.
+* A toggle to allow the user to select whether they want to set a Noffle as public or private.
 
 ### Audio
 

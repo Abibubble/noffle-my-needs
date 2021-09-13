@@ -1,13 +1,11 @@
 import os
-from flask import (
-    Flask, flash, render_template,
-    redirect, request, session, url_for)
+from flask import (Flask, flash, render_template, redirect, request, session,
+                   url_for)
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
 if os.path.exists("env.py"):
     import env
-    
 
 app = Flask(__name__)
 
@@ -28,7 +26,10 @@ def landing(name=None):
         user = mongo.db.users.find()
 
     noffles = mongo.db.noffles.find()
-    return render_template('landing.html', name=name, noffles=noffles, user=user)
+    return render_template('landing.html',
+                           name=name,
+                           noffles=noffles,
+                           user=user)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -40,8 +41,8 @@ def login():
 
         if existing_user:
             # Ensure hashed password matches user input
-            if check_password_hash(
-                    existing_user["password"], request.form.get("password")):
+            if check_password_hash(existing_user["password"],
+                                   request.form.get("password")):
                 session["user"] = request.form.get("username").lower()
                 return redirect(url_for('set_noffles'))
             else:
@@ -118,8 +119,11 @@ def register():
         # Put the new user into 'session' cookie
         session["user"] = request.form.get("username").lower()
         flash("Hi, {}. Welcome to Noffle My Needs.".format(
-                        request.form.get("username").capitalize()))
-        return render_template("set_noffles.html", noffles=noffles, user=user, user_noffles={})
+            request.form.get("username").capitalize()))
+        return render_template("set_noffles.html",
+                               noffles=noffles,
+                               user=user,
+                               user_noffles={})
 
     return render_template('register.html', user=user)
 
@@ -133,17 +137,16 @@ def profile(username):
         user = mongo.db.users.find()
         flash("You need to be logged in to access this page")
         return redirect(url_for("login"))
-        
+
     noffles = []
     try:
         for noffle in user["noffles"]:
             my_noffles = mongo.db.noffles.find_one({"_id": ObjectId(noffle)})
-            noffles.append(my_noffles)      
+            noffles.append(my_noffles)
     except BaseException:
         noffles = []
     if session["user"]:
-        return render_template(
-            "profile.html", noffles=noffles, user=user)
+        return render_template("profile.html", noffles=noffles, user=user)
     else:
         flash("You need to be logged in to access this page")
         return redirect(url_for("login"))
@@ -164,7 +167,7 @@ def update_user(user_id):
     try:
         for noffle in user["noffles"]:
             my_noffles = mongo.db.noffles.find_one({"_id": ObjectId(noffle)})
-            noffles.append(my_noffles)      
+            noffles.append(my_noffles)
     except BaseException:
         noffles = []
 
@@ -184,8 +187,8 @@ def update_user(user_id):
             "pronouns": request.form.get("pronouns").lower(),
             "image_no": request.form.get("image_no"),
         }
-        mongo.db.users.update_one(
-            {"_id": ObjectId(user["_id"])}, {'$set': update_user})
+        mongo.db.users.update_one({"_id": ObjectId(user["_id"])},
+                                  {'$set': update_user})
 
     return redirect(url_for("profile", username=username))
 
@@ -202,7 +205,7 @@ def office(name=None):
 
     users = mongo.db.users.find()
     noffles = mongo.db.noffles.find()
-    
+
     noffle_dict = {}
     for managed_user in users:
         noffles_list = []
@@ -213,8 +216,12 @@ def office(name=None):
 
     users = mongo.db.users.find()
     noffles = mongo.db.noffles.find()
-    return render_template(
-        'office.html', name=name, noffles=noffles, user=user, users=users, noffle_dict=noffle_dict)
+    return render_template('office.html',
+                           name=name,
+                           noffles=noffles,
+                           user=user,
+                           users=users,
+                           noffle_dict=noffle_dict)
 
 
 @app.route('/manage_noffles')
@@ -233,8 +240,10 @@ def manage_noffles(name=None):
         return redirect(url_for("office"))
     else:
         noffles = mongo.db.noffles.find()
-        return render_template(
-            'manage_noffles.html', name=name, noffles=noffles, user=user)
+        return render_template('manage_noffles.html',
+                               name=name,
+                               noffles=noffles,
+                               user=user)
     return redirect(url_for("login"))
 
 
@@ -265,9 +274,12 @@ def manage_users(name=None):
     noffles = mongo.db.noffles.find()
     users = mongo.db.users.find()
 
-    return render_template(
-        'manage_users.html', name=name, noffles=noffles,
-        users=users, user=user, noffle_dict=noffle_dict)
+    return render_template('manage_users.html',
+                           name=name,
+                           noffles=noffles,
+                           users=users,
+                           user=user,
+                           noffle_dict=noffle_dict)
 
 
 @app.route("/admin_toggle/<user_id>")
@@ -276,12 +288,16 @@ def admin_toggle(user_id):
     user = mongo.db.users.find_one({"_id": ObjectId(user_id)})
 
     if user["is_admin"] is False:
-        mongo.db.users.update(
-            {"_id": ObjectId(user_id)}, {"$set": {"is_admin": True}})
+        mongo.db.users.update({"_id": ObjectId(user_id)},
+                              {"$set": {
+                                  "is_admin": True
+                              }})
         flash("User Admin Rights Added")
     else:
-        mongo.db.users.update(
-            {"_id": ObjectId(user_id)}, {"$set": {"is_admin": False}})
+        mongo.db.users.update({"_id": ObjectId(user_id)},
+                              {"$set": {
+                                  "is_admin": False
+                              }})
         flash("User Admin Rights Removed")
 
     return redirect(url_for("manage_users"))
@@ -290,6 +306,7 @@ def admin_toggle(user_id):
 @app.route("/delete_user/<user_id>")
 def delete_user(user_id):
     # Allow admin user to delete other users
+    print(">>>>>>", user_id)
     mongo.db.users.remove({"_id": ObjectId(user_id)})
     flash("User Successfully Deleted")
     return redirect(url_for("manage_users"))
@@ -315,9 +332,12 @@ def set_noffles(name=None):
 
     noffles = mongo.db.noffles.find()
     user_noffles = user['noffles']
-    
-    return render_template(
-        'set_noffles.html', name=name, noffles=noffles, user=user, user_noffles=user_noffles)
+
+    return render_template('set_noffles.html',
+                           name=name,
+                           noffles=noffles,
+                           user=user,
+                           user_noffles=user_noffles)
 
 
 @app.route('/add_noffle/<noffle_id>')
@@ -340,22 +360,29 @@ def add_noffle(noffle_id):
     if noffle_id in user['noffles']:
         flash(f'Noffle {current_noffle["name"]} deleted')
         if current_noffle["name"] == 'Panic button':
-            mongo.db.users.update(
-                {"_id": ObjectId(user["_id"])}, {"$set": {"panic": False}})
-        mongo.db.users.update(
-            {'_id': ObjectId(user['_id'])}, {'$pull': {'noffles': noffle_id}})
+            mongo.db.users.update({"_id": ObjectId(user["_id"])},
+                                  {"$set": {
+                                      "panic": False
+                                  }})
+        mongo.db.users.update({'_id': ObjectId(user['_id'])},
+                              {'$pull': {
+                                  'noffles': noffle_id
+                              }})
         return redirect(url_for("set_noffles", noffles=noffles, user=user))
     else:
         flash(f'Noffle {current_noffle["name"]} added')
         if current_noffle["name"] == 'Panic button':
-            mongo.db.users.update(
-                {"_id": ObjectId(user["_id"])}, {"$set": {"panic": True}})
-        mongo.db.users.update(
-                {'_id': ObjectId(user['_id'])}, {'$push': {'noffles': noffle_id}})
+            mongo.db.users.update({"_id": ObjectId(user["_id"])},
+                                  {"$set": {
+                                      "panic": True
+                                  }})
+        mongo.db.users.update({'_id': ObjectId(user['_id'])},
+                              {'$push': {
+                                  'noffles': noffle_id
+                              }})
         return redirect(url_for("set_noffles", noffles=noffles, user=user))
 
-    return render_template(
-        'set_noffles.html', noffles=noffles, user=user)
+    return render_template('set_noffles.html', noffles=noffles, user=user)
 
 
 @app.route('/new_noffle', methods=["GET", "POST"])
@@ -396,10 +423,11 @@ def new_noffle():
 
         # Put the new user into 'session' cookie
         flash(f'Noffle {noffle.name} has been added')
-        return render_template("manage_noffles.html", noffles=noffles, user=user)
+        return render_template("manage_noffles.html",
+                               noffles=noffles,
+                               user=user)
 
     return render_template("manage_noffles.html", noffles=noffles, user=user)
-
 
 
 @app.route('/delete_account/<username>')
@@ -422,4 +450,4 @@ def delete_account(username):
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
-            debug=False)
+            debug=True)

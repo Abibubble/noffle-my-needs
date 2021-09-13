@@ -3,16 +3,17 @@
 {% block content %}
     <section class="container">
         <div class="row">
-            <h2 class="text-center mb-5">404 - Page Not Found</h2>
+            <h2 class="text-center mb-5">500 - Internal Server Error</h2>
         </div>
         <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <h3>Oh no! It looks like something went wrong!</h3>
-                    <a href="{{ url_for('landing') }}">Click here to return to safety</a>
-                    <img class="w-50" src="/static/img/avatar10.png" alt="A purple avatar with a magnifying glass">
+            <div class="row text-center">
+                <div class="col-12 d-grid">
+                    <h3 class="my-3">Oh no! It looks like something went wrong!</h3>
+                    <a class="btn btn-blue btn-error w-auto m-auto mb-3" href="{{ url_for('landing') }}">
+                        Click here to return to safety
+                    </a>
+                    <img class="w-75 m-auto" src="/static/img/500.png" alt="A purple avatar with a magnifying glass">
                 </div>
             </div>
-        </div>
     </section>
 {% endblock %}

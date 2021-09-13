@@ -11,7 +11,7 @@
 
 This project was built for the [Trust In SODA](https://www.trustinsoda.com/) and [Code Institute](https://codeinstitute.net/) Hackathon in September 2021, by the team A11y Allies. The theme is 'Building An Accessible Workplace', and we were tasked with creating a tool that helps employers create a truly accessible workspace, or improve their recruitment and onboarding experience for every person. It is designed to be responsive on a wide range of devices, whilst also being easy to navigate through, and fully accessible.
 
-![Final project image home page](static/docs/img/finalpage.png)
+![Final project image home page](static/docs/img/finalsite.png)
 
 ## Contents
 

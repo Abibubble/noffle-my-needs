@@ -73,11 +73,11 @@
                                 <p class="card-text">{{ noffle.description }}</p>
                                 <i class="fas fa-exclamation-circle"></i>
                                 {% if noffle.private %}
-                                    <input id="private-{{ noffle._id }}" type="checkbox" class="tap-target" data-toggle="toggle" checked>
+                                    <input id="private-{{ noffle._id|string }}" type="checkbox" class="tap-target" data-toggle="toggle" checked>
                                 {% else %}
-                                    <input id="private-{{ noffle._id }}" type="checkbox" class="tap-target" data-toggle="toggle">
+                                    <input id="private-{{ noffle._id|string }}" type="checkbox" class="tap-target" data-toggle="toggle">
                                 {% endif %}
-                                <label for="private-{{ noffle._id }}">Private</label>
+                                <label for="private-{{ noffle._id|string }}">Private</label>
                             </div>
                         </div>
                     </a>

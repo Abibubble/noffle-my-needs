@@ -501,13 +501,12 @@ def new_noffle():
         }
         mongo.db.noffles.insert_one(new_noffle_addition)
 
-        # Put the new user into 'session' cookie
         flash(f'Noffle {noffle.name} has been added')
         return render_template("manage_noffles.html",
                                noffles=noffles,
                                user=user)
 
-    return render_template("manage_noffles.html", noffles=noffles, user=user)
+    return render_template("new_noffle.html", noffles=noffles, user=user)
 
 @app.route('/delete_account/<username>')
 def delete_account(username):

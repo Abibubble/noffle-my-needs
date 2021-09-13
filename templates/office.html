@@ -3,28 +3,29 @@
 {% block content %}
     <section class="container">
         <h2 class="text-center">A11y Corp</h2>
-        <hr>
+        <hr class="mb-5">
         <div class="row">
             {% for user in users %}
-                <div class="col-sm-12 col-md-4 col-lg-3">
+                <div class="col-sm-12 col-md-4 col-lg-3 mb-4">
                     <a href="#" role="button" data-toggle="modal" data-target="#user-modal-{{ user._id }}">
                         <div class="card office-card">
                             <div class="card-body {% if user.panic == true %}btn-red{% else %}btn-green{% endif %} office-card-body">
                                 <div class="row">
-                                    <div class="col-12 mp-0 mb-1">
+                                    <div class="col-12 mp-0 my-2">
                                         <img class="avatar-office img-fluid" src="/static/img/avatar{{ user.image_no }}.png" alt="Icon for {{ user.username }}">
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-12">
+                                    <div class="col-12 my-2">
                                         <h3 class="card-heading-title">
-                                            {{ user.first_name|capitalize }} {{ user.last_name|capitalize }} ({{ user.pronouns }})
+                                            {{ user.first_name|capitalize }} {{ user.last_name|capitalize }}
                                         </h3>
+                                        <p class="fw-bold fst-italic">({{ user.pronouns }})</p>
                                     </div>
                                 </div>
                                 <div class="row">
                                     {% for icon in noffle_dict[user.username] %}
-                                        <div class="col-2 m-1">
+                                        <div class="col-2 m-1 mt-2">
                                             <i class="{{ icon['icon'] }} fa-2x noffle-icon"></i>
                                         </div>
                                     {% endfor %}

@@ -185,6 +185,18 @@ textarea {
     border: 2px solid black !important;
 }
 
+/* ----------------------------------------------------------------------------------- Carousel */
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon,
+.carousel-caption {
+    color: black !important;
+}
+
+.carousel-caption {
+    margin-left: 100px;
+}
+
 /* ----------------------------------------------------------------------------------- Avatars */
 
 .avatar-profile {

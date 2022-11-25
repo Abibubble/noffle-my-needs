@@ -7,7 +7,7 @@
 ![Font Awesome version](https://img.shields.io/badge/Font%20Awesome-v5.15.1-blue)
 ![GitHub forks](https://img.shields.io/github/forks/abibubble/noffle-my-needs?style=social)
 
-[Here is a link to the final project](https://noffle-my-needs.herokuapp.com/)
+[Here is a link to the final project](https://noffle-my-needs.onrender.com/)
 
 This project was built for the [Trust In SODA](https://www.trustinsoda.com/) and [Code Institute](https://codeinstitute.net/) Hackathon in September 2021, by the team A11y Allies. The theme is 'Building An Accessible Workplace', and we were tasked with creating a tool that helps employers create a truly accessible workspace, or improve their recruitment and onboarding experience for every person. It is designed to be responsive on a wide range of devices, whilst also being easy to navigate through, and fully accessible.
 
@@ -377,6 +377,7 @@ MongoDB was used to store data for this site in a database. The data has been se
 * MongoDB account and database
 * GitHub account
 * Heroku account
+* Render account
 
 ### Initial Deployment
 
@@ -429,6 +430,52 @@ This site was deployed to Heroku by following these steps:
 14. In 'Manual Deploy', choose which branch you'd like to deploy from (We chose 'main' branch, this is also known as 'master').
 15. Click 'Deploy Branch' to deploy your app onto the Heroku servers.
 16. Once the app has finished building, click 'Open App' to open your site.
+
+#### To migrate to Render:
+
+This site was deployed to Render by following these steps:
+
+1. Render needs to be told what the requirements are for this project, so go into your GitPod terminal, and create files to explain the requirements by using the following commands:
+    * `pip3 freeze --local > requirements.txt`
+    * `echo web: python run.py > Procfile` - Ensure there is no blank line after the contents of this file
+2. Push these changes to your repository.
+3. Ensure you have a .gitignore file in your repository, and if not, create one.
+4. Add `env.py` and `__pycache__/` into your .gitignore file, and save the file. This is to avoid any sensitive information being added into your repository.
+5. Create an env.py file, and add the following information to it, updating the '## x ##' values with your own values:
+
+``` python
+import os
+
+os.environ.setdefault("IP", "0.0.0.0")
+os.environ.setdefault("PORT", "5000")
+os.environ.setdefault("SECRET_KEY", " ## YOUR SECRET_KEY ## ")
+os.environ.setdefault("MONGO_URI", " ## YOUR MONGO_URI ## ")
+os.environ.setdefault("MONGO_DB", " ## YOUR MONGO_DBNAME ## ")
+```
+
+6. Login or sign up to [Render](https://render.com).
+7. Select 'New' in the top right of your dashboard, and select 'Web Service'.
+8. Search for your repo, and click 'Connect'.
+9. Enter a unique name for your web service (ideally the project name).
+10. Use the following settings:
+
+| Setting Name   | Value                  |
+| -------------- | ---------------------- |
+| Root Directory | {blank}                |
+| Environment    | Python 3               |
+| Region         | Frankfurt (EU Central) |
+| Branch         | main                   |
+
+11. Set the 'Build Command' to `pip install -r requirements.txt`.
+12. Set the 'Start Command' to `python app.py`.
+13. Select the 'Free plan $0/month'.
+14. Click 'Advanced', then 'Add Secret File'.
+15. Copy and paste the content of your `env.py` file into the 'File Contents' section.
+16. Set the 'Filename' to `env.py`, and click 'Save'.
+17. Select whether you want the repo to auto-deploy or not.
+18. Click 'Create web service'.
+19. Wait for this to deploy.
+20. Click the link at the top of the page displaying your new URL to take you to the deployed site.
 
 ### How to Fork it
 
